@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-4">
             <div class="mb-3 m-lg-4">
-                <h1 class="display-4">Registrate</h1>
+                <h1 class="display-4">¡Registrate!</h1>
                 <div class="form-group">
                     <label for="inputEmail3">Email</label>
                     <asp:TextBox ID="txtMailRegistro" CssClass="form-control" runat="server"></asp:TextBox>

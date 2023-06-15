@@ -7,13 +7,10 @@ using System.Web.UI.WebControls;
 
 namespace TP_Programacion3
 {
-    public partial class Turnos : System.Web.UI.Page
+    public partial class Perfil : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            // dgvCalendario.DataSource=
-               dgvCalendario.DataBind();
 
         }
     }
