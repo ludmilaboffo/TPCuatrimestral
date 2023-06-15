@@ -5,13 +5,13 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using dominio;
+using Dominio;
 
 namespace Negocio
 {
     public class UsuarioNegocio
     {
-        public List<Usuario> listar (string id = "")
+        public List<Usuario> listar(string id = "")
         {
             List<Usuario> lista = new List<Usuario>();
             AccesoDatos datos = new AccesoDatos();
@@ -20,8 +20,8 @@ namespace Negocio
             {
                 string consulta = "SELECT Dni, Contrasena, Mail, Telefono, Direccion, Estado, Nombre, Apellido FROM Usuarios";
 
-                datos.setConsulta (consulta);
-                datos.ejecutarLectura(); 
+                datos.setConsulta(consulta);
+                datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {

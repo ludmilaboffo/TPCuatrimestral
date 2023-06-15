@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace dominio
-{
+namespace Dominio
+{ 
     public class Lugar
     {
-        public Lugar() { }
         public string nombre { get; set; }
         public string direccion { get; set; }
         public int ID { get; set; }
@@ -16,5 +15,4 @@ namespace dominio
 
         //  public string URLimagen {get; set; }
     }
-
 }
