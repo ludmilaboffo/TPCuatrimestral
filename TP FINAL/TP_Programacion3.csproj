@@ -110,7 +110,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="WEB\favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -121,9 +121,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Inicio.aspx" />
-    <Content Include="Perfil.aspx" />
-    <Content Include="Registro.aspx" />
+    <Content Include="WEB\Inicio.aspx" />
+    <Content Include="WEB\Perfil.aspx" />
+    <Content Include="WEB\Registro.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -152,12 +152,12 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
-    <Content Include="Site.Master" />
-    <Content Include="Turnos.aspx" />
-    <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
-    <Content Include="Bundle.config" />
-    <Content Include="Site.Mobile.Master" />
+    <Content Include="WEB\Site.Master" />
+    <Content Include="WEB\Turnos.aspx" />
+    <Content Include="WEB\ViewSwitcher.ascx" />
+    <Content Include="WEB\Web.config" />
+    <Content Include="WEB\Bundle.config" />
+    <Content Include="WEB\Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -166,56 +166,56 @@
     <Compile Include="Dominio\Semana.cs" />
     <Compile Include="Dominio\Lugar.cs" />
     <Compile Include="Dominio\Usuario.cs" />
-    <Compile Include="Inicio.aspx.cs">
+    <Compile Include="WEB\Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Inicio.aspx.designer.cs">
+    <Compile Include="WEB\Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Negocio\AccesoDatos.cs" />
     <Compile Include="Negocio\UsuarioNegocio.cs" />
-    <Compile Include="Perfil.aspx.cs">
+    <Compile Include="WEB\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Perfil.aspx.designer.cs">
+    <Compile Include="WEB\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro.aspx.cs">
+    <Compile Include="WEB\Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registro.aspx.designer.cs">
+    <Compile Include="WEB\Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Site.Master.cs">
+    <Compile Include="WEB\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site.Master.designer.cs">
+    <Compile Include="WEB\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="Site.Mobile.Master.cs">
+    <Compile Include="WEB\Site.Mobile.Master.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Site.Mobile.Master.designer.cs">
+    <Compile Include="WEB\Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="Turnos.aspx.cs">
+    <Compile Include="WEB\Turnos.aspx.cs">
       <DependentUpon>Turnos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Turnos.aspx.designer.cs">
+    <Compile Include="WEB\Turnos.aspx.designer.cs">
       <DependentUpon>Turnos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ViewSwitcher.ascx.cs">
+    <Compile Include="WEB\ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ViewSwitcher.ascx.designer.cs">
+    <Compile Include="WEB\ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -223,13 +223,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="WEB\packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-    <None Include="Web.Debug.config">
+    <None Include="WEB\Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
+    <None Include="WEB\Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
