@@ -16,7 +16,7 @@ namespace TP_Programacion3
             this.ID = id;
         }
         public string nombre { get; set; }
-        public string Apellido { get; set; }
+        public string apellido { get; set; }
         public int ID { get; set; }
         public string DNI { get; set; }
         public MailAddress Mail { get; set; }
