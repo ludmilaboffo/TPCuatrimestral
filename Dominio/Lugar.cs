@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TP_Programacion3
+namespace dominio
 {
-    public class Lugares
+    public class Lugar
     {
-        public Lugares() { }
+        public Lugar() { }
         public string nombre { get; set; }
         public string direccion { get; set; }
         public int ID { get; set; }

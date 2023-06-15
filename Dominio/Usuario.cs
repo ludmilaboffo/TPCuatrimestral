@@ -6,11 +6,15 @@ using System.Net.Mail;
 using System.Security.Policy;
 using System.Web;
 
-namespace TP_Programacion3
+namespace dominio
 {
+    public enum TipoUsuario
+    {
+        ARTISTA = 1;
+        ADMIN = 2;
+    }
     public class Usuario
     {
-        public Usuario() { }
         public Usuario(int id)
         {
             this.ID = id;
@@ -18,6 +22,7 @@ namespace TP_Programacion3
         public string nombre { get; set; }
         public string apellido { get; set; }
         public int ID { get; set; }
+        public TipoUsuario tipo {get; set; }
         public string DNI { get; set; }
         public MailAddress Mail { get; set; }
         public string telefono { get; set; }
