@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Routing;
 using Microsoft.AspNet.FriendlyUrls;
 
-namespace TP_Programacion3
+namespace TPCUATRI
 {
     public static class RouteConfig
     {

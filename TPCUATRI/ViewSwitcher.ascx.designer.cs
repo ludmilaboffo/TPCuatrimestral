@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TP_Programacion3 {
+namespace TPCUATRI {
     
     
     public partial class ViewSwitcher {

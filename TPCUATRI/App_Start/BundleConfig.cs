@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.UI;
 
-namespace TP_Programacion3
+namespace TPCUATRI
 {
     public class BundleConfig
     {
