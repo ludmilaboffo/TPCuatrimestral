@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeShopMusic", "FreeShopMusic.csproj", "{2D3633E2-4E42-41DC-9CCF-56EF24ABAAB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "..\Dominio\Dominio.csproj", "{0F61786D-3CF1-44C1-A160-1328E65A9AEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "..\Negocio\Negocio.csproj", "{2A302021-782E-48E4-A71B-765C3574000E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2D3633E2-4E42-41DC-9CCF-56EF24ABAAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D3633E2-4E42-41DC-9CCF-56EF24ABAAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D3633E2-4E42-41DC-9CCF-56EF24ABAAB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F61786D-3CF1-44C1-A160-1328E65A9AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F61786D-3CF1-44C1-A160-1328E65A9AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F61786D-3CF1-44C1-A160-1328E65A9AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F61786D-3CF1-44C1-A160-1328E65A9AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A302021-782E-48E4-A71B-765C3574000E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A302021-782E-48E4-A71B-765C3574000E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A302021-782E-48E4-A71B-765C3574000E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A302021-782E-48E4-A71B-765C3574000E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
