@@ -8,7 +8,7 @@
             <div class="mb-3 m-lg-4">
                 <h1 class="display-4">¡Ups! Parece que ha habido un error</h1>
                 <asp:Label Text="text" runat="server" ID="lblMensaje"></asp:Label>
-                 <a href="MenuInicio.aspx">Atrás</a>
+                 <a href="Login.aspx">Atrás</a>
             </div>
         </div>
     </div>
