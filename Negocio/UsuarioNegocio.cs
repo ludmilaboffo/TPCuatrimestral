@@ -9,7 +9,7 @@ namespace Negocio
 {
     public class UsuarioNegocio
     {
-        public bool registrarse (Usuario user)
+        public bool Loguearse (Usuario user)
         {
             AccesoDatos datos = new AccesoDatos();
             try

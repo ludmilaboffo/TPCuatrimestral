@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
+using Negocio;
 
 namespace TP_Programacion3
 {
@@ -12,6 +14,10 @@ namespace TP_Programacion3
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnReg_Click(object sender, EventArgs e)
+        {
         }
     }
 }
