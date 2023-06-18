@@ -122,8 +122,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MenuInicio.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -171,19 +171,19 @@
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Inicio.aspx.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Inicio.aspx.designer.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MenuInicio.aspx.cs">
+      <DependentUpon>MenuInicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuInicio.aspx.designer.cs">
+      <DependentUpon>MenuInicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>

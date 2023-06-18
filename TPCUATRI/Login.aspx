@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="mb-3 m-lg-4">
-                <asp:Button ID="btnIngresar" CssClass="btn btn-primary" runat="server" Text="Ingresar" />
+                <asp:Button ID="btnIngresar" CssClass="btn btn-primary" runat="server" Text="Ingresar"  OnClick="btnIngresar_Click"/>
             </div>
             <div class="mb-3 m-lg-3">
                 <div class="mb-3">

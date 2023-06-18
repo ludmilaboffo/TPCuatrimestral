@@ -16,7 +16,7 @@ namespace TPCUATRI
 
         }
 
-        protected void btnLogin_Click(object sender, EventArgs e)
+        protected void btnIngresar_Click(object sender, EventArgs e)
         {
 
             Usuario user;
@@ -27,19 +27,18 @@ namespace TPCUATRI
                 if (negocio.Loguearse(user))
                 {
                     Session.Add("user", user);
-                    Response.Redirect("Perfil.aspx");
+                    Response.Redirect("Perfil.aspx", false);
                 }
                 else
                 {
                     Session.Add("error", "Email o password incorrecto");
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("Error.aspx", false);
                 }
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
             }
-
         }
     }
 }
