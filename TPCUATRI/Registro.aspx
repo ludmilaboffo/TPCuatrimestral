@@ -20,7 +20,7 @@
             <div class="mb-3 m-lg-3">
                 <asp:Button ID="btnReg" CssClass="btn btn-primary" runat="server" Text="Aceptar" OnClick="btnReg_Click" />
                <h5 CssClass="h5">¿Ya tenes una cuenta?</h5> 
-                <a href="Inicio.aspx">Volver al inicio de sesión</a>
+                <a href="Login.aspx">Volver al inicio de sesión</a>
             </div>
         </div>
     </div>

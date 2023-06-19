@@ -4,7 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <%if (isAdmin())
+    <%
+        Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
+
+        if (usuario.isAdmin())
         { %>
     <div class="row justify-content-center">
         <div class="col-md-4">
@@ -14,7 +17,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Dar de baja a un usuario del sistema</h5>
                      <div class="card-body">
-                        <asp:Button ID="btnBajaUsuario" CssClass="btn btn-outline-primary" runat="server" Text="Ir"/>
+                        <asp:Button ID="btnBajaUsuario" CssClass="btn btn-outline-primary" runat="server" Text="Ir" OnClick="btnBajaUsuario_Click"/>
                     </div>
                 </div>
             </div>
@@ -23,15 +26,15 @@
                 <div class="card-body text-success">
                     <h5 class="card-title">Agregar un nuevo espacio para espectaculos</h5>
                     <div class="card-body">
-                         <asp:Button ID="btnAltaLugar" CssClass="btn btn-outline-success" runat="server" Text="Ir"/>
+                         <asp:Button ID="btnAltaLugar" CssClass="btn btn-outline-success" runat="server" Text="Ir" OnClick="btnAltaLugar_Click"/>
                     </div>
                     <h5 class="card-title">Dar de baja un espacio existente</h5>
                     <div class="card-body">    
-                        <asp:Button ID="btnBajaLugar" CssClass="btn btn-outline-success" runat="server"  Text="Ir"/>
+                        <asp:Button ID="btnBajaLugar" CssClass="btn btn-outline-success" runat="server"  Text="Ir" OnClick="btnBajaLugar_Click"/>
                     </div>
                     <h5 class="card-title">Modificar un espacio existente</h5>
                     <div class="card-body">                    
-                        <asp:Button ID="btnModificarLugar" CssClass="btn btn-outline-success" runat="server"  Text="Ir"/>
+                        <asp:Button ID="btnModificarLugar" CssClass="btn btn-outline-success" runat="server"  Text="Ir" OnClick="btnModificarLugar_Click"/>
                     </div>
                 </div>
             </div>
@@ -51,7 +54,7 @@
         </div>
     </div>
     <%}
-        else if (isArtista())
+        else if (usuario.isArtista())
         {%>
         <div class="row justify-content-center">
             <div class="col-md-4">
@@ -61,5 +64,5 @@
                 <asp:Button runat="server" ID="btnLugares"  Text="Ir" cssClass="btn btn-success" OnClick="btnLugares_Click" />
             </div>
         </div>
-    <%} %>
+    <%}%>
 </asp:Content>

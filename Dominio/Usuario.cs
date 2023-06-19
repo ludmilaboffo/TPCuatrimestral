@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Dominio
 {
@@ -24,5 +27,23 @@ namespace Dominio
                 password = pass;
                 userTipo = admin ? TipoUsuario.ADMIN : TipoUsuario.ARTISTA; // True o false segun sea admin o artista
             }
+
+        public bool isAdmin()
+        {
+            if (HttpContext.Current.Session["user"] != null && ((Dominio.Usuario)HttpContext.Current.Session["user"]).userTipo == Dominio.TipoUsuario.ADMIN)
+            {
+                return true;
+            }
+            return false;
         }
+        public bool isArtista()
+        {
+            if (HttpContext.Current.Session["user"] != null && ((Dominio.Usuario)HttpContext.Current.Session["user"]).userTipo == Dominio.TipoUsuario.ARTISTA)
+            {
+                return true;
+            }
+            return false;
+        }
+       
+    }
 }

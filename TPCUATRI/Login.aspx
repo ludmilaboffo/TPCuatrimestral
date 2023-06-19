@@ -26,7 +26,7 @@
                     <h2 class="h5">¿Aun no tienes cuenta?</h2>
                     <h5 class="text-muted"><small><em>¡Únite!</em></small></h5>
                 </div>
-                <asp:Button ID="btnRegistrar" CssClass="btn btn-primary" runat="server" Text="Registrarse" />
+                <asp:Button ID="btnRegistrar" CssClass="btn btn-primary" runat="server" Text="Registrarse" OnClick="btnRegistrar_Click" />
             </div>
         </div>
     </div>

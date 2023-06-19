@@ -12,9 +12,6 @@ namespace TP_Programacion3
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            // dgvCalendario.DataSource=
-               dgvCalendario.DataBind();
-
         }
     }
 }

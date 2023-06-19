@@ -18,27 +18,29 @@ namespace TPCUATRI
             }
         }
 
-        public bool isAdmin()
-        {
-            if(Session["user"]!= null && ((Dominio.Usuario)Session["user"]).userTipo == Dominio.TipoUsuario.ADMIN)
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool isArtista()
-        {
-            if (Session["user"] != null && ((Dominio.Usuario)Session["user"]).userTipo == Dominio.TipoUsuario.ARTISTA)
-            {
-                return true;
-            }
-            return false;
-        }
-
         protected void btnLugares_Click(object sender, EventArgs e)
         {
             Response.Redirect("Lugares.aspx", false);
         }
 
+        protected void btnBajaUsuario_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("BajaUsuario.aspx", false);
+        }
+
+        protected void btnAltaLugar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Lugares.aspx", false);
+        }
+
+        protected void btnBajaLugar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Lugares.aspx", false);
+        }
+
+        protected void btnModificarLugar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Lugares.aspx", false);
+        }
     }
 }

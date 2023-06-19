@@ -27,7 +27,7 @@ namespace TPCUATRI
                 if (negocio.Loguearse(user))
                 {
                     Session.Add("user", user);
-                    Response.Redirect("Perfil.aspx", false);
+                    Response.Redirect("MenuInicio.aspx", false);
                 }
                 else
                 {
@@ -39,6 +39,11 @@ namespace TPCUATRI
             {
                 Session.Add("error", ex.ToString());
             }
+        }
+
+        protected void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Registro.aspx", false);
         }
     }
 }
