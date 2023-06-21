@@ -7,12 +7,12 @@ namespace Dominio
 { 
     public class Lugar
     {
-        public string nombre { get; set; }
-        public string direccion { get; set; }
-        public int ID { get; set; }
+        public int idLugar { get; set; }
+        public string Direccion { get; set; }
         public string Descripcion { get; set; }
-        public int Prioridad { get; set; }
+        public string Nombre { get; set; }
+        public bool Disponibilidad { get; set;}
+        public string UrlImagen { get; set; }
 
-        //  public string URLimagen {get; set; }
     }
 }

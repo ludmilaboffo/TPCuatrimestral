@@ -30,7 +30,7 @@ namespace Dominio
 
         public bool isAdmin()
         {
-            if (HttpContext.Current.Session["user"] != null && ((Dominio.Usuario)HttpContext.Current.Session["user"]).userTipo == Dominio.TipoUsuario.ADMIN)
+            if (((Dominio.Usuario)HttpContext.Current.Session["user"]).userTipo == Dominio.TipoUsuario.ADMIN)
             {
                 return true;
             }
@@ -38,7 +38,7 @@ namespace Dominio
         }
         public bool isArtista()
         {
-            if (HttpContext.Current.Session["user"] != null && ((Dominio.Usuario)HttpContext.Current.Session["user"]).userTipo == Dominio.TipoUsuario.ARTISTA)
+            if (((Dominio.Usuario)HttpContext.Current.Session["user"]).userTipo == Dominio.TipoUsuario.ARTISTA)
             {
                 return true;
             }

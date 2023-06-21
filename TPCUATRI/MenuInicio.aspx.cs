@@ -11,11 +11,11 @@ namespace TPCUATRI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] == null)
-            {
-                Session.Add("error", "Debes loguearte para entrar");
-                Response.Redirect("Error.aspx", false);
-            }
+                if (Session["user"] == null)
+                {
+                    Session.Add("error", "Debes loguearte para entrar");
+                    Response.Redirect("Error.aspx", false);
+                }
         }
 
         protected void btnLugares_Click(object sender, EventArgs e)
