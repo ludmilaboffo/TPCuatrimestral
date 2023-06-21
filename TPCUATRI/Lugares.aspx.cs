@@ -17,9 +17,9 @@ namespace TPCUATRI
         {
             if (Session["user"] != null)
             {
-                if (!((Dominio.Usuario)Session["user"]).isAdmin() && !((Dominio.Usuario)Session["user"]).isArtista())
+                if (Session["user"] == null)
                 {
-                    Session.Add("error", "No te has logueado. No puedes ver esta sección");
+                    Session.Add("error", "Debes loguearte para entrar");
                     Response.Redirect("Error.aspx", false);
                 }
                 if (!IsPostBack)

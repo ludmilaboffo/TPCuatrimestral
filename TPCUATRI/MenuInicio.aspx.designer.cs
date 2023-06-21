@@ -33,24 +33,6 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.Button btnAltaLugar;
 
         /// <summary>
-        /// btnBajaLugar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBajaLugar;
-
-        /// <summary>
-        /// btnModificarLugar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarLugar;
-
-        /// <summary>
         /// btnAltaHorarios control.
         /// </summary>
         /// <remarks>
@@ -58,15 +40,6 @@ namespace TPCUATRI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAltaHorarios;
-
-        /// <summary>
-        /// btnBajaHorarios control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBajaHorarios;
 
         /// <summary>
         /// btnLugares control.
