@@ -33,5 +33,20 @@ namespace TPCUATRI
                 ListaLugar = (List<Lugar>)(Session["ListaLugar"]);
             }
         }
+
+        protected void btnModificarLugar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LugaresNegocio lugares = new LugaresNegocio();
+               // lugares.eliminarLogico(int.Parse(txtid.text));    //necesito traer el id de lugar*
+                Response.Redirect("Lugares.aspx");
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex);
+            }
+        }
     }
 }

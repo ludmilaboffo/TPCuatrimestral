@@ -24,7 +24,7 @@
                 </div>
              <% 
              } else if(((Dominio.Usuario)Session["user"]).isAdmin()){%>
-                    <asp:Button ID="btnModificarLugar" CssClass="btn btn-primary" Text="Modificar" runat="server" commandName="Modificar" CommandArgument='<%# Eval("idLugar") %>'  />
+                    <asp:Button ID="btnModificarLugar" Onclick="btnModificarLugar_Click" CssClass="btn btn-warning" Text="Modificar" runat="server" commandName="Modificar" CommandArgument='<%# Eval("idLugar") %>'  />
                     </div>
             <%}%>
         </ItemTemplate>
