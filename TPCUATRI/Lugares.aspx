@@ -19,7 +19,7 @@
                     <p CssClass="card-text"><%#Eval("Direccion")%></p>            
            <% if (((Dominio.Usuario)Session["user"]).isArtista()) 
             { %>
-                    <asp:Button ID="btnPedirTurno" CssClass="btn btn-primary" Text="Pedir turno" runat="server" commandName="PedirTurno" CommandArgument='<%# Eval("idLugar") %>'  />
+                    <asp:Button ID="btnPedirTurno" CssClass="btn btn-primary" Text="Pedir turno" runat="server" commandName="PedirTurno" CommandArgument='<%# Eval("idLugar") %>' OnClick="btnPedirTurno_Click" />
                     </div>
                 </div>
              <% 

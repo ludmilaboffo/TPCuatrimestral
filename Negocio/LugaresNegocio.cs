@@ -10,7 +10,7 @@ namespace Negocio
     public class LugaresNegocio
     {
 
-
+        public List<Lugar> ListaLugar;
         public List<Lugar> listar(string id = "")
         {
             List<Lugar> lista = new List<Lugar>();
@@ -18,7 +18,7 @@ namespace Negocio
 
             try
             {
-                string consulta = "SELECT Id, Direccion, Descripcion, Nombre, Estado, UrlImagen FROM Lugares";
+                string consulta = "SELECT idLugar, Direccion, Descripcion, Nombre, Estado, UrlImagen FROM Lugares";
 
                 datos.setConsulta(consulta);
                 datos.ejecutarLectura();
@@ -27,7 +27,7 @@ namespace Negocio
                 {
                     Lugar aux = new Lugar();
 
-                    aux.idLugar = (int)datos.Lector["Id"];
+                    aux.idLugar = (int)datos.Lector["idLugar"];
                     aux.Direccion = (string)datos.Lector["Direccion"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
@@ -63,5 +63,22 @@ namespace Negocio
                 throw ex;
             }
         }
+        public string buscarLugar(int id)
+        {
+            List<Lugar> ListaLugar;
+            LugaresNegocio obj = new LugaresNegocio();
+            ListaLugar = obj.listar();
+
+            foreach (Lugar lugar in ListaLugar)
+            {
+                if (lugar.idLugar == id)
+                {
+                    return lugar.Nombre;
+                }
+            }
+            return "No existe";
+        }
+
+
     }
 }

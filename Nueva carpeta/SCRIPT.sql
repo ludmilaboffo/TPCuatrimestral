@@ -22,9 +22,8 @@ CREATE TABLE Usuarios (
 GO
 
 
-
 CREATE TABLE Lugares (
-    Id INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
+    idLugar INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
     Direccion VARCHAR (50),
     Descripcion VARCHAR(50),
     Nombre VARCHAR (50),
@@ -33,32 +32,51 @@ CREATE TABLE Lugares (
 )
 GO
 
-CREATE TABLE Horarios(
-    Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Horario INT 
-)
+CREATE TABLE Dias(
+    idDias INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    descripcion Varchar(30)
+	)
 GO
 
+DROP TABLE TURNOS
 
-CREATE TABLE Turnos (
-    Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Fecha DATE,
-    IdLugar INT NOT NULL FOREIGN KEY REFERENCES Lugares (Id),
-    IdUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios (Id),
-    IdHorrio INT NOT NULL FOREIGN KEY REFERENCES Horarios (Id),
+
+Create TABLE Turnos (
+    idTurnos INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Fecha DATE NOT NULL,
+    idLugar INT NOT NULL FOREIGN KEY REFERENCES Lugares (idLugar),
+    idUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios (Id),
     Estado BIT
 )
 GO
+ --- SI NO HAY 
+INSERT INTO Turnos (Fecha, idLugar, idUsuario, Estado)
+VALUES ('2023-07-23', 5, 1, 1),
+       ('2023-07-24', 2, 1, 1),
+       ('2023-07-25', 3, 1, 1),
+       ('2023-07-26', 4, 1, 1),
+       ('2023-07-27', 1, 1, 1),
+       ('2023-07-28', 2, 1, 1),
+       ('2023-07-29', 1, 1, 1)
+
+
+	 
+	 DROP TABLE TURNOS
+Select * from Turnos
+Select * from Dias
+Select * from Lugares
+Select * from Usuarios
+
 
 
 INSERT INTO 
 	Lugares(Direccion, Descripcion, Nombre, Estado, UrlImagen)
 
--- VALUES ('Av. 9 de Julio s/n', 'Obelisco del centro porteño', 'OBELISCO', 1,'https://dkeauwle5qhyx.cloudfront.net/wp-content/uploads/2021/05/obelisco_ba.jpg')
---VALUES(' Av. Sarmiento s/n, CABA','Ubicado en medio de los bosques de Palermo','PLANETARIO',1,'https://m.buenosaires123.com.ar/images/700/planetario-buenos-aires.jpg')
---VALUES('Cerrito 628, CABA','Teatro de Opera, ubicado en plaza de Mayo','TEATRO COLÓN',1,'https://eldiariodeviaje.com/wp-content/uploads/2020/12/2017-05-23-22-14-10-01-1080x675.jpeg')
---VALUES('Estacion Belgrano ramal Mitre','Cultura y gastronomico oriental','BARRIO CHINO',1,'https://www.descubriendobuenosaires.com/wp-content/uploads/2021/07/BarrioChino3-1024.jpg')
-values('Dique 3 de Puerto Madero','Excelente foco turistico y gastronomico', 'PUENTE DE LA MUJER',1,'https://cdn-media.italiani.it/site-buenosaires/2019/03/Puente-de-la-Mujer-Luces-de-noche-e1552009688826-1000x600.jpeg')
+ VALUES ('Av. 9 de Julio s/n', 'Obelisco del centro porteño', 'OBELISCO', 1,'https://dkeauwle5qhyx.cloudfront.net/wp-content/uploads/2021/05/obelisco_ba.jpg')
+VALUES(' Av. Sarmiento s/n, CABA','Ubicado en medio de los bosques de Palermo','PLANETARIO',1,'https://m.buenosaires123.com.ar/images/700/planetario-buenos-aires.jpg')
+VALUES('Cerrito 628, CABA','Teatro de Opera, ubicado en plaza de Mayo','TEATRO COLÓN',1,'https://eldiariodeviaje.com/wp-content/uploads/2020/12/2017-05-23-22-14-10-01-1080x675.jpeg')
+VALUES('Estacion Belgrano ramal Mitre','Cultura y gastronomico oriental','BARRIO CHINO',1,'https://www.descubriendobuenosaires.com/wp-content/uploads/2021/07/BarrioChino3-1024.jpg')
+--values('Dique 3 de Puerto Madero','Excelente foco turistico y gastronomico', 'PUENTE DE LA MUJER',1,'https://cdn-media.italiani.it/site-buenosaires/2019/03/Puente-de-la-Mujer-Luces-de-noche-e1552009688826-1000x600.jpeg')
 
 
 
