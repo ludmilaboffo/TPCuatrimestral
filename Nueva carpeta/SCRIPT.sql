@@ -43,22 +43,33 @@ DROP TABLE TURNOS
 
 Create TABLE Turnos (
     idTurnos INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Fecha DATE NOT NULL,
+    idFecha int NOT NULL FOREIGN KEY REFERENCES FECHAS(idFecha),
     idLugar INT NOT NULL FOREIGN KEY REFERENCES Lugares (idLugar),
     idUsuario INT NOT NULL FOREIGN KEY REFERENCES Usuarios (Id),
     Estado BIT
 )
 GO
  --- SI NO HAY 
-INSERT INTO Turnos (Fecha, idLugar, idUsuario, Estado)
-VALUES ('2023-07-23', 5, 1, 1),
-       ('2023-07-24', 2, 1, 1),
-       ('2023-07-25', 3, 1, 1),
-       ('2023-07-26', 4, 1, 1),
-       ('2023-07-27', 1, 1, 1),
-       ('2023-07-28', 2, 1, 1),
-       ('2023-07-29', 1, 1, 1)
+INSERT INTO Turnos (idFecha, idLugar, idUsuario, Estado)
+VALUES (4, 5, 1, 1),
+       (4, 2, 1, 1),
+       (1, 1, 1, 1),
+       (2, 2, 1, 1),
+       (1, 4, 1, 1),
+       (3, 3, 1, 1)
 
+
+CREATE TABLE FECHAS(
+	idFecha int  not null primary key identity (1,1),
+	numeroDia int not null,
+	descripcionDia varchar(30)
+)
+
+INSERT INTO FECHAS(numeroDia, descripcionDia)
+VALUES (25, 'VIERNES'),
+		(26,'SABADO'),
+		(27, 'DOMINGO'),
+		(28, 'LUNES')
 
 	 
 	 DROP TABLE TURNOS

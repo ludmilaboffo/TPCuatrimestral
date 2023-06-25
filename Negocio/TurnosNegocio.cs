@@ -15,7 +15,7 @@ namespace Negocio
 
             try
             {
-                string consulta = "  SELECT idTurnos, Fecha, idLugar, idUsuario, Estado FROM Turnos";
+                string consulta = "  SELECT idTurnos, idFecha, idLugar, idUsuario, Estado FROM Turnos";
 
                 datos.setConsulta(consulta);
                 datos.ejecutarLectura();
@@ -28,7 +28,7 @@ namespace Negocio
                     Lugar lugar = new Lugar();
                     lugar.idLugar = (int)datos.Lector["idLugar"];
                     nuevo.nombreLugar = buscarLugar(lugar.idLugar);
-                    nuevo.Fecha = datos.Lector.GetDateTime(datos.Lector.GetOrdinal("Fecha"));
+                    nuevo.idFecha = (int)datos.Lector["idFecha"];
                     nuevo.idUsuario = (int)datos.Lector["idUsuario"];
                     nuevo.disponibilidad = (bool)datos.Lector["Estado"];
                     lista.Add(nuevo);
