@@ -41,7 +41,7 @@
         {%>
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <h1 class="Esta seccion solo está disponible para administradores"</h1>
+            <h1 class="h1">Esta seccion solo está disponible para administradores</h1>
         </div>
     </div>
     <%}

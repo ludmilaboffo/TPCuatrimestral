@@ -18,6 +18,7 @@ namespace TPCUATRI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            txtId.Enabled = false;
             if (Session["user"] == null)
             {
                 Session.Add("error", "Debes loguearte para entrar");
@@ -27,7 +28,7 @@ namespace TPCUATRI
             {
                 if (!IsPostBack)
                 {
-                   ListaLugar= lugar.listar();
+                    ListaLugar= lugar.listar();
                     ListaFecha = fecha.listar();
 
                     ddlLugar.DataSource = ListaLugar;
@@ -41,6 +42,18 @@ namespace TPCUATRI
                     ddlFecha.DataTextField = "numeroFecha";
                     ddlFecha.DataBind();
                 }
+                /// modificamos
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if(id!= "")
+                {
+                    TurnosNegocio turno = new TurnosNegocio();
+                    Turno selec = (turno.listar(id))[0];
+
+                    /// AHORA PRECARGO
+                    txtId.Text = id;
+                    ddlFecha.SelectedValue = selec.Fecha.idFecha.ToString();
+                    ddlLugar.SelectedValue = selec.Lugar.idLugar.ToString();
+                } 
             }
             catch(Exception ex)
             {
@@ -52,6 +65,7 @@ namespace TPCUATRI
 
         protected void btnAceptarAlta_Click(object sender, EventArgs e)
         {
+
             try
             {
                 Turno nuevo = new Turno();

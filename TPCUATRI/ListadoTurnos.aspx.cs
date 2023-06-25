@@ -20,27 +20,24 @@ namespace TP_Programacion3
                 Session.Add("error", "Debes loguearte para entrar");
                 Response.Redirect("Error.aspx", false);
             }
-            if (Session["ListaTurnos"] == null) {
                 TurnosNegocio negocio = new TurnosNegocio();
-                ListaTurnos = negocio.listar();
-                Session.Add("ListaTurnos", ListaTurnos);          
-            }
-                var turnosDGV =((List<Turno>)(Session["ListaTurnos"])).Select(t => new {
-                    idTurno = t.idTurno,
+                ListaTurnos = negocio.listarSP();
+                var turnosDGV =(ListaTurnos).Select(t => new {
+                    id = t.idTurno,
                     FechaNum = t.Fecha.numeroFecha,
                     FechaDia = t.Fecha.descripcionFecha,
                     NombreLugar = t.Lugar.Nombre,
                 });
-                gvTurnos.DataSource = turnosDGV;
+              gvTurnos.DataSource = turnosDGV;
               gvTurnos.DataBind();              
 
         }
 
         protected void gvTurnos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var id = gvTurnos.SelectedDataKey.Value.ToString(); /// CAPTURO EL ID DEL ELEMENTO SELECCIONADO
-            /// agregar una pantalla para eliminar/agregar
-            /// Response.Redirect("TurnosBaja.aspx?=id" +id);  -- me lleva el id seleccionado
+            var id = gvTurnos.SelectedDataKey.Value.ToString();
+            Response.Redirect("AltaTurno.aspx?id=" + id);
+
         }
     }
 }

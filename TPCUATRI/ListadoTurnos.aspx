@@ -8,14 +8,13 @@
         {
     %>
     <div id="calendarioSemanal" class="m-lg-5">
-        <asp:GridView ID="gvTurnos" runat="server" CssClass="table table-dark" DataKeyNames="idTurno" AutoGenerateColumns="false" OnSelectedIndexChanged="gvTurnos_SelectedIndexChanged">
+        <asp:GridView ID="gvTurnos" runat="server" CssClass="table table-dark" DataKeyNames="id" AutoGenerateColumns="false" OnSelectedIndexChanged="gvTurnos_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField HeaderText="Nº" DataField="FechaNum" />
                 <asp:BoundField HeaderText="Día" DataField="FechaDia" />
                 <asp:BoundField HeaderText="Lugar" DataField="NombreLugar"/>
-                <asp:CommandField  ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Eliminar"/>
+                <asp:CommandField  ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Modificar/Eliminar"/>
             </Columns>
-
         </asp:GridView>
     </div>
     <%} %>

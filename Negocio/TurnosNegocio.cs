@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
 using Dominio;
 
 namespace Negocio
@@ -52,16 +54,63 @@ namespace Negocio
             }
         }
 
-        public List<Turno> listar(string id = "")
+        public List<Turno> listar(string id = " ")
+        {
+            List<Turno> lista = new List<Turno>();     
+            SqlCommand comando = new SqlCommand();
+            SqlConnection conexion = new SqlConnection();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText= "SELECT idTurnos, idLugar, idUsuario, idFecha, Estado FROM Turnos ";
+                if (id != "")       
+                comando.CommandText += " WHERE idTurnos= " + id;
+                comando.Connection = conexion;
+                conexion.Open();
+
+                lector = comando.ExecuteReader();                
+                while (lector.Read())
+                {
+                    Turno nuevo = new Turno();
+                    LugaresNegocio nov = new LugaresNegocio();
+                    FechaNegocio date = new FechaNegocio();
+
+                    nuevo.idTurno = (int)lector["idTurnos"];
+                    nuevo.Lugar = new Lugar();
+                    nuevo.Lugar.idLugar = (int)lector["idLugar"];
+                    nuevo.Lugar.Nombre= nov.buscarLugar(nuevo.Lugar.idLugar);
+                    nuevo.Fecha = new Fecha();
+                    nuevo.Fecha.idFecha = (int)lector["idFecha"];
+                    nuevo.Fecha.descripcionFecha = date.retornarNombreDia(nuevo.Fecha.idFecha);
+                    nuevo.Fecha.numeroFecha = date.retornarNumeroDia(nuevo.Fecha.idFecha);
+                    nuevo.idUsuario = (int)lector["idUsuario"];
+                    nuevo.disponibilidad = (bool)lector["Estado"];
+                    lista.Add(nuevo);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+        }
+        public List<Turno> listarSP()
         {
             List<Turno> lista = new List<Turno>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                string consulta = "  SELECT idTurnos, idFecha, idLugar, idUsuario, Estado FROM Turnos";
-
-                datos.setConsulta(consulta);
+                datos.setProcedimieto("ST_ListarTurnos");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -73,7 +122,7 @@ namespace Negocio
                     nuevo.idTurno = (int)datos.Lector["idTurnos"];
                     nuevo.Lugar = new Lugar();
                     nuevo.Lugar.idLugar = (int)datos.Lector["idLugar"];
-                    nuevo.Lugar.Nombre= nov.buscarLugar(nuevo.Lugar.idLugar);
+                    nuevo.Lugar.Nombre = nov.buscarLugar(nuevo.Lugar.idLugar);
                     nuevo.Fecha = new Fecha();
                     nuevo.Fecha.idFecha = (int)datos.Lector["idFecha"];
                     nuevo.Fecha.descripcionFecha = date.retornarNombreDia(nuevo.Fecha.idFecha);
@@ -95,7 +144,6 @@ namespace Negocio
             }
 
         }
-
     }
 
 }
