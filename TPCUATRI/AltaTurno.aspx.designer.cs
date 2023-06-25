@@ -24,13 +24,13 @@ namespace TPCUATRI
         protected global::System.Web.UI.ScriptManager scriptManager;
 
         /// <summary>
-        /// txtFechaTurno control.
+        /// txtId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaTurno;
+        protected global::System.Web.UI.WebControls.TextBox txtId;
 
         /// <summary>
         /// ddlLugar control.
@@ -49,15 +49,6 @@ namespace TPCUATRI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlFecha;
-
-        /// <summary>
-        /// txtUsuario control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsuario;
 
         /// <summary>
         /// btnAceptarAlta control.

@@ -20,7 +20,7 @@ namespace TPCUATRI
 
         protected void btnLugares_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Lugares.aspx", false);
+            Response.Redirect("ListarLugares.aspx", false);
         }
 
         protected void btnBajaUsuario_Click(object sender, EventArgs e)
@@ -41,6 +41,16 @@ namespace TPCUATRI
         protected void btnModificarLugar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Lugares.aspx", false);
+        }
+
+        protected void btnAltaHorarios_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AltaTurno.aspx", false);
+        }
+
+        protected void btnListarTurnos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ListadoTurnos.aspx", false);
         }
     }
 }

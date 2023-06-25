@@ -8,6 +8,50 @@ namespace Negocio
 {
     public class TurnosNegocio
     {
+
+        public void altaSP(Turno nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setProcedimieto("ST_AltaTurno");
+                datos.setParametro("@idFecha", nuevo.Fecha.idFecha);
+                datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
+                datos.setParametro("@idUsuario", nuevo.idUsuario);
+                datos.setParametro("@Estado", true);
+                datos.ejecutarAccion();
+            }
+            catch(Exception ex){
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void alta(Turno nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("INSERT INTO Turnos (idFecha, idLugar, idUsuario, Estado) VALUES (@idFecha, @idLugar, @idUsuario, @Estado)");
+                datos.setParametro("@idFecha", nuevo.Fecha.idFecha);
+                datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
+                datos.setParametro("@idUsuario", nuevo.idUsuario);
+                datos.setParametro("@Estado", true);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public List<Turno> listar(string id = "")
         {
             List<Turno> lista = new List<Turno>();
@@ -23,12 +67,17 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     Turno nuevo = new Turno();
+                    LugaresNegocio nov = new LugaresNegocio();
+                    FechaNegocio date = new FechaNegocio();
 
                     nuevo.idTurno = (int)datos.Lector["idTurnos"];
-                    Lugar lugar = new Lugar();
-                    lugar.idLugar = (int)datos.Lector["idLugar"];
-                    nuevo.nombreLugar = buscarLugar(lugar.idLugar);
-                    nuevo.idFecha = (int)datos.Lector["idFecha"];
+                    nuevo.Lugar = new Lugar();
+                    nuevo.Lugar.idLugar = (int)datos.Lector["idLugar"];
+                    nuevo.Lugar.Nombre= nov.buscarLugar(nuevo.Lugar.idLugar);
+                    nuevo.Fecha = new Fecha();
+                    nuevo.Fecha.idFecha = (int)datos.Lector["idFecha"];
+                    nuevo.Fecha.descripcionFecha = date.retornarNombreDia(nuevo.Fecha.idFecha);
+                    nuevo.Fecha.numeroFecha = date.retornarNumeroDia(nuevo.Fecha.idFecha);
                     nuevo.idUsuario = (int)datos.Lector["idUsuario"];
                     nuevo.disponibilidad = (bool)datos.Lector["Estado"];
                     lista.Add(nuevo);
@@ -47,21 +96,6 @@ namespace Negocio
 
         }
 
-        public string buscarLugar(int id)
-        {
-            List<Lugar> ListaLugar;
-            LugaresNegocio obj = new LugaresNegocio();
-            ListaLugar = obj.listar();
-            
-            foreach(Lugar  lugar in ListaLugar)
-            {
-                if(lugar.idLugar == id)
-                {
-                    return lugar.Nombre;
-                }
-            }
-            return "No existe";
-        }
     }
 
 }

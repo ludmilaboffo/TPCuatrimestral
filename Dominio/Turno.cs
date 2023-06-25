@@ -9,11 +9,9 @@ namespace Dominio
 
     public class Turno
     {
-        public int idFecha { get; set; }
+        public Fecha Fecha { get; set; }
         public int idTurno { get; set; }
-        public int idLugar { get; set; }
-        public string nombreLugar { get; set; }
-        
+        public Lugar Lugar { get; set; }        
         public int idUsuario { get; set; }
         public bool disponibilidad { get; set; }
 

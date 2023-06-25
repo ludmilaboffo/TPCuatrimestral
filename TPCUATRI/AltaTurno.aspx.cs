@@ -17,7 +17,14 @@ namespace TPCUATRI
         List<Fecha> ListaFecha;
 
         protected void Page_Load(object sender, EventArgs e)
-        {          
+        {
+            if (Session["user"] == null)
+            {
+                Session.Add("error", "Debes loguearte para entrar");
+                Response.Redirect("Error.aspx", false);
+            }
+            try
+            {
                 if (!IsPostBack)
                 {
                    ListaLugar= lugar.listar();
@@ -34,18 +41,38 @@ namespace TPCUATRI
                     ddlFecha.DataTextField = "numeroFecha";
                     ddlFecha.DataBind();
                 }
+            }
+            catch(Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
 
         }
 
         protected void btnAceptarAlta_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Turno nuevo = new Turno();
+                TurnosNegocio negocio = new TurnosNegocio();
+                LugaresNegocio lugarNegocio = new LugaresNegocio(); 
 
-            Response.Redirect("TurnosInicio.aspx");
+                nuevo.Lugar = new Lugar();
+                nuevo.Lugar.idLugar = int.Parse(ddlLugar.SelectedValue);
+                nuevo.idUsuario = 1; /// Ver: está hardcodeado
+                nuevo.Fecha = new Fecha();
+                nuevo.Fecha.idFecha = int.Parse(ddlFecha.SelectedValue);
+
+                negocio.alta(nuevo);
+                Response.Redirect("ListadoTurnos.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
-        protected void ddlLugar_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

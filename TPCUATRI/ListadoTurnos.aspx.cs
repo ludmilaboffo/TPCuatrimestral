@@ -20,15 +20,20 @@ namespace TP_Programacion3
                 Session.Add("error", "Debes loguearte para entrar");
                 Response.Redirect("Error.aspx", false);
             }
-            if (Session["ListaTurnos"] == null) { 
+            if (Session["ListaTurnos"] == null) {
                 TurnosNegocio negocio = new TurnosNegocio();
                 ListaTurnos = negocio.listar();
-                Session.Add("ListaTurnos", ListaTurnos);                       
+                Session.Add("ListaTurnos", ListaTurnos);          
             }
-
-              gvTurnos.DataSource = (List<Turno>)(Session["ListaTurnos"]);
+                var turnosDGV =((List<Turno>)(Session["ListaTurnos"])).Select(t => new {
+                    idTurno = t.idTurno,
+                    FechaNum = t.Fecha.numeroFecha,
+                    FechaDia = t.Fecha.descripcionFecha,
+                    NombreLugar = t.Lugar.Nombre,
+                });
+                gvTurnos.DataSource = turnosDGV;
               gvTurnos.DataBind();              
-              ListaTurnos = (List<Turno>)(Session["ListaTurnos"]);  
+
         }
 
         protected void gvTurnos_SelectedIndexChanged(object sender, EventArgs e)

@@ -4,17 +4,25 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" ID="scriptManager"></asp:ScriptManager>
-    <div class="row">
-        <div class="col-6">
+    <%
+
+        Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
+        if (usuario != null)
+        {
+
+            if (usuario.isAdmin())
+            { %>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
             <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Fecha</label>
-                <asp:TextBox runat="server" ID="txtFechaTurno" CssClass="form-control" TextMode="Date"> </asp:TextBox>
+                <label for="exampleFormControlInput1" class="form-label">ID</label>
+                <asp:TextBox runat="server" ID="txtId" CssClass="form-control"> </asp:TextBox>
             </div>
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="mb-3">
                         <label class="form-label">Lugar</label>
-                        <asp:DropDownList ID="ddlLugar" CssClass="btn dropdown-menu-dark" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLugar_SelectedIndexChanged"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlLugar" CssClass="btn dropdown-menu-dark" runat="server" AutoPostBack="true"></asp:DropDownList>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Fecha</label>
@@ -23,15 +31,20 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
             <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Usuario</label>
-                <asp:TextBox runat="server" ID="txtUsuario" CssClass="form-control"> </asp:TextBox>
-            </div>
-            <div class="mb-3">
                 <asp:Button runat="server" Text="Aceptar" ID="btnAceptarAlta" OnClick="btnAceptarAlta_Click" CssClass="btn btn-outline-danger" />
                 <a href="MenuInicio.aspx">Volver al menú de inicio</a>
             </div>
         </div>
     </div>
+        <%}
+        else if (usuario.isArtista())
+        {%>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h1 class="Esta seccion solo está disponible para administradores"</h1>
+        </div>
+    </div>
+    <%}
 
-
+        }%>
 </asp:Content>

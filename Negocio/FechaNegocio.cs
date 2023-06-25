@@ -42,5 +42,36 @@ namespace Negocio
             }
 
         }
+
+        public string retornarNombreDia(int id)
+        {
+            List<Fecha> ListaFecha;
+            FechaNegocio obj = new FechaNegocio();
+            ListaFecha = obj.listar();
+
+            foreach (Fecha fech in ListaFecha)
+            {
+                if (fech.idFecha == id)
+                {
+                    return fech.descripcionFecha;
+                }
+            }
+            return "No existe";
+        }
+        public int retornarNumeroDia(int id)
+        {
+            List<Fecha> ListaFecha;
+            FechaNegocio obj = new FechaNegocio();
+            ListaFecha = obj.listar();
+
+            foreach (Fecha fech in ListaFecha)
+            {
+                if (fech.idFecha == id)
+                {
+                    return fech.numeroFecha;
+                }
+            }
+            return 0;
+        }
     }
 }

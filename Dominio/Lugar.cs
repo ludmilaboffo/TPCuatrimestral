@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace Dominio
 { 
     public class Lugar
@@ -13,6 +14,7 @@ namespace Dominio
         public string Nombre { get; set; }
         public bool Disponibilidad { get; set;}
         public string UrlImagen { get; set; }
+
 
     }
 }

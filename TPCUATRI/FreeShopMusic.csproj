@@ -126,7 +126,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="AltaTurno.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="Lugares.aspx" />
+    <Content Include="ListarLugares.aspx" />
     <Content Include="MenuInicio.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
@@ -159,7 +159,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="TurnosInicio.aspx" />
+    <Content Include="ListadoTurnos.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -203,12 +203,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Lugares.aspx.cs">
-      <DependentUpon>Lugares.aspx</DependentUpon>
+    <Compile Include="ListarLugares.aspx.cs">
+      <DependentUpon>ListarLugares.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Lugares.aspx.designer.cs">
-      <DependentUpon>Lugares.aspx</DependentUpon>
+    <Compile Include="ListarLugares.aspx.designer.cs">
+      <DependentUpon>ListarLugares.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuInicio.aspx.cs">
       <DependentUpon>MenuInicio.aspx</DependentUpon>
@@ -246,12 +246,12 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="TurnosInicio.aspx.cs">
-      <DependentUpon>TurnosInicio.aspx</DependentUpon>
+    <Compile Include="ListadoTurnos.aspx.cs">
+      <DependentUpon>ListadoTurnos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TurnosInicio.aspx.designer.cs">
-      <DependentUpon>TurnosInicio.aspx</DependentUpon>
+    <Compile Include="ListadoTurnos.aspx.designer.cs">
+      <DependentUpon>ListadoTurnos.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
