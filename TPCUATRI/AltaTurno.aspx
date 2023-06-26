@@ -31,8 +31,27 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
             <div class="mb-3">
-                <asp:Button runat="server" Text="Aceptar" ID="btnAceptarAlta" OnClick="btnAceptarAlta_Click" CssClass="btn btn-outline-danger" />
-                <a href="MenuInicio.aspx">Volver al menú de inicio</a>
+                <asp:Button runat="server" Text="Aceptar" ID="btnAceptarAlta" OnClick="btnAceptarAlta_Click" CssClass="btn btn-primary" />
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <asp:UpdatePanel ID="upEliminar" runat="server">
+                        <ContentTemplate>
+                        <div class="mb-3">
+                            <asp:Button runat="server" Text="Eliminar" ID="btnEliminarTurno" CssClass="btn btn-danger" OnClick="btnEliminarTurno_Click" />
+                            <a href="MenuInicio.aspx">Volver al menú de inicio</a>
+                        </div>
+
+                        <%if (confirmarEliminacion)
+                            { %>
+                        <div class="mb-3">
+                            <asp:CheckBox runat="server" Text="Confirmar eliminacion" ID="chConfirmarEliminar"/>
+                            <asp:Button runat="server" Text="Confirmar" ID="btnConfirmarEliminacion" CssClass="btn btn-outline-danger" OnClick="btnConfirmarEliminacion_Click" />
+                        </div>
+                        <%} %>
+                       </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
             </div>
         </div>
     </div>

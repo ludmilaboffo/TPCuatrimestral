@@ -15,10 +15,13 @@ namespace TPCUATRI
         FechaNegocio fecha = new FechaNegocio();
         List<Lugar> ListaLugar;
         List<Fecha> ListaFecha;
+        public bool confirmarEliminacion { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            confirmarEliminacion = false;
             txtId.Enabled = false;
+
             if (Session["user"] == null)
             {
                 Session.Add("error", "Debes loguearte para entrar");
@@ -97,5 +100,26 @@ namespace TPCUATRI
             }
         }
 
+        protected void btnEliminarTurno_Click(object sender, EventArgs e)
+        {
+            confirmarEliminacion = true;
+        }
+
+        protected void btnConfirmarEliminacion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chConfirmarEliminar.Checked)
+                {
+                    TurnosNegocio turno = new TurnosNegocio();
+                    turno.eliminar(int.Parse(txtId.Text));
+                    Response.Redirect("ListadoTurnos.aspx", false);
+                }
+            }
+            catch(Exception ex)
+            {
+                Session.Add("error", ex);
+            }
+        }
     }
 }

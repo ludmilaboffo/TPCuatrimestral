@@ -23,7 +23,8 @@ namespace Negocio
                 datos.setParametro("@Estado", true);
                 datos.ejecutarAccion();
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally
@@ -56,7 +57,7 @@ namespace Negocio
 
         public List<Turno> listar(string id = " ")
         {
-            List<Turno> lista = new List<Turno>();     
+            List<Turno> lista = new List<Turno>();
             SqlCommand comando = new SqlCommand();
             SqlConnection conexion = new SqlConnection();
             SqlDataReader lector;
@@ -65,13 +66,13 @@ namespace Negocio
             {
                 conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText= "SELECT idTurnos, idLugar, idUsuario, idFecha, Estado FROM Turnos ";
-                if (id != "")       
-                comando.CommandText += " WHERE idTurnos= " + id;
+                comando.CommandText = "SELECT idTurnos, idLugar, idUsuario, idFecha, Estado FROM Turnos ";
+                if (id != "")
+                    comando.CommandText += " WHERE idTurnos= " + id;
                 comando.Connection = conexion;
                 conexion.Open();
 
-                lector = comando.ExecuteReader();                
+                lector = comando.ExecuteReader();
                 while (lector.Read())
                 {
                     Turno nuevo = new Turno();
@@ -81,7 +82,7 @@ namespace Negocio
                     nuevo.idTurno = (int)lector["idTurnos"];
                     nuevo.Lugar = new Lugar();
                     nuevo.Lugar.idLugar = (int)lector["idLugar"];
-                    nuevo.Lugar.Nombre= nov.buscarLugar(nuevo.Lugar.idLugar);
+                    nuevo.Lugar.Nombre = nov.buscarLugar(nuevo.Lugar.idLugar);
                     nuevo.Fecha = new Fecha();
                     nuevo.Fecha.idFecha = (int)lector["idFecha"];
                     nuevo.Fecha.descripcionFecha = date.retornarNombreDia(nuevo.Fecha.idFecha);
@@ -154,6 +155,21 @@ namespace Negocio
             datos.setParametro("@idUsuario", nuevo.idUsuario);
             datos.setParametro("@Estado", true);
             datos.ejecutarAccion();
+        }
+        public void eliminar(int Id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("delete from Turnos where idTurnos = @id");
+                datos.setParametro("@id", Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 
