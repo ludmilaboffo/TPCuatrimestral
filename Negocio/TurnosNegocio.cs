@@ -144,6 +144,17 @@ namespace Negocio
             }
 
         }
+        public void modificarConSP(Turno nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            datos.setProcedimieto("ST_ModificarTurnos");
+            datos.setParametro("@idTurnos", nuevo.idTurno);
+            datos.setParametro("@idFecha", nuevo.Fecha.idFecha);
+            datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
+            datos.setParametro("@idUsuario", nuevo.idUsuario);
+            datos.setParametro("@Estado", true);
+            datos.ejecutarAccion();
+        }
     }
 
 }
