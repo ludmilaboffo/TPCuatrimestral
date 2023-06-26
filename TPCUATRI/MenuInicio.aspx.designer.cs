@@ -24,31 +24,13 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.Button btnBajaUsuario;
 
         /// <summary>
-        /// btnAltaLugar control.
+        /// btnListadoLugares control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAltaLugar;
-
-        /// <summary>
-        /// btnAltaHorarios control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAltaHorarios;
-
-        /// <summary>
-        /// btnAltaTurnos control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAltaTurnos;
+        protected global::System.Web.UI.WebControls.Button btnListadoLugares;
 
         /// <summary>
         /// btnListarTurnos control.

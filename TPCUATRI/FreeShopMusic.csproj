@@ -126,7 +126,7 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="AltaTurno.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="ListarLugares.aspx" />
+    <Content Include="ListadoLugares.aspx" />
     <Content Include="MenuInicio.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
@@ -203,12 +203,12 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ListarLugares.aspx.cs">
-      <DependentUpon>ListarLugares.aspx</DependentUpon>
+    <Compile Include="ListadoLugares.aspx.cs">
+      <DependentUpon>ListadoLugares.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ListarLugares.aspx.designer.cs">
-      <DependentUpon>ListarLugares.aspx</DependentUpon>
+    <Compile Include="ListadoLugares.aspx.designer.cs">
+      <DependentUpon>ListadoLugares.aspx</DependentUpon>
     </Compile>
     <Compile Include="MenuInicio.aspx.cs">
       <DependentUpon>MenuInicio.aspx</DependentUpon>
