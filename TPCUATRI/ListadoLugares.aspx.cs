@@ -49,7 +49,7 @@ namespace TPCUATRI
             Button btnModificarLugar = (Button)sender;
             int idLugar = int.Parse(btnModificarLugar.CommandArgument);
             Session.Add("idLugar", idLugar);
-            Response.Redirect("Turnos.aspx");
+            Response.Redirect("ListadoTurnos.aspx");
         }
     }
 }

@@ -17,7 +17,9 @@ namespace TPCUATRI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!((Usuario)Session["user"]).isAdmin()) //TIRA ERROR DE REFERENCIA
+            Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
+            if (usuario != null)
+                if (usuario.isAdmin()) //TIRA ERROR DE REFERENCIA
             {
                 Session.Add("error", "Solo los administradores acceden a esta sección");
                 Response.Redirect("Error.aspx", false);
@@ -32,12 +34,12 @@ namespace TPCUATRI
                         LugaresNegocio lugares = new LugaresNegocio();
                         Lugar seleccionado = (lugares.listar(id))[0];
                         Session.Add("lugarSeleccionado", seleccionado);
-
-                        txtID.Text = id;
+                            txtID.Enabled = false;
+                            txtID.Text = id;
                         txtNombre.Text = seleccionado.Nombre;
                         txtDescripcion.Text = seleccionado.Descripcion;
                         chkEstado.Checked = seleccionado.Disponibilidad;
-                        // imgLugar = seleccionado.UrlImagen.ToString(); // no puedo traer la imagen 
+                         imgLugar.ImageUrl = seleccionado.UrlImagen.ToString(); 
                         if (!seleccionado.Disponibilidad)
                             btnEliminarLugar.Text = "Reactivar";
 
@@ -65,6 +67,10 @@ namespace TPCUATRI
                 if (Request.QueryString["id"]!=null)
                 {
                     nuevo.idLugar = int.Parse(txtID.Text);
+                    nuevo.Descripcion = txtDescripcion.Text;
+                    nuevo.Direccion = txtDireccion.Text;
+                    nuevo.Nombre = txtNombre.Text;
+                    nuevo.UrlImagen = imgLugar.ImageUrl;
                     negocio.ModificarConSP(nuevo);
                 }
 
