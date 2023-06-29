@@ -20,40 +20,40 @@ namespace TPCUATRI
             Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
             if (usuario != null)
                 if (usuario.isAdmin()) //TIRA ERROR DE REFERENCIA
-            {
-                Session.Add("error", "Solo los administradores acceden a esta sección");
-                Response.Redirect("Error.aspx", false);
-            }
-            else
-            {
-                if (!IsPostBack)
                 {
-                    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                    if (id != "" && !IsPostBack)
+                    Session.Add("error", "Solo los administradores acceden a esta sección");
+                    Response.Redirect("Error.aspx", false);
+                }
+                else
+                {
+                    if (!IsPostBack)
                     {
-                        LugaresNegocio lugares = new LugaresNegocio();
-                        Lugar seleccionado = (lugares.listar(id))[0];
-                        Session.Add("lugarSeleccionado", seleccionado);
+                        string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                        if (id != "" && !IsPostBack)
+                        {
+                            LugaresNegocio lugares = new LugaresNegocio();
+                            Lugar seleccionado = (lugares.listar(id))[0];
+                            Session.Add("lugarSeleccionado", seleccionado);
                             txtID.Enabled = false;
                             txtID.Text = id;
-                        txtNombre.Text = seleccionado.Nombre;
-                        txtDescripcion.Text = seleccionado.Descripcion;
-                        chkEstado.Checked = seleccionado.Disponibilidad;
-                         imgLugar.ImageUrl = seleccionado.UrlImagen.ToString(); 
-                        if (!seleccionado.Disponibilidad)
-                            btnEliminarLugar.Text = "Reactivar";
+                            txtNombre.Text = seleccionado.Nombre;
+                            txtDescripcion.Text = seleccionado.Descripcion;
 
+                            imgLugar.ImageUrl = seleccionado.UrlImagen.ToString();
+                            if (!seleccionado.Disponibilidad)
+                                btnEliminarLugar.Text = "Reactivar";
+
+                        }
                     }
                 }
-            }
-           
+
         }
 
         protected void btnEliminarLugar_Click(object sender, EventArgs e)
         {
             LugaresNegocio lugares = new LugaresNegocio();
             Lugar seleccionado = (Lugar)Session["lugarSeleccionado"];
-           
+
             lugares.eliminarLogico(seleccionado.idLugar, !seleccionado.Disponibilidad);
             Response.Redirect("Lugares.aspx");
         }
@@ -64,7 +64,7 @@ namespace TPCUATRI
             {
                 Lugar nuevo = new Lugar();
                 LugaresNegocio negocio = new LugaresNegocio();
-                if (Request.QueryString["id"]!=null)
+                if (Request.QueryString["id"] != null)
                 {
                     nuevo.idLugar = int.Parse(txtID.Text);
                     nuevo.Descripcion = txtDescripcion.Text;
@@ -80,7 +80,7 @@ namespace TPCUATRI
 
                 throw ex;
             }
-        } 
+        }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
