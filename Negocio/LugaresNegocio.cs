@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +16,12 @@ namespace Negocio
         {
             List<Lugar> lista = new List<Lugar>();
             AccesoDatos datos = new AccesoDatos();
-
+            SqlCommand comand = new SqlCommand();
             try
             {
-                string consulta = "SELECT idLugar, Direccion, Descripcion, Nombre, Estado, UrlImagen FROM Lugares";
-
+                string consulta = "SELECT idLugar, Direccion, Descripcion, Nombre, Estado, UrlImagen FROM Lugares ";
+                if (id != "")
+                    consulta += "where idLugar =" + id;
                 datos.setConsulta(consulta);
                 datos.ejecutarLectura();
 
@@ -49,18 +51,45 @@ namespace Negocio
 
         }
 
-        public void eliminarLogico(int id)
+        public void eliminarLogico(int id, bool activo = false)
         {
             try
             {
                 AccesoDatos datos = new AccesoDatos();
-                datos.setConsulta("update Lugares set Activo = 0 Where id = @id");
+                datos.setConsulta("update Lugares set Estado = @activo Where id = @id");
                 datos.setParametro("@id", id);
+                datos.setParametro("@Estado", activo);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public void ModificarConSP(Lugar lugar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setProcedimieto("StoredModificarLugar"); // TERMINAR STORED PROCEDURE EN LA BASE
+                datos.setParametro("@idLugar", lugar.idLugar);
+                datos.setParametro("@Direccion", lugar.Direccion);
+                datos.setParametro("@Descripcion", lugar.Descripcion);
+                datos.setParametro("@Nombre", lugar.Nombre);
+                datos.setParametro("@Estado", lugar.Disponibilidad);
+                datos.setParametro("@UrlImagen", lugar.UrlImagen);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
         public string buscarLugar(int id)
@@ -78,6 +107,8 @@ namespace Negocio
             }
             return "No existe";
         }
+
+
 
 
     }

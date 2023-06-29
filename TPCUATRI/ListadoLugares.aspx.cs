@@ -40,7 +40,7 @@ namespace TPCUATRI
            Button btnModificarLugar = (Button)sender; 
             int idlugar = int.Parse(btnModificarLugar.CommandArgument);
             Session.Add("idlugar",idlugar );
-            Response.Redirect("EditarLugares.aspx");
+            Response.Redirect("EditarLugares.aspx?IdLugar"+ idlugar);
             
         }
 

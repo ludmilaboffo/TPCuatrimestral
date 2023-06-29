@@ -76,6 +76,17 @@ VALUES (4, 5, 1, 1),
 
 	   EXEC ST_AltaTurno 1,2,1,1
 
+	   go
+	   alter procedure StoredModificarLugar
+	   @idLugar int,
+	   @Direccion varchar(50),
+	   @Descripcion varchar(50),
+	   @Nombre varchar (50),
+	   @Estado bit,
+	   @UrlImagen varchar (250),
+	   as begin
+	    update -- TERMINAR EL UPDATE DE LUGARES--
+
 
 CREATE TABLE FECHAS(
 	idFecha int  not null primary key identity (1,1),

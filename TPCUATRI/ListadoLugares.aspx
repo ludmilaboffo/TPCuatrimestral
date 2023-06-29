@@ -8,12 +8,12 @@
         if (usuario != null)
         {
     %>
-    <asp:Repeater runat="server" ID="repLugares">
+    <asp:Repeater runat="server" ID="repLugares"> 
         <ItemTemplate>
-            <div class="card mb-3">
+            <div class="card mb-3"> 
                 <img src="<%#Eval ("UrlImagen")%>" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 CssClass="card-title"><%#Eval("Nombre")%></h5>
+                    <h5 CssClass="card-title"><%#Eval("Nombre")%></h5>d 
                     <p  ID="direccion" CssClass="card-text"><%#Eval("Direccion")%></p>
                     <p CssClass="card-text"><%#Eval("Descripcion")%></p>
                     <p CssClass="card-text"><%#Eval("Direccion")%></p>            
