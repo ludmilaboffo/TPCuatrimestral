@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -24,11 +25,11 @@ namespace TPCUATRI
                 }
                 if (!IsPostBack)
                 {
-                        LugaresNegocio negocio = new LugaresNegocio();
-                        ListaLugar= negocio.listar();
-                        Session.Add("ListaLugar", ListaLugar);
-                        repLugares.DataSource = (List<Lugar>)(Session["ListaLugar"]);
-                        repLugares.DataBind();
+                    LugaresNegocio negocio = new LugaresNegocio();
+                    ListaLugar = negocio.listar();
+                    Session.Add("ListaLugar", ListaLugar);
+                    repLugares.DataSource = (List<Lugar>)(Session["ListaLugar"]);
+                    repLugares.DataBind();
                 }
                 ListaLugar = (List<Lugar>)(Session["ListaLugar"]);
             }
@@ -36,17 +37,11 @@ namespace TPCUATRI
 
         protected void btnModificarLugar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LugaresNegocio lugares = new LugaresNegocio();
-               // lugares.eliminarLogico(int.Parse(txtid.text));    //necesito traer el id de lugar*
-                Response.Redirect("Lugares.aspx");
-            }
-            catch (Exception ex)
-            {
-
-                Session.Add("Error", ex);
-            }
+           Button btnModificarLugar = (Button)sender; 
+            int idlugar = int.Parse(btnModificarLugar.CommandArgument);
+            Session.Add("idlugar",idlugar );
+            Response.Redirect("EditarLugares.aspx");
+            
         }
 
         protected void btnPedirTurno_Click(object sender, EventArgs e)

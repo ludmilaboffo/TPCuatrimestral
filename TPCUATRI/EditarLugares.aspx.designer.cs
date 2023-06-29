@@ -11,43 +11,34 @@ namespace TPCUATRI
 {
 
 
-    public partial class MenuInicio
+    public partial class EditarLugares
     {
 
         /// <summary>
-        /// Control btnBajaUsuario.
+        /// Control btnEliminarLugar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBajaUsuario;
+        protected global::System.Web.UI.WebControls.Button btnEliminarLugar;
 
         /// <summary>
-        /// Control btnListadoLugares.
+        /// Control btnAceptar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnListadoLugares;
+        protected global::System.Web.UI.WebControls.Button btnAceptar;
 
         /// <summary>
-        /// Control btnListarTurnos.
+        /// Control btnCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnListarTurnos;
-
-        /// <summary>
-        /// Control btnLugares.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLugares;
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

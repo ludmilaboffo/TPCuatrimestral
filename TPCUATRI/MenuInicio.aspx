@@ -7,10 +7,10 @@
     <%
 
         Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
-        if (usuario != null)
+      //  if (usuario != null)
         {
 
-            if (usuario.isAdmin())
+      //      if (usuario.isAdmin())
             { %>
     <div class="row justify-content-center">
         <div class="col-md-4">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <%}
-        else if (usuario.isArtista())
+     //  else if (usuario.isArtista())
         {%>
     <div class="row justify-content-center">
         <div class="col-md-4">
