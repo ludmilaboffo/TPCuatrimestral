@@ -17,64 +17,77 @@ namespace TPCUATRI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!((Usuario)Session["user"]).isAdmin()) //TIRA ERROR DE REFERENCIA
-            {
-                Session.Add("error", "Solo los administradores acceden a esta sección");
-                Response.Redirect("Error.aspx", false);
-            }
-            else
-            {
-                if (!IsPostBack)
+            Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
+
+                txtID.Enabled = false;
+                if (Session["user"] == null)
                 {
-                    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                    if (id != "" && !IsPostBack)
-                    {
-                        LugaresNegocio lugares = new LugaresNegocio();
-                        Lugar seleccionado = (lugares.listar(id))[0];
-                        Session.Add("lugarSeleccionado", seleccionado);
+                    Session.Add("error", "Debes loguearte para entrar");
+                    Response.Redirect("Error.aspx", false);
+                };
+            try
+            {
+                string id = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";
+                if (id != "" && !IsPostBack)
+                {
+                    LugaresNegocio lugares = new LugaresNegocio();
+                    Lugar seleccionado = (lugares.listar(id))[0];
+                    Session.Add("lugarSeleccionado", seleccionado);
+                    txtID.Text = seleccionado.idLugar.ToString();
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtDireccion.Text = seleccionado.Direccion;
+                    txtDescripcion.Text = seleccionado.Descripcion;
+                    imgLugar.ImageUrl = seleccionado.UrlImagen.ToString();
+                    if (!seleccionado.Disponibilidad)
+                        btnEliminarLugar.Text = "Reactivar";
 
-                        txtID.Text = id;
-                        txtNombre.Text = seleccionado.Nombre;
-                        txtDescripcion.Text = seleccionado.Descripcion;
-                        chkEstado.Checked = seleccionado.Disponibilidad;
-                        // imgLugar = seleccionado.UrlImagen.ToString(); // no puedo traer la imagen 
-                        if (!seleccionado.Disponibilidad)
-                            btnEliminarLugar.Text = "Reactivar";
-
-                    }
                 }
             }
-           
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+
         }
 
         protected void btnEliminarLugar_Click(object sender, EventArgs e)
         {
             LugaresNegocio lugares = new LugaresNegocio();
             Lugar seleccionado = (Lugar)Session["lugarSeleccionado"];
-           
+
             lugares.eliminarLogico(seleccionado.idLugar, !seleccionado.Disponibilidad);
             Response.Redirect("Lugares.aspx");
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
+
+
             try
             {
                 Lugar nuevo = new Lugar();
                 LugaresNegocio negocio = new LugaresNegocio();
-                if (Request.QueryString["id"]!=null)
+
+                if (Request.QueryString["id"] != null)
                 {
                     nuevo.idLugar = int.Parse(txtID.Text);
+                    nuevo.Descripcion = txtDescripcion.Text;
+                    nuevo.Direccion = txtDireccion.Text;
+                    nuevo.Nombre = txtNombre.Text;
+                    nuevo.UrlImagen = imgLugar.ImageUrl;
                     negocio.ModificarConSP(nuevo);
+                    Response.Redirect("ListadoLugares.aspx", false);
                 }
-
+             //   negocio.alta(nuevo);
+                Response.Redirect("ListadoTurnos.aspx", false);
             }
             catch (Exception ex)
             {
 
                 throw ex;
             }
-        } 
+        }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {

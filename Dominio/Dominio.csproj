@@ -70,6 +70,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Artista.cs" />
     <Compile Include="Fecha.cs" />
     <Compile Include="Lugar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

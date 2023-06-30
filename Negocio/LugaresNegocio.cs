@@ -15,26 +15,32 @@ namespace Negocio
         public List<Lugar> listar(string id = "")
         {
             List<Lugar> lista = new List<Lugar>();
+            SqlCommand comando = new SqlCommand();
+            SqlConnection conexion = new SqlConnection();
+            SqlDataReader lector;
             AccesoDatos datos = new AccesoDatos();
             SqlCommand comand = new SqlCommand();
             try
             {
-                string consulta = "SELECT idLugar, Direccion, Descripcion, Nombre, Estado, UrlImagen FROM Lugares ";
+                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "SELECT idLugar, Direccion, Descripcion, Nombre, Estado, UrlImagen FROM Lugares ";
                 if (id != "")
-                    consulta += "where idLugar =" + id;
-                datos.setConsulta(consulta);
-                datos.ejecutarLectura();
+                    comando.CommandText += " WHERE idLugar= " + id;
+                comando.Connection = conexion;
+                conexion.Open();
 
-                while (datos.Lector.Read())
+                lector = comando.ExecuteReader();
+                while (lector.Read())
                 {
                     Lugar aux = new Lugar();
 
-                    aux.idLugar = (int)datos.Lector["idLugar"];
-                    aux.Direccion = (string)datos.Lector["Direccion"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Disponibilidad = (bool)datos.Lector["Estado"];
-                    aux.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    aux.idLugar = (int)lector["idLugar"];
+                    aux.Direccion = (string)lector["Direccion"];
+                    aux.Descripcion = (string)lector["Descripcion"];
+                    aux.Nombre = (string)lector["Nombre"];
+                    aux.Disponibilidad = (bool)lector["Estado"];
+                    aux.UrlImagen = (string)lector["UrlImagen"];
                     lista.Add(aux);
                 }
 
@@ -56,8 +62,8 @@ namespace Negocio
             try
             {
                 AccesoDatos datos = new AccesoDatos();
-                datos.setConsulta("update Lugares set Estado = @activo Where id = @id");
-                datos.setParametro("@id", id);
+                datos.setConsulta("update Lugares set Estado = @activo Where id = @idLugar");
+                datos.setParametro("@idLugar", id);
                 datos.setParametro("@Estado", activo);
                 datos.ejecutarAccion();
             }
@@ -72,7 +78,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setProcedimieto("StoredModificarLugar"); // TERMINAR STORED PROCEDURE EN LA BASE
+                datos.setProcedimieto("StoredModificarLugar"); 
                 datos.setParametro("@idLugar", lugar.idLugar);
                 datos.setParametro("@Direccion", lugar.Direccion);
                 datos.setParametro("@Descripcion", lugar.Descripcion);
@@ -90,6 +96,44 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public void alta(Lugar nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("INSERT INTO Lugares ( Direccion, Descripcion, Nombre, Estado) VALUES ( @Direccion, @Descripcion, @Nombre, @Estado )");
+                datos.setParametro("@Descripcion", nuevo.Descripcion);
+                datos.setParametro("@Direccion", nuevo.Direccion);
+                datos.setParametro("@Nombre", nuevo.Nombre);
+                datos.setParametro("@Estado", true);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int Id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("delete from Turnos where idLugares = @idLugar");
+                datos.setParametro("@idLugar", Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
         public string buscarLugar(int id)

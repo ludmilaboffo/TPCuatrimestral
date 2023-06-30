@@ -156,6 +156,7 @@ namespace Negocio
             datos.setParametro("@Estado", true);
             datos.ejecutarAccion();
         }
+
         public void eliminar(int Id)
         {
             try

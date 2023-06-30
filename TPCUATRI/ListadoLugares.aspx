@@ -9,7 +9,7 @@
         {
     %>
     <asp:Repeater runat="server" ID="repLugares"> 
-        <ItemTemplate>
+        <ItemTemplate>           
             <div class="card mb-3"> 
                 <img src="<%#Eval ("UrlImagen")%>" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -24,8 +24,8 @@
                 </div>
              <% 
              } else if(((Dominio.Usuario)Session["user"]).isAdmin()){%>
-                    <asp:Button ID="btnModificarLugar" Onclick="btnModificarLugar_Click" CssClass="btn btn-warning" Text="Modificar" runat="server" commandName="Modificar" CommandArgument='<%# Eval("idLugar") %>'  />
-                    </div>
+                    <asp:Button ID="btnModificarLugar" Onclick="btnModificarLugar_Click" CssClass="btn btn-warning" Text="" runat="server" commandName="Modificar" CommandArgument='<%# Eval("idLugar") %>'  />              
+               </div>
             <%}%>
         </ItemTemplate>
     </asp:Repeater>

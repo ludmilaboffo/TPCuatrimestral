@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDatos.cs" />
+    <Compile Include="ArtistaNegocio.cs" />
     <Compile Include="FechaNegocio.cs" />
     <Compile Include="TurnosNegocio.cs" />
     <Compile Include="LugaresNegocio.cs" />

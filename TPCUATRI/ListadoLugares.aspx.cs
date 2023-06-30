@@ -39,9 +39,9 @@ namespace TPCUATRI
         {
            Button btnModificarLugar = (Button)sender; 
             int idlugar = int.Parse(btnModificarLugar.CommandArgument);
-            Session.Add("idlugar",idlugar );
-            Response.Redirect("EditarLugares.aspx?IdLugar"+ idlugar);
-            
+            Session.Add("idLugar", idlugar );
+            Response.Redirect("EditarLugares.aspx?idLugar=" + idlugar);
+
         }
 
         protected void btnPedirTurno_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace TPCUATRI
             Button btnModificarLugar = (Button)sender;
             int idLugar = int.Parse(btnModificarLugar.CommandArgument);
             Session.Add("idLugar", idLugar);
-            Response.Redirect("Turnos.aspx");
+            Response.Redirect("ListadoTurnos.aspx");
         }
     }
 }
