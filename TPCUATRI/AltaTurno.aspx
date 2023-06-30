@@ -14,8 +14,8 @@
             { %>
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">ID</label>
+            <div class="mb-3 display-none">
+                <labe for="exampleFormControlInput1" class="form-label">ID</labe>
                 <asp:TextBox runat="server" ID="txtId" CssClass="form-control"> </asp:TextBox>
             </div>
             <asp:UpdatePanel runat="server">

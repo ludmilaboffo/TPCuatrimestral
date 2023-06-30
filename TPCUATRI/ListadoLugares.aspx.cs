@@ -51,5 +51,11 @@ namespace TPCUATRI
             Session.Add("idLugar", idLugar);
             Response.Redirect("ListadoTurnos.aspx");
         }
+
+        protected void btnAltaLugar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("EditarLugares.aspx");
+        }
+
     }
 }

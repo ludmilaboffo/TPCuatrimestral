@@ -14,17 +14,18 @@ namespace TPCUATRI
     {
         public Lugar lugaress { get; set; }
         public Lugar Lugar { get; set; }
+        public bool eliminarLugar { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
 
-                txtID.Enabled = false;
-                if (Session["user"] == null)
-                {
-                    Session.Add("error", "Debes loguearte para entrar");
-                    Response.Redirect("Error.aspx", false);
-                };
+            txtID.Enabled = false;
+            if (Session["user"] == null)
+            {
+                Session.Add("error", "Debes loguearte para entrar");
+                Response.Redirect("Error.aspx", false);
+            };
             try
             {
                 string id = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";
@@ -38,9 +39,6 @@ namespace TPCUATRI
                     txtDireccion.Text = seleccionado.Direccion;
                     txtDescripcion.Text = seleccionado.Descripcion;
                     imgLugar.ImageUrl = seleccionado.UrlImagen.ToString();
-                    if (!seleccionado.Disponibilidad)
-                        btnEliminarLugar.Text = "Reactivar";
-
                 }
             }
             catch (Exception ex)
@@ -79,8 +77,8 @@ namespace TPCUATRI
                     negocio.ModificarConSP(nuevo);
                     Response.Redirect("ListadoLugares.aspx", false);
                 }
-             //   negocio.alta(nuevo);
-                Response.Redirect("ListadoTurnos.aspx", false);
+                //   negocio.alta(nuevo);
+                Response.Redirect("ListadoLugares.aspx", false);
             }
             catch (Exception ex)
             {
@@ -92,6 +90,29 @@ namespace TPCUATRI
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("ListadoLugares.aspx");
+        }
+
+        protected void btnConfirmarLugares_Click(object sender, EventArgs e)
+        {
+            eliminarLugar = true;
+            upEliminar.Update();
+        }
+
+        protected void btnEliminarLugar_Click1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chConfirmarEliminarLugares.Checked)
+                {
+                    LugaresNegocio lugar = new LugaresNegocio();
+                    lugar.eliminar(int.Parse(txtID.Text));
+                    Response.Redirect("ListadoLugares.aspx", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
         }
     }
 }

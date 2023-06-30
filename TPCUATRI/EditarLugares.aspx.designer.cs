@@ -33,6 +33,15 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.TextBox txtID;
 
         /// <summary>
+        /// udModificar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel udModificar;
+
+        /// <summary>
         /// txtNombre control.
         /// </summary>
         /// <remarks>
@@ -78,15 +87,6 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.Image imgLugar;
 
         /// <summary>
-        /// btnEliminarLugar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEliminarLugar;
-
-        /// <summary>
         /// btnAceptar control.
         /// </summary>
         /// <remarks>
@@ -103,5 +103,41 @@ namespace TPCUATRI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
+
+        /// <summary>
+        /// upEliminar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upEliminar;
+
+        /// <summary>
+        /// btnEliminarLugar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminarLugar;
+
+        /// <summary>
+        /// chConfirmarEliminarLugares control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chConfirmarEliminarLugares;
+
+        /// <summary>
+        /// btnConfirmarLugares control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirmarLugares;
     }
 }

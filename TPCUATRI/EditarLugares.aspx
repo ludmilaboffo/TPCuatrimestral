@@ -12,12 +12,12 @@
 
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <div class="mb-3">
+            <div class="mb-3 display-none">
                 <label class="form-label">ID</label>
                 <asp:TextBox ID="txtID" CssClass="form-control" runat="server"></asp:TextBox>
 
             </div>
-            <asp:UpdatePanel runat="server">
+            <asp:UpdatePanel runat="server" ID="udModificar" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="mb-3">
                         <label class="form-label">Nombre</label>
@@ -47,15 +47,34 @@
             </asp:UpdatePanel>
         </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-6">
             <div class="mb-3">
-                <asp:Button ID="btnEliminarLugar" runat="server" Text="Desactivar lugar" CssClass="btn btn-danger" OnClick="btnEliminarLugar_Click" />
                 <asp:Button ID="btnAceptar" runat="server" Text="Aceptar cambios" CssClass="btn btn-primary" OnClick="btnAceptar_Click" />
                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar cambios" CssClass="btn btn-secondary" OnClick="btnCancelar_Click" />
             </div>
         </div>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <asp:UpdatePanel ID="upEliminar" runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <asp:Button runat="server" Text="Eliminar" ID="btnEliminarLugar" CssClass="btn btn-danger" OnClick="btnEliminarLugar_Click1" />
+                        <a href="MenuInicio.aspx">Volver al menú de inicio</a>
+                    </div>
 
-    <%}%>
+                    <%if (eliminarLugar)
+                        { %>
+                    <div class="mb-3">
+                        <asp:CheckBox runat="server" Text="Confirmar eliminacion" ID="chConfirmarEliminarLugares" />
+                        <asp:Button runat="server" Text="Confirmar" ID="btnConfirmarLugares" CssClass="btn btn-outline-danger" OnClick="btnConfirmarLugares_Click" />
+                    </div>
+                    <%} %>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            </div>
+        </div>
+
+            <%}%>
 </asp:Content>
