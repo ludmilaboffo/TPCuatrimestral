@@ -36,8 +36,13 @@ namespace TP_Programacion3
         protected void gvTurnos_SelectedIndexChanged(object sender, EventArgs e)
         {
             var id = gvTurnos.SelectedDataKey.Value.ToString();
-            Response.Redirect("AltaTurno.aspx?id=" + id);
+            Response.Redirect("ABMTurno.aspx?id=" + id);
 
+        }
+
+        protected void btnAltaTurno_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AMBTurno.aspx", false);
         }
     }
 }

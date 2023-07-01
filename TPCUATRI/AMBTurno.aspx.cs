@@ -90,8 +90,9 @@ namespace TPCUATRI
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertScript", "alert('" + mensaje + "');", true);
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
-                negocio.alta(nuevo);
-                Response.Redirect("ListadoTurnos.aspx", false);
+
+                    negocio.alta(nuevo);
+                    Response.Redirect("ListadoTurnos.aspx", false);
             }
             catch (Exception ex)
             {
@@ -122,4 +123,5 @@ namespace TPCUATRI
             }
         }
     }
+
 }

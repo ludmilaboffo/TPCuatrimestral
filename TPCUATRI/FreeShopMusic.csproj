@@ -125,7 +125,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="AltaTurno.aspx" />
+    <Content Include="AMBTurno.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ListadoLugares.aspx" />
     <Content Include="MenuInicio.aspx" />
@@ -197,12 +197,12 @@
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AltaTurno.aspx.cs">
-      <DependentUpon>AltaTurno.aspx</DependentUpon>
+    <Compile Include="AMBTurno.aspx.cs">
+      <DependentUpon>AMBTurno.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AltaTurno.aspx.designer.cs">
-      <DependentUpon>AltaTurno.aspx</DependentUpon>
+    <Compile Include="AMBTurno.aspx.designer.cs">
+      <DependentUpon>AMBTurno.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
