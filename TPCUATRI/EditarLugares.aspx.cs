@@ -38,7 +38,7 @@ namespace TPCUATRI
                     txtNombre.Text = seleccionado.Nombre;
                     txtDireccion.Text = seleccionado.Direccion;
                     txtDescripcion.Text = seleccionado.Descripcion;
-                    imgLugar.ImageUrl = seleccionado.UrlImagen.ToString();
+                    txtImgLugar.Text = seleccionado.UrlImagen.ToString();
                 }
             }
             catch (Exception ex)
@@ -66,24 +66,30 @@ namespace TPCUATRI
             {
                 Lugar nuevo = new Lugar();
                 LugaresNegocio negocio = new LugaresNegocio();
+ 
+                nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.Direccion = txtDireccion.Text;
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.UrlImagen = txtImgLugar.Text;
 
-                if (Request.QueryString["id"] != null)
+                if (Request.QueryString["idLugar"] != null)
                 {
                     nuevo.idLugar = int.Parse(txtID.Text);
-                    nuevo.Descripcion = txtDescripcion.Text;
-                    nuevo.Direccion = txtDireccion.Text;
-                    nuevo.Nombre = txtNombre.Text;
-                    nuevo.UrlImagen = imgLugar.ImageUrl;
                     negocio.ModificarConSP(nuevo);
                     Response.Redirect("ListadoLugares.aspx", false);
                 }
-                //   negocio.alta(nuevo);
+                else
+                {
+
+                     negocio.alta(nuevo);
+                }
                 Response.Redirect("ListadoLugares.aspx", false);
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -113,6 +119,11 @@ namespace TPCUATRI
             {
                 Session.Add("error", ex);
             }
+        }
+
+        protected void txtImgLugar_TextChanged(object sender, EventArgs e)
+        {
+            imgLugar.ImageUrl = txtImgLugar.Text;
         }
     }
 }

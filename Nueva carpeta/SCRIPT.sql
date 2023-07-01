@@ -20,7 +20,7 @@ CREATE TABLE Usuarios (
     Estado BIT
 )
 GO
-
+ WHERE 
 
 CREATE TABLE Lugares (
     idLugar INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
@@ -38,7 +38,6 @@ CREATE TABLE Dias(
 	)
 GO
 
-DROP TABLE TURNOS
 
 
 Create TABLE Turnos (
@@ -134,3 +133,26 @@ INSERT INTO
 HORARIOS(Horario)
 Values(23)
 
+
+
+go
+
+
+
+CREATE PROCEDURE StoredModificarLugar
+	@idLugar int,
+	@Direccion varchar(50),
+	@Descripcion varchar(50),
+	@Nombre varchar(50),
+	@Estado bit,
+	@UrlImagen varchar(250)
+AS
+BEGIN
+	UPDATE Lugares
+	SET Direccion = @Direccion,
+		Descripcion = @Descripcion,
+		Nombre = @Nombre,
+		Estado = @Estado,
+		UrlImagen = @UrlImagen
+	WHERE idLugar = @idLugar
+END

@@ -104,10 +104,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("INSERT INTO Lugares ( Direccion, Descripcion, Nombre, Estado) VALUES ( @Direccion, @Descripcion, @Nombre, @Estado )");
+
+
+                datos.setConsulta("INSERT INTO Lugares ( Direccion, Descripcion, Nombre, Estado, UrlImagen) VALUES ( @Direccion, @Descripcion, @Nombre, @Estado, @Imagen )");
                 datos.setParametro("@Descripcion", nuevo.Descripcion);
                 datos.setParametro("@Direccion", nuevo.Direccion);
                 datos.setParametro("@Nombre", nuevo.Nombre);
+                datos.setParametro("@Imagen", nuevo.UrlImagen);
                 datos.setParametro("@Estado", true);
                 datos.ejecutarAccion();
             }
@@ -154,6 +157,21 @@ namespace Negocio
 
 
 
+        public void Actualizar(Lugar nuevo)
+        {
 
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("UPDATE Lugares SET UrlImagen = @img WHERE idLugar = @idLugar");
+                datos.setParametro("@idLugar", nuevo.idLugar);
+                datos.setParametro("@img", nuevo.UrlImagen);
+                datos.ejecutarAccion();
+            }
+            catch(Exception ex){
+                throw ex;
+            }
+
+        }
     }
 }

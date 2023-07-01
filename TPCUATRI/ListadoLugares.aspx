@@ -58,7 +58,7 @@
     <asp:Repeater runat="server" ID="repLugares">
         <ItemTemplate>
             <div class="card mb-3">
-                <img src="<%#Eval("UrlImagen")%>" class="card-img-top" alt="...">
+                <img src="<%#Eval("UrlImagen")%>" class="card-img-top" alt="..." onerror="this.src='https://media.istockphoto.com/id/1193046540/es/vector/foto-pr%C3%B3ximamente-icono-de-imagen-ilustraci%C3%B3n-vectorial-aislado-sobre-fondo-blanco-no-hay.jpg?s=612x612&w=0&k=20&c=sblCjtqWoLEpWnqGZMr5yuiltE2bsiuH-WwsecNGSIA=';">
                 <div class="card-body">
                     <h5 cssclass="card-title"><%#Eval("Nombre")%></h5>
                     <p id="direccion" cssclass="card-text"><%#Eval("Direccion")%></p>
