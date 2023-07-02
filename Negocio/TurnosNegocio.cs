@@ -44,6 +44,14 @@ namespace Negocio
                 datos.setParametro("@idUsuario", nuevo.idUsuario);
                 datos.setParametro("@Estado", true);
                 datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+
+                /// Este procedimiento tiene una subconsulta: si la fecha existe en la tabla de turnos
+                /// y se relaciona con ese id de Lugar, da de baja esa fecha para ese lugar
+               // datos.setConsulta("StoredProcedureBajaFecha");
+                //datos.setParametro("@idlug", nuevo.Lugar.idLugar);
+                //datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -66,7 +74,7 @@ namespace Negocio
             {
                 conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT idTurnos, idLugar, idUsuario, idFecha, Estado FROM Turnos ";
+                comando.CommandText = "SELECT T.idTurnos, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar ";
                 if (id != "")
                     comando.CommandText += " WHERE idTurnos= " + id;
                 comando.Connection = conexion;
@@ -78,15 +86,16 @@ namespace Negocio
                     Turno nuevo = new Turno();
                     LugaresNegocio nov = new LugaresNegocio();
                     FechaNegocio date = new FechaNegocio();
-
                     nuevo.idTurno = (int)lector["idTurnos"];
                     nuevo.Lugar = new Lugar();
                     nuevo.Lugar.idLugar = (int)lector["idLugar"];
-                    nuevo.Lugar.Nombre = nov.buscarLugar(nuevo.Lugar.idLugar);
+                    nuevo.Lugar.Nombre = (string)lector["Nombre"];
+                    nuevo.Lugar.Disponibilidad = (bool)lector["Estado"];
                     nuevo.Fecha = new Fecha();
                     nuevo.Fecha.idFecha = (int)lector["idFecha"];
-                    nuevo.Fecha.descripcionFecha = date.retornarNombreDia(nuevo.Fecha.idFecha);
-                    nuevo.Fecha.numeroFecha = date.retornarNumeroDia(nuevo.Fecha.idFecha);
+                    nuevo.Fecha.descripcionFecha = (string)lector["descripcionDia"];
+                    nuevo.Fecha.numeroFecha = (int)lector["numeroDia"];
+                    nuevo.Fecha.Estado = (bool)lector["Estado"];
                     nuevo.idUsuario = (int)lector["idUsuario"];
                     nuevo.disponibilidad = (bool)lector["Estado"];
                     lista.Add(nuevo);
@@ -111,23 +120,24 @@ namespace Negocio
 
             try
             {
-                datos.setProcedimieto("ST_ListarTurnos");
+                datos.setProcedimieto("StoredListarTurnos"); /// STORE PROCEDURE CON INNER JOIN A AMBAS TABLAS
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
                     Turno nuevo = new Turno();
-                    LugaresNegocio nov = new LugaresNegocio();
-                    FechaNegocio date = new FechaNegocio();
+
 
                     nuevo.idTurno = (int)datos.Lector["idTurnos"];
                     nuevo.Lugar = new Lugar();
                     nuevo.Lugar.idLugar = (int)datos.Lector["idLugar"];
-                    nuevo.Lugar.Nombre = nov.buscarLugar(nuevo.Lugar.idLugar);
+                    nuevo.Lugar.Nombre = (string)datos.Lector["Nombre"];
+                    nuevo.Lugar.Disponibilidad = (bool)datos.Lector["Estado"];
                     nuevo.Fecha = new Fecha();
                     nuevo.Fecha.idFecha = (int)datos.Lector["idFecha"];
-                    nuevo.Fecha.descripcionFecha = date.retornarNombreDia(nuevo.Fecha.idFecha);
-                    nuevo.Fecha.numeroFecha = date.retornarNumeroDia(nuevo.Fecha.idFecha);
+                    nuevo.Fecha.descripcionFecha = (string)datos.Lector["descripcionDia"];
+                    nuevo.Fecha.numeroFecha = (int)datos.Lector["numeroDia"];
+                    nuevo.Fecha.Estado=(bool)datos.Lector["Estado"];
                     nuevo.idUsuario = (int)datos.Lector["idUsuario"];
                     nuevo.disponibilidad = (bool)datos.Lector["Estado"];
                     lista.Add(nuevo);

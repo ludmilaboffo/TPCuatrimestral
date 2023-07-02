@@ -80,9 +80,9 @@
                    
                     <% if (((Dominio.Usuario)Session["user"]).isArtista())
                         { %>
-                    <div class="centered-button">
-                        <asp:Button ID="btnPedirTurno" CssClass="btn btn-primary m mb-4" Text="Pedir turno" runat="server" CommandName="PedirTurno" CommandArgument='<%# Eval("idLugar") %>' OnClick="btnPedirTurno_Click" />
-                    </div>
+                        <div class="centered-button">
+                                <asp:Button ID="btnPedirTurno" CssClass="btn btn-primary m mb-4" Text="Pedir turno" runat="server" CommandName="PedirTurno" CommandArgument='<%# Eval("idLugar") %>' OnClick="btnPedirTurno_Click" />
+                        </div>
                 </div>
             </div>
             <% 

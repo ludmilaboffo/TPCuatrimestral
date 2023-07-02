@@ -90,19 +90,19 @@
                 <div class="card menu-card">
                     <div class="card-header menu-card-header">MI PERFIL</div>
                     <div class="card-body menu-card-body">
-                        <asp:Button ID="Button1" CssClass="btn btn-primary menu-button" runat="server" Text="Ir" OnClick="btnBajaUsuario_Click" />
+                        <asp:Button ID="btnPerfil" CssClass="btn btn-primary menu-button" runat="server" Text="Ver perfil" OnClick="btnPerfil_Click" />
                     </div>
                 </div>
                 <div class="card menu-card">
                     <div class="card-header menu-card-header">NUEVO TURNO</div>
                     <div class="card-body menu-card-body">
-                        <asp:Button ID="Button2" CssClass="btn btn-primary menu-button" runat="server" Text="Ir" OnClick="btnListadoLugares_Click" />
+                        <asp:Button ID="btnNuevoTurnoART" CssClass="btn btn-primary menu-button" runat="server" Text="Ir" OnClick="btnNuevoTurnoART_Click" />
                     </div>
                 </div>
                 <div class="card menu-card">
                     <div class="card-header menu-card-header">MI AGENDA</div>
                     <div class="card-body menu-card-body">
-                        <asp:Button ID="Button3" CssClass="btn btn-primary menu-button" runat="server" OnClick="btnListarTurnos_Click" Text="Ir" />
+                        <asp:Button ID="btnAgendaArtista" CssClass="btn btn-primary menu-button" runat="server" OnClick="btnAgendaArtista_Click" Text="Ir" />
                     </div>
                 </div>
             </div>

@@ -10,5 +10,6 @@ namespace Dominio
         public int idFecha { get; set; }
         public string descripcionFecha { get; set; }
         public int numeroFecha { get; set; }
+        public bool Estado {get; set;}
     }
 }

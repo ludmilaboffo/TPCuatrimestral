@@ -43,35 +43,38 @@ namespace Negocio
 
         }
 
-        public string retornarNombreDia(int id)
+        public List<Fecha> listarFiltrado(string id = "")
         {
-            List<Fecha> ListaFecha;
-            FechaNegocio obj = new FechaNegocio();
-            ListaFecha = obj.listar();
-
-            foreach (Fecha fech in ListaFecha)
+            List<Fecha> lista = new List<Fecha>();
+            AccesoDatos datos = new AccesoDatos();
+            try
             {
-                if (fech.idFecha == id)
-                {
-                    return fech.descripcionFecha;
-                }
-            }
-            return "No existe";
-        }
-        public int retornarNumeroDia(int id)
-        {
-            List<Fecha> ListaFecha;
-            FechaNegocio obj = new FechaNegocio();
-            ListaFecha = obj.listar();
+                datos.setProcedimieto("StoredFechaFiltrada");
+                datos.setParametro("@id", id);
+                datos.ejecutarLectura();
 
-            foreach (Fecha fech in ListaFecha)
-            {
-                if (fech.idFecha == id)
+                while (datos.Lector.Read())
                 {
-                    return fech.numeroFecha;
+                    Fecha nuevo = new Fecha();
+
+                    nuevo.idFecha = (int)datos.Lector["idFecha"];
+                    nuevo.numeroFecha = (int)datos.Lector["numeroDia"];
+                    nuevo.descripcionFecha = (string)datos.Lector["descripcionDia"];
+                    nuevo.Estado = (bool)datos.Lector["Estado"];
+                    lista.Add(nuevo);
                 }
+
+                return lista;
             }
-            return 0;
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

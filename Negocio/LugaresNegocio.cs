@@ -132,7 +132,7 @@ namespace Negocio
 
             try
             {
-                datos.setProcedimieto("ST_ListarLugares");
+                datos.setProcedimieto("StoredListarLugares");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

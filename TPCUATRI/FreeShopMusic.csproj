@@ -129,6 +129,7 @@
     <Content Include="Login.aspx" />
     <Content Include="ListadoLugares.aspx" />
     <Content Include="MenuInicio.aspx" />
+    <Content Include="NuevoTurno_Artista.aspx" />
     <Content Include="Perfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -224,6 +225,13 @@
     </Compile>
     <Compile Include="MenuInicio.aspx.designer.cs">
       <DependentUpon>MenuInicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NuevoTurno_Artista.aspx.cs">
+      <DependentUpon>NuevoTurno_Artista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NuevoTurno_Artista.aspx.designer.cs">
+      <DependentUpon>NuevoTurno_Artista.aspx</DependentUpon>
     </Compile>
     <Compile Include="Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>

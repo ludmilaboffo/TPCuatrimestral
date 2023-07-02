@@ -58,5 +58,21 @@ namespace TPCUATRI
             }
             return " ";
         }
+
+
+        protected void btnPerfil_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnNuevoTurnoART_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ListadoLugares.aspx", false);
+        }
+
+        protected void btnAgendaArtista_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
