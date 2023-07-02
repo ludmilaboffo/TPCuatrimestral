@@ -144,7 +144,7 @@ namespace Negocio
                     nuevo.Descripcion = (string)datos.Lector["Descripcion"];
                     nuevo.Nombre = (string)datos.Lector["Nombre"];
                     nuevo.UrlImagen = (string)datos.Lector["UrlImagen"];
-                    nuevo.Disponibilidad = (bool)datos.Lector["Estado"];
+                    nuevo.Disponibilidad = (bool)datos.Lector["Estado"];               
                     lista.Add(nuevo);
                 }
 

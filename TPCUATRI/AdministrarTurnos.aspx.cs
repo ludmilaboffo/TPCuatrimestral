@@ -29,10 +29,15 @@ namespace TPCUATRI
             }
             try
             {
-                    ListaLugar= lugar.listar();
-                    ListaFecha = fecha.listar();
+                ListaLugar = lugar.listar();
+                ListaFecha = fecha.listar();
+
+                // ordeno la lista de forma descendente
+                ListaLugar.Sort((l1, l2) => l1.Nombre.CompareTo(l2.Nombre));
+                ListaFecha.Sort((f1, f2) => f1.numeroFecha.CompareTo(f2.numeroFecha));
                 if (!IsPostBack)
                 {
+
 
                     ddlLugar.DataSource = ListaLugar;
                     ddlLugar.DataValueField = "idLugar";
@@ -47,7 +52,7 @@ namespace TPCUATRI
                 }
                 /// modificamos
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                if(id!= "" && !IsPostBack)
+                if (id != "" && !IsPostBack)
                 {
                     TurnosNegocio turno = new TurnosNegocio();
                     Turno selec = (turno.listar(id))[0];
@@ -61,10 +66,10 @@ namespace TPCUATRI
                     {
                         btnInhabilitarTurno.Text = "Rehabilitar";
                     }
-                    
-                } 
+
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Session.Add("error", ex);
                 Response.Redirect("Error.aspx", false);
@@ -79,7 +84,7 @@ namespace TPCUATRI
             {
                 Turno nuevo = new Turno();
                 TurnosNegocio negocio = new TurnosNegocio();
-                LugaresNegocio lugarNegocio = new LugaresNegocio(); 
+                LugaresNegocio lugarNegocio = new LugaresNegocio();
 
                 nuevo.Lugar = new Lugar();
                 nuevo.Lugar.idLugar = int.Parse(ddlLugar.SelectedValue);
@@ -87,7 +92,7 @@ namespace TPCUATRI
                 nuevo.Fecha = new Fecha();
                 nuevo.Fecha.idFecha = int.Parse(ddlFecha.SelectedValue);
 
-                if(Request.QueryString["id"] != null)
+                if (Request.QueryString["id"] != null)
                 {
                     nuevo.idTurno = int.Parse(txtId.Text);
                     negocio.modificarConSP(nuevo);
@@ -100,8 +105,11 @@ namespace TPCUATRI
                     negocio.alta(nuevo);
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
+                else
+                {
                     Session.Add("error", "Ya un turno en ese lugar en la misma fecha");
                     Response.Redirect("Error.aspx", false);
+                }
 
             }
             catch (Exception ex)
@@ -127,7 +135,7 @@ namespace TPCUATRI
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Session.Add("error", ex);
             }
@@ -162,11 +170,11 @@ namespace TPCUATRI
         {
             List<Turno> Listaturno;
             TurnosNegocio negocio = new TurnosNegocio();
-            Listaturno = negocio.listarSP();       
+            Listaturno = negocio.listarSP();
 
-            foreach(Turno turno in Listaturno)
+            foreach (Turno turno in Listaturno)
             {
-                if(turno.Fecha.idFecha == nuevo.Fecha.idFecha && turno.Lugar.idLugar == nuevo.Lugar.idLugar)
+                if (turno.Fecha.idFecha == nuevo.Fecha.idFecha && turno.Lugar.idLugar == nuevo.Lugar.idLugar)
                 {
                     return false;
                 }
@@ -174,6 +182,6 @@ namespace TPCUATRI
 
             return true;
         }
-    }
 
+    }
 }

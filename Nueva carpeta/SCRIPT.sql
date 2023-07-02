@@ -156,3 +156,94 @@ BEGIN
 		UrlImagen = @UrlImagen
 	WHERE idLugar = @idLugar
 END
+select * from FECHAS
+
+ALTER TABLE FECHAS
+ADD Estado bit;
+
+
+UPDATE FECHAS
+SET Estado = 0 WHERE idFecha = 2
+
+SELECT T.idTurnos, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia
+FROM Turnos T
+INNER JOIN FECHAS F on F.idFecha = T.idFecha
+INNER JOIN Lugares L on L.idLugar = T.idLugar
+WHERE F.Estado = 1 AND L.Estado = 1
+go
+
+CREATE PROCEDURE StoredListarTurnos
+AS
+BEGIN
+SELECT T.idTurnos, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar
+END
+exec StoredListarTurnos
+
+create PROCEDURE StoredListarLugares
+AS
+BEGIN
+	Select* from Lugares
+END 
+
+SELECT OBJECT_ID('ST_ListadoTurnos') AS ObjectID;
+IF OBJECT_ID('ST_ListadoTurnos', 'P') IS NOT NULL
+BEGIN
+    DROP PROCEDURE SP_ListarLugares;
+END
+
+CREATE PROCEDURE StoredFechaFiltrada(
+ @id int
+ )
+ AS
+BEGIN
+	SELECT F.idFecha, F.descripcionDia, F.numeroDia, F.Estado, L.idLugar FROM FECHAS F
+	INNER JOIN Turnos T on T.idFecha = F.idFecha
+	INNER JOIN Lugares L on L.idLugar = T.idLugar
+	WHERE F.Estado = 1 AND T.idLugar = @id
+END
+
+EXEC StoredFechaFiltrada 3
+alter PROCEDURE StoredProcedureBajaFecha
+   @BAJA int
+AS
+BEGIN
+    UPDATE FECHAS
+    SET Estado = 0
+    WHERE idFecha IN (
+        SELECT idFecha
+        FROM Turnos
+        WHERE idLugar = @BAJA
+    )
+END
+
+
+select * from turnos
+
+DELETE FROM TURNOS WHERE idTurnos = 18
+
+
+
+CREATE ALTER PROCEDURE StoredFechaFiltradaPorTurno(
+ @id int
+ )
+ AS
+BEGIN
+	SELECT F.idFecha, F.descripcionDia, F.numeroDia, F.Estado, L.idLugar, T.idTurnos FROM FECHAS F
+	INNER JOIN Turnos T on T.idFecha = F.idFecha
+	INNER JOIN Lugares L on L.idLugar = T.idLugar
+	WHERE F.Estado = 1 AND T.idTurnos = @id
+END
+
+EXEC StoredFechaFiltradaPorTurno 17
+
+CREATE PROCEDURE SP_BajaFecha(
+    @idLugar int
+AS
+BEGIN
+    UPDATE T
+    SET Estado = 0
+    FROM Turnos AS T
+    INNER JOIN Fechas AS F ON T.idFecha = F.idFecha
+    WHERE T.idLugar = @idLugar;
+END 
+

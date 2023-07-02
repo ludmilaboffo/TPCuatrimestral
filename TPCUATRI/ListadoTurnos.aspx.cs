@@ -37,6 +37,7 @@ namespace TP_Programacion3
         protected void gvTurnos_SelectedIndexChanged(object sender, EventArgs e)
         {
             var id = gvTurnos.SelectedDataKey.Value.ToString();
+            Session.Add("idTurnoSeleccionado", id);
             Response.Redirect("AdministrarTurnos.aspx?id=" + id);
 
         }

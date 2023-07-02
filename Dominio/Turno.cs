@@ -15,6 +15,8 @@ namespace Dominio
         public int idUsuario { get; set; }
         public bool disponibilidad { get; set; }
 
+        public bool ocupado { get; set; }
+
         /// POR DEFECTO EL ID USUARIO SE CARGA EN 1 QUE ES EL ADMIN. Mientras este en 1,
         /// estara disponible también
     }

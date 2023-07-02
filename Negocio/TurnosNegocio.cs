@@ -11,7 +11,7 @@ namespace Negocio
     public class TurnosNegocio
     {
 
-        public void altaSP(Turno nuevo)
+        public void altaSP(Turno nuevo) /// ESTE DA EL ALTA PARA LOS USUARIOS ARTISTAS
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -21,6 +21,7 @@ namespace Negocio
                 datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
                 datos.setParametro("@idUsuario", nuevo.idUsuario);
                 datos.setParametro("@Estado", true);
+                datos.setParametro("@Ocupado", true);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -43,15 +44,10 @@ namespace Negocio
                 datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
                 datos.setParametro("@idUsuario", nuevo.idUsuario);
                 datos.setParametro("@Estado", true);
+                datos.setParametro("@Ocupado", false);
                 datos.ejecutarAccion();
-                datos.cerrarConexion();
-
-
                 /// Este procedimiento tiene una subconsulta: si la fecha existe en la tabla de turnos
                 /// y se relaciona con ese id de Lugar, da de baja esa fecha para ese lugar
-               // datos.setConsulta("StoredProcedureBajaFecha");
-                //datos.setParametro("@idlug", nuevo.Lugar.idLugar);
-                //datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
@@ -98,6 +94,7 @@ namespace Negocio
                     nuevo.Fecha.Estado = (bool)lector["Estado"];
                     nuevo.idUsuario = (int)lector["idUsuario"];
                     nuevo.disponibilidad = (bool)lector["Estado"];
+                    nuevo.ocupado = (bool)lector["Ocupado"];
                     lista.Add(nuevo);
                 }
 
@@ -140,6 +137,7 @@ namespace Negocio
                     nuevo.Fecha.Estado=(bool)datos.Lector["Estado"];
                     nuevo.idUsuario = (int)datos.Lector["idUsuario"];
                     nuevo.disponibilidad = (bool)datos.Lector["Estado"];
+                    nuevo.ocupado = (bool)datos.Lector["Ocupado"];
                     lista.Add(nuevo);
                 }
 
@@ -164,6 +162,7 @@ namespace Negocio
             datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
             datos.setParametro("@idUsuario", nuevo.idUsuario);
             datos.setParametro("@Estado", true);
+            datos.setParametro("@Ocupado", false);
             datos.ejecutarAccion();
         }
 
@@ -199,6 +198,15 @@ namespace Negocio
 
                 throw ex;
             }
+        }
+
+        public void bajaFecha(int lugar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            datos.setProcedimieto("SP_BajaFecha");
+            datos.setParametro("@idLugarParam", lugar);
+            datos.ejecutarAccion();
+            datos.cerrarConexion();
         }
     }
 

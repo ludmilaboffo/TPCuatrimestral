@@ -76,5 +76,40 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+
+        public List<Fecha> listarFiltradoPorTurno(string id = "")
+        {
+            List<Fecha> lista = new List<Fecha>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setProcedimieto("StoredFechaFiltradaPorTurno");
+                datos.setParametro("@id", id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Fecha nuevo = new Fecha();
+
+                    nuevo.idFecha = (int)datos.Lector["idFecha"];
+                    nuevo.numeroFecha = (int)datos.Lector["numeroDia"];
+                    nuevo.descripcionFecha = (string)datos.Lector["descripcionDia"];
+                    nuevo.Estado = (bool)datos.Lector["Estado"];
+                    lista.Add(nuevo);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

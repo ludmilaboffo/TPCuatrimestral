@@ -12,7 +12,6 @@ namespace TPCUATRI
     public partial class NuevoTurno_Artista : System.Web.UI.Page
     {
         FechaNegocio fecha = new FechaNegocio();
-        List<Fecha> ListaFecha;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,6 +28,7 @@ namespace TPCUATRI
                 {
                     int idLugar = (int)Session["idLugar"];
                     List<Fecha> listaFechas = fecha.listarFiltrado(idLugar.ToString());
+                    listaFechas.Sort((f1, f2) => f1.numeroFecha.CompareTo(f2.numeroFecha));
                     ddlFecha.DataSource = listaFechas;
                     ddlFecha.DataValueField = "idFecha";
                     ddlFecha.DataTextField = "numeroFecha";
