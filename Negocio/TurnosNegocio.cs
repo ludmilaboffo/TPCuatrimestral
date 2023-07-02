@@ -172,6 +172,24 @@ namespace Negocio
                 throw ex;
             }
         }
+
+
+        public void eliminarLogico(int Id, bool disponible = false)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("UPDATE Turnos SET Estado = @disponible where idTurnos = @id");
+                datos.setParametro("@id", Id);
+                datos.setParametro("@disponible", disponible);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 
 }

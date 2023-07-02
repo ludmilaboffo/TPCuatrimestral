@@ -51,6 +51,9 @@
                 <asp:Button ID="btnAceptar" runat="server" Text="Aceptar cambios" CssClass="btn btn-primary" OnClick="btnAceptar_Click" />
                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar cambios" CssClass="btn btn-secondary" OnClick="btnCancelar_Click" />
             </div>
+               <div class="mb-3">
+                <asp:Button ID="btnInhabilitar" runat="server" Text="Inhabilitar" CssClass="btn btn-light" OnClick="btnInhabilitar_Click" />
+            </div>
         </div>
     </div>
     <div class="row justify-content-center">

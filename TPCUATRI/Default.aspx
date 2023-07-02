@@ -2,9 +2,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>¡BIENVENIDO AL SISTEMA!</h1>
-    <h2>Debes estar registrado para ver los menues</h2>
-    <a href="Login.aspx">Iniciar sesion</a>
-    <h2>¿No tenes cuenta</h2>
-    <a href="Registro.aspx">Registrate</a>
+       <div class="container fluir">
+        <div class="row justify-content-center menu-container">
+            <div class="col-md-6">
+                <h1>¡Bienvenido al sistema de registro</h1>
+                <h5>Lamentablemente, solo los usuarios pueden ver el contenido.</h5>
+                <h5>¿Tenes cuenta? </h5>
+                <a href="Login.aspx">¡Logueate!</a>
+                </div>
+            </div>
+           </div>
 </asp:Content>

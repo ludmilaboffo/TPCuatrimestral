@@ -39,6 +39,10 @@ namespace TPCUATRI
                     txtDireccion.Text = seleccionado.Direccion;
                     txtDescripcion.Text = seleccionado.Descripcion;
                     txtImgLugar.Text = seleccionado.UrlImagen.ToString();
+                    if (!seleccionado.Disponibilidad)
+                    {
+                        btnInhabilitar.Text = "Rehabilitar";
+                    }
                 }
             }
             catch (Exception ex)
@@ -47,15 +51,6 @@ namespace TPCUATRI
                 Response.Redirect("Error.aspx", false);
             }
 
-        }
-
-        protected void btnEliminarLugar_Click(object sender, EventArgs e)
-        {
-            LugaresNegocio lugares = new LugaresNegocio();
-            Lugar seleccionado = (Lugar)Session["lugarSeleccionado"];
-
-            lugares.eliminarLogico(seleccionado.idLugar, !seleccionado.Disponibilidad);
-            Response.Redirect("Lugares.aspx");
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -124,6 +119,18 @@ namespace TPCUATRI
         protected void txtImgLugar_TextChanged(object sender, EventArgs e)
         {
             imgLugar.ImageUrl = txtImgLugar.Text;
+        }
+
+        protected void btnInhabilitar_Click(object sender, EventArgs e)
+        {
+
+            LugaresNegocio negocio = new LugaresNegocio();
+            Lugar seleccionado = (Lugar)Session["LugarSeleccionado"];
+
+            negocio.eliminarLogico(int.Parse(txtID.Text), !seleccionado.Disponibilidad);    
+            Response.Redirect("ListadoLugares.aspx");
+
+
         }
     }
 }

@@ -57,14 +57,14 @@ namespace Negocio
 
         }
 
-        public void eliminarLogico(int id, bool activo = false)
+        public void eliminarLogico(int id, bool disponible = false)
         {
             try
             {
                 AccesoDatos datos = new AccesoDatos();
-                datos.setConsulta("update Lugares set Estado = @activo Where id = @idLugar");
+                datos.setConsulta("UPDATE Lugares set Estado = @disponible Where idLugar = @idLugar");
                 datos.setParametro("@idLugar", id);
-                datos.setParametro("@Estado", activo);
+                datos.setParametro("@disponible", disponible);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -124,6 +124,43 @@ namespace Negocio
             }
         }
 
+
+        public List<Lugar> listarSP()
+        {
+            List<Lugar> lista = new List<Lugar>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setProcedimieto("ST_ListarLugares");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Lugar nuevo = new Lugar();
+
+                    nuevo.idLugar = (int)datos.Lector["idLugar"];
+                    nuevo.Direccion = (string)datos.Lector["Direccion"];
+                    nuevo.Descripcion = (string)datos.Lector["Descripcion"];
+                    nuevo.Nombre = (string)datos.Lector["Nombre"];
+                    nuevo.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    nuevo.Disponibilidad = (bool)datos.Lector["Estado"];
+                    lista.Add(nuevo);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
         public void eliminar(int Id)
         {
             try
@@ -157,21 +194,5 @@ namespace Negocio
 
 
 
-        public void Actualizar(Lugar nuevo)
-        {
-
-            try
-            {
-                AccesoDatos datos = new AccesoDatos();
-                datos.setConsulta("UPDATE Lugares SET UrlImagen = @img WHERE idLugar = @idLugar");
-                datos.setParametro("@idLugar", nuevo.idLugar);
-                datos.setParametro("@img", nuevo.UrlImagen);
-                datos.ejecutarAccion();
-            }
-            catch(Exception ex){
-                throw ex;
-            }
-
-        }
     }
 }

@@ -25,8 +25,9 @@ namespace TP_Programacion3
                 var turnosDGV =(ListaTurnos).Select(t => new {
                     id = t.idTurno,
                     FechaNum = t.Fecha.numeroFecha,
-                    FechaDia = t.Fecha.descripcionFecha,
+                    FechaDia = t.Fecha.descripcionFecha +"    "+ (t.Fecha.numeroFecha).ToString(),
                     NombreLugar = t.Lugar.Nombre,
+                    Disponibilidad= t.disponibilidad
                 });
               gvTurnos.DataSource = turnosDGV;
               gvTurnos.DataBind();              
@@ -36,13 +37,13 @@ namespace TP_Programacion3
         protected void gvTurnos_SelectedIndexChanged(object sender, EventArgs e)
         {
             var id = gvTurnos.SelectedDataKey.Value.ToString();
-            Response.Redirect("ABMTurno.aspx?id=" + id);
+            Response.Redirect("AdministrarTurnos.aspx?id=" + id);
 
         }
 
         protected void btnAltaTurno_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AMBTurno.aspx", false);
+            Response.Redirect("AdministrarTurnos.aspx", false);
         }
     }
 }

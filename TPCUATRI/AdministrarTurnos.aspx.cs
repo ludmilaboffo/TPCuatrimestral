@@ -51,11 +51,17 @@ namespace TPCUATRI
                 {
                     TurnosNegocio turno = new TurnosNegocio();
                     Turno selec = (turno.listar(id))[0];
+                    Session.Add("TurnoSeleccionado", selec);
 
                     /// AHORA PRECARGO
                     txtId.Text = id;
                     ddlFecha.SelectedValue = selec.Fecha.idFecha.ToString();
                     ddlLugar.SelectedValue = selec.Lugar.idLugar.ToString();
+                    if (!selec.disponibilidad)
+                    {
+                        btnInhabilitarTurno.Text = "Rehabilitar";
+                    }
+                    
                 } 
             }
             catch(Exception ex)
@@ -86,8 +92,6 @@ namespace TPCUATRI
                     nuevo.idTurno = int.Parse(txtId.Text);
                     negocio.modificarConSP(nuevo);
 
-                    string mensaje = "¡Modificacion exitosa!";
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertScript", "alert('" + mensaje + "');", true);
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
 
@@ -121,6 +125,32 @@ namespace TPCUATRI
             {
                 Session.Add("error", ex);
             }
+        }
+
+
+        protected void btnActivar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnInhabilitarTurno_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TurnosNegocio turno = new TurnosNegocio();
+                Turno seleccionado = (Turno)Session["TurnoSeleccionado"];
+
+                turno.eliminarLogico(int.Parse(txtId.Text), !seleccionado.disponibilidad);
+                /// busco, negando la disponibilidad, que tenga la opuesta ///
+                Response.Redirect("ListadoTurnos.aspx", false);
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
+
         }
     }
 

@@ -5,6 +5,7 @@
         .card {
             border: none;
             border-radius: 0;
+            background-color: transparent;
         }
 
         .card-img-top {
@@ -14,7 +15,8 @@
             margin-top: 40px;
             margin-bottom: 20px;
             transition: transform 0.3s;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 1px 4px 0px rgba(255, 255, 255, 0.1);
+
         }
 
             .card-img-top:hover {
@@ -47,11 +49,17 @@
             font-size: 12px;
         }
 
-
-
+        h5{
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 50px;
+        }
+        h5, p{
+           color: white;
+        }
     </style>
     <%    
         Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
+
         if (usuario != null)
         {
     %>
@@ -64,6 +72,12 @@
                     <p id="direccion" cssclass="card-text"><%#Eval("Direccion")%></p>
                     <p cssclass="card-text"><%#Eval("Descripcion")%></p>
                     <p cssclass="card-text"><%#Eval("Direccion")%></p>
+                    <div class="mb-3">
+                        <em cssclass="card-text" style="color: red;">
+                            <%# (bool)Eval("Disponibilidad") ? "Disponible" : "No disponible" %>
+                        </em>
+                     </div>
+                   
                     <% if (((Dominio.Usuario)Session["user"]).isArtista())
                         { %>
                     <div class="centered-button">

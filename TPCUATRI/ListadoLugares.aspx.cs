@@ -26,7 +26,7 @@ namespace TPCUATRI
                 if (!IsPostBack)
                 {
                     LugaresNegocio negocio = new LugaresNegocio();
-                    ListaLugar = negocio.listar();
+                    ListaLugar = negocio.listarSP();
                     Session.Add("ListaLugar", ListaLugar);
                     repLugares.DataSource = (List<Lugar>)(Session["ListaLugar"]);
                     repLugares.DataBind();
