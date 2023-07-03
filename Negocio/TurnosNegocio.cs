@@ -16,7 +16,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setProcedimieto("ST_AltaTurno");
+                datos.setProcedimieto("StoredAltaTurno");
                 datos.setParametro("@idFecha", nuevo.Fecha.idFecha);
                 datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
                 datos.setParametro("@idUsuario", nuevo.idUsuario);
@@ -70,7 +70,7 @@ namespace Negocio
             {
                 conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT T.idTurnos, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar ";
+                comando.CommandText = "SELECT T.idTurnos, T.Ocupado, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar ";
                 if (id != "")
                     comando.CommandText += " WHERE idTurnos= " + id;
                 comando.Connection = conexion;

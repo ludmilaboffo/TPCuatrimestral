@@ -7,6 +7,7 @@ using Dominio;
 using Negocio;
 using System.Web.UI.WebControls;
 
+
 namespace TPCUATRI
 {
     public partial class MenuInicio : System.Web.UI.Page
@@ -21,8 +22,8 @@ namespace TPCUATRI
                 }
                 else
                 {
-                    Artista art = new Artista();
-                    string nombreUsuario = buscarArtista(usuario.idUsuario);
+                    ArtistasNegocio art = new ArtistasNegocio();
+                    string nombreUsuario = art.buscarArtista(usuario.idUsuario);
                     lblHola.Text = "Bienvenido " + nombreUsuario;
 
                 }
@@ -43,22 +44,7 @@ namespace TPCUATRI
         {
             Response.Redirect("ListadoLugares.aspx", false);
         }
-        public string buscarArtista(int id)
-        {
-            List<Artista> ListaArtista;
-            ArtistasNegocio art = new ArtistasNegocio();
-            ListaArtista = art.listar();
-
-            foreach (Artista artista in ListaArtista)
-            {
-                if (artista.idArtista == id)
-                {
-                    return artista.nombreArtista;
-                }
-            }
-            return " ";
-        }
-
+      
 
         protected void btnPerfil_Click(object sender, EventArgs e)
         {

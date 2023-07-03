@@ -61,6 +61,22 @@ namespace Negocio
 
         }
 
+         public string buscarArtista(int id)
+        {
+            List<Artista> ListaArtista;
+            ArtistasNegocio art = new ArtistasNegocio();
+            ListaArtista = art.listar();
+
+            foreach (Artista artista in ListaArtista)
+            {
+                if (artista.idArtista == id)
+                {
+                    return artista.nombreArtista;
+                }
+            }
+            return " ";
+        }
+
     }
 
 }

@@ -111,5 +111,21 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public string fechaReservada(int id)
+        {
+            FechaNegocio fecha = new FechaNegocio();
+            List<Fecha> listaFecha;
+            listaFecha = fecha.listar();
+            foreach(Fecha date in listaFecha)
+            {
+                if(date.idFecha == id)
+                {
+                    string reservada = date.numeroFecha + " " + date.descripcionFecha;
+                    return reservada;
+                }
+            }
+            return " ";
+        }
     }
 }

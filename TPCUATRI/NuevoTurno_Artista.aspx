@@ -24,8 +24,29 @@
                         <br />
                         <asp:DropDownList ID="ddlFecha" CssClass="btn btn-warning dropdown-toggle" runat="server" AutoPostBack="true"></asp:DropDownList>
                     </div>
+                    <div class="mb-3">
+                        <asp:Button runat="server" ID="btnSelecionarFecha" OnClick="btnSelecionarFecha_Click" Text="Aceptar" /> />
+                    </div>                  
                 </ContentTemplate>
             </asp:UpdatePanel>
+            <asp:UpdatePanel runat="server">
+                 <ContentTemplate>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <%if (confirmarFecha)
+                                { %>
+                            <div class="mb-3">
+                                <asp:CheckBox runat="server" Text="Confirmar turno" ID="chConfirmarTurno" />
+                                <asp:Button runat="server" Text="Confirmar" ID="btnConfirmarTurno" CssClass="btn btn-close-white" OnClick="btnConfirmarTurno_Click" />
+                                 <asp:Label runat="server" ID="lblConfirmado" CssClass="h3"></asp:Label>
+                                 <br />
+                                 <asp:Label runat="server" ID="lblFecha" CssClass="h5"></asp:Label>
+                                 <asp:Label runat="server" ID="lblLugar" CssClass="h5"></asp:Label>
+                            </div>
+
+                            <%} %>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
         </div>
             <%}%>

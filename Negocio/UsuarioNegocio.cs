@@ -24,7 +24,7 @@ namespace Negocio
                 {
                     user.idUsuario = (int)datos.Lector["Id"];
                     user.userTipo = (int)(datos.Lector["TipoUsuario"]) == 1 ? TipoUsuario.ADMIN : TipoUsuario.ARTISTA;
-                    return true; // Si devuelve true es porque leyo una sola vez y me devuelve ese usuario                }
+                    return true;
                 }
                 return false;
             }

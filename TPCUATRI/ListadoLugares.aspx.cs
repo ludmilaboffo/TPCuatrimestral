@@ -53,6 +53,7 @@ namespace TPCUATRI
             {
                 Session.Add("idLugar", idLugar);
                 Response.Redirect("NuevoTurno_Artista.aspx?idLugar=" + idLugar);
+
             }
             else
             {
