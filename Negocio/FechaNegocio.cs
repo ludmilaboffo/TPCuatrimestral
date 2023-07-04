@@ -43,7 +43,7 @@ namespace Negocio
 
         }
 
-        public List<Fecha> listarFiltrado(string id = "")
+        public List<Fecha> listarFiltrado(string id = "", int ocupado = 0)
         {
             List<Fecha> lista = new List<Fecha>();
             AccesoDatos datos = new AccesoDatos();
@@ -51,6 +51,7 @@ namespace Negocio
             {
                 datos.setProcedimieto("StoredFechaFiltrada");
                 datos.setParametro("@id", id);
+                datos.setParametro("@ocupado", ocupado);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

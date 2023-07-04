@@ -14,13 +14,15 @@ namespace TPCUATRI
         FechaNegocio fecha = new FechaNegocio();
         public bool confirmarFecha = false;
         Turno turno = new Turno();
-        public string idFechaTurno;
-        public string idLugar;
+        public string idFechaTurno { get; set; }
+        public bool fechaLibre { get; set; }
+        public string idLugar { get; set; }
         List<Fecha> listaFechas;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            fechaLibre = true;
             Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
             if (usuario == null)
             {
@@ -30,25 +32,30 @@ namespace TPCUATRI
             try
             {
                 idLugar = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";
-                listaFechas = fecha.listarFiltrado(idLugar.ToString());
-                    if (!IsPostBack)
+                listaFechas = fecha.listarFiltrado(idLugar.ToString(), 0);
+                if (!IsPostBack)
+                {
+                    if (listaFechas.Count > 0 && listaFechas!= null)
                     {
-                        
                         ddlFecha.DataSource = listaFechas;
                         ddlFecha.DataValueField = "idFecha";
                         ddlFecha.DataTextField = "numeroFecha";
                         ddlFecha.DataBind();
                         idFechaTurno = ddlFecha.SelectedValue;
+
+                        FechaNegocio fecha = new FechaNegocio();
+                        Fecha selec = (fecha.listarFiltrado(idLugar))[0];
+                        Session.Add("FechaSeleccionada", selec);
+
+                        /// AHORA PRECARGO
+                        ddlFecha.SelectedValue = selec.ToString();
                     }
-                if (idLugar != "" && !IsPostBack)
-                {
-                    FechaNegocio fecha = new FechaNegocio();
-                    Fecha selec = (fecha.listarFiltrado(idLugar))[0];
-                    Session.Add("FechaSeleccionada", selec);
-
-                    /// AHORA PRECARGO
-                    ddlFecha.SelectedValue = selec.ToString();                   
-
+                    else
+                    {
+                        fechaLibre = false;
+                        ddlFecha.Visible = false;
+                        lblNoHayTurno.Text = "Lo sentimos. Parece que no hay turnos para el lugar elegido.";
+                    }
                 }
             }
 
@@ -78,7 +85,7 @@ namespace TPCUATRI
             TurnosNegocio date = new TurnosNegocio();
             FechaNegocio dia = new FechaNegocio();
             LugaresNegocio place = new LugaresNegocio();
-            
+
             /// al nuevo turno le guardo el id de la fecha, el id del turno y el id del lugar
             turno.idUsuario = usuario.idUsuario;
 
@@ -118,6 +125,11 @@ namespace TPCUATRI
                 }
             }
             return false;
+        }
+
+        protected void regresarAtras_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("MenuInicio.aspx", false);
         }
     }
 }

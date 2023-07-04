@@ -12,6 +12,7 @@ namespace Negocio
     {
 
         public void altaSP(Turno nuevo) /// ESTE DA EL ALTA PARA LOS USUARIOS ARTISTAS
+            // ¿Qué hace? El procedimiento almacenado realiza un UPDATE no un alta
         {
             AccesoDatos datos = new AccesoDatos();
             try
