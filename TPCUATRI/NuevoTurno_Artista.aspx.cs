@@ -14,7 +14,11 @@ namespace TPCUATRI
         FechaNegocio fecha = new FechaNegocio();
         public bool confirmarFecha = false;
         Turno turno = new Turno();
-   
+        public string idFechaTurno;
+        public string idLugar;
+        List<Fecha> listaFechas;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
@@ -25,17 +29,30 @@ namespace TPCUATRI
             }
             try
             {
-                string IDlugar = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";
-                if (IDlugar != "" && !IsPostBack)
+                idLugar = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";
+                listaFechas = fecha.listarFiltrado(idLugar.ToString());
+                    if (!IsPostBack)
+                    {
+                        
+                        ddlFecha.DataSource = listaFechas;
+                        ddlFecha.DataValueField = "idFecha";
+                        ddlFecha.DataTextField = "numeroFecha";
+                        ddlFecha.DataBind();
+                        idFechaTurno = ddlFecha.SelectedValue;
+                    }
+                if (idLugar != "" && !IsPostBack)
                 {
-                    int idLugar = int.Parse(IDlugar);
-                    List<Fecha> listaFechas = fecha.listarFiltrado(idLugar.ToString());
-                    ddlFecha.DataSource = listaFechas;
-                    ddlFecha.DataValueField = "idFecha";
-                    ddlFecha.DataTextField = "numeroFecha";
-                    ddlFecha.DataBind();
+                    FechaNegocio fecha = new FechaNegocio();
+                    Fecha selec = (fecha.listarFiltrado(idLugar))[0];
+                    Session.Add("FechaSeleccionada", selec);
+
+                    /// AHORA PRECARGO
+                    ddlFecha.SelectedValue = selec.ToString();                   
+
                 }
             }
+
+            ////--------------
             catch (Exception ex)
             {
                 Session.Add("error", ex);
@@ -43,10 +60,13 @@ namespace TPCUATRI
             }
 
         }
-
         protected void btnSelecionarFecha_Click(object sender, EventArgs e)
         {
             confirmarFecha = true;
+            divConfirmarTurno.Visible = true;
+            divConfirmado.Visible = false;
+            divFecha.Visible = false;
+            divLugar.Visible = false;
         }
 
         protected void btnConfirmarTurno_Click(object sender, EventArgs e)
@@ -58,22 +78,46 @@ namespace TPCUATRI
             TurnosNegocio date = new TurnosNegocio();
             FechaNegocio dia = new FechaNegocio();
             LugaresNegocio place = new LugaresNegocio();
-
+            
             /// al nuevo turno le guardo el id de la fecha, el id del turno y el id del lugar
             turno.idUsuario = usuario.idUsuario;
-            int idLugar = (int)Session["idLugar"];
 
-            string idFecha = ddlFecha.SelectedValue;
-            turno.Lugar.idLugar = idLugar;
-            turno.Fecha.idFecha = int.Parse(idFecha);
-
-            date.altaSP(turno);
-            lblConfirmado.Text = "Su turno ha sido confirmado. Puede verlo en la agenda";
-
-            lblFecha.Text = dia.fechaReservada(int.Parse(idFecha));
-            lblLugar.Text = place.buscarLugar(idLugar);
-            Response.Redirect("MenuInicio.aspx", false);
+            turno.Lugar = new Lugar();
+            turno.Fecha = new Fecha();
+            turno.Lugar.idLugar = int.Parse(idLugar);
+            turno.Fecha.idFecha = int.Parse(ddlFecha.SelectedValue);
+            if (!existe(turno))
+            {
+                date.altaSP(turno);
+                divConfirmarTurno.Visible = false;
+                divConfirmado.Visible = true;
+                divFecha.Visible = true;
+                divLugar.Visible = true;
+                lblConfirmado.Text = "Su turno ha sido confirmado. Puede verlo en la agenda";
+                lblFecha.Text = dia.fechaReservada(turno.Fecha.idFecha);
+                lblLugar.Text = place.buscarLugar(turno.Lugar.idLugar);
+            }
+            else
+            {
+                Session.Add("error", "El turno seleccionado no está disponible");
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
+        public bool existe(Turno nuevo)
+        {
+            List<Turno> Listaturno;
+            TurnosNegocio negocio = new TurnosNegocio();
+            Listaturno = negocio.listarSP();
+
+            foreach (Turno turno in Listaturno)
+            {
+                if ((turno.Fecha.idFecha == nuevo.Fecha.idFecha) && (turno.Lugar.idLugar == nuevo.Lugar.idLugar) && (turno.ocupado == true))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

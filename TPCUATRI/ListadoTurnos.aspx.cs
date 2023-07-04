@@ -27,7 +27,8 @@ namespace TP_Programacion3
                     FechaNum = t.Fecha.numeroFecha,
                     FechaDia = t.Fecha.descripcionFecha +"    "+ (t.Fecha.numeroFecha).ToString(),
                     NombreLugar = t.Lugar.Nombre,
-                    Disponibilidad= t.disponibilidad
+                    Disponibilidad= t.disponibilidad,
+                    Ocupado = t.ocupado
                 });
               gvTurnos.DataSource = turnosDGV;
               gvTurnos.DataBind();              

@@ -156,7 +156,7 @@ BEGIN
 		UrlImagen = @UrlImagen
 	WHERE idLugar = @idLugar
 END
-select * from FECHAS
+select * from Turnos
 
 ALTER TABLE FECHAS
 ADD Estado bit;
@@ -172,10 +172,10 @@ INNER JOIN Lugares L on L.idLugar = T.idLugar
 WHERE F.Estado = 1 AND L.Estado = 1
 go
 
-CREATE PROCEDURE StoredListarTurnos
+ALTER PROCEDURE StoredListarTurnos
 AS
 BEGIN
-SELECT T.idTurnos, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar
+SELECT T.idTurnos, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia, T.Ocupado FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar
 END
 exec StoredListarTurnos
 
@@ -217,9 +217,10 @@ BEGIN
 END
 
 
-select * from turnos
+DELETE FROM TURNOS WHERE idTurnos between 2 AND 70
 
-DELETE FROM TURNOS WHERE idTurnos = 18
+
+DELETE FROM TURNOS WHERE idTurnos = 65
 
 
 
@@ -236,14 +237,39 @@ END
 
 EXEC StoredFechaFiltradaPorTurno 17
 
-CREATE PROCEDURE SP_BajaFecha(
-    @idLugar int
-AS
-BEGIN
-    UPDATE T
-    SET Estado = 0
+    UPDATE turnos
+    SET Estado = 1
     FROM Turnos AS T
     INNER JOIN Fechas AS F ON T.idFecha = F.idFecha
-    WHERE T.idLugar = @idLugar;
-END 
+    WHERE T.idLugar = @idLugarParam;
 
+
+UPDATE FECHAS
+SET Estado = 1
+WHERE Estado = 0 
+select *  from Fechas 
+
+
+ins
+
+
+alter PROCEDURE SP_BajaFecha
+    @idLugarParam int
+AS
+BEGIN
+		UPDATE FECHAS F
+		SET F.ESTADO = 0
+		WHERE(
+		 SELECT T.idLugar FROM TURNOS T
+		 INNER JOIN Lugares L on L.idLugar = T.idLugar
+		 INNER JOIN FECHAS F on F.idFecha = T.idFecha
+		) = @idLugarParam
+END
+
+
+
+SELECT * FROM FECHAS
+delete from turnos where idTurnos between 67 and 71
+
+ALTER TABLE Turnos
+ADD Ocupado BIT NOT NULL DEFAULT 0

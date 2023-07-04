@@ -51,6 +51,15 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.Button btnSelecionarFecha;
 
         /// <summary>
+        /// divConfirmarTurno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divConfirmarTurno;
+
+        /// <summary>
         /// chConfirmarTurno control.
         /// </summary>
         /// <remarks>
@@ -69,6 +78,15 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.Button btnConfirmarTurno;
 
         /// <summary>
+        /// divConfirmado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divConfirmado;
+
+        /// <summary>
         /// lblConfirmado control.
         /// </summary>
         /// <remarks>
@@ -78,6 +96,15 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.Label lblConfirmado;
 
         /// <summary>
+        /// divFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFecha;
+
+        /// <summary>
         /// lblFecha control.
         /// </summary>
         /// <remarks>
@@ -85,6 +112,15 @@ namespace TPCUATRI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFecha;
+
+        /// <summary>
+        /// divLugar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLugar;
 
         /// <summary>
         /// lblLugar control.

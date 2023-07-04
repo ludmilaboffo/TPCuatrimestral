@@ -34,7 +34,8 @@
             <Columns>
                 <asp:BoundField HeaderText="Dia" DataField="FechaDia"></asp:BoundField>
                 <asp:BoundField HeaderText="Lugar" DataField="NombreLugar"></asp:BoundField>
-               <asp:CheckBoxField HeaderText="Disponibilidad" DataField="Disponibilidad" />
+               <asp:CheckBoxField HeaderText="Alta" DataField="Disponibilidad" />
+                 <asp:BoundField HeaderText="Disponibilidad" DataField="ocupado"></asp:BoundField>
                 <asp:CommandField HeaderText="Administrar" ShowSelectButton="true" SelectText="Ver detalles"></asp:CommandField>
             </Columns>
         </asp:GridView>
