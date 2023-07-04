@@ -61,7 +61,62 @@ namespace Negocio
 
         }
 
-         public string buscarArtista(int id)
+        public List<Artista> ListarConSp()
+        {
+            List<Artista> lista = new List<Artista>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setProcedimieto("StoredListarUsuarios"); // HACER PROCEDURE
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Artista nuevo = new Artista();
+
+                    nuevo.idArtista = (int)datos.Lector["Id"];
+                    nuevo.nombreArtista = (string)datos.Lector["Nombre"];
+                    nuevo.apellidoArtista = (string)datos.Lector["Apellido"];
+                    nuevo.mailArtista = (string)datos.Lector["Mail"];
+                    nuevo.telefonoArtista = (string)datos.Lector["Telefono"];
+                    nuevo.contrasenaArtista = (string)datos.Lector["Contraseña"];
+                    nuevo.estadoArtista = (bool)datos.Lector["Estado"];
+                    nuevo.direccionArtista = (string)datos.Lector["Direccion"];
+                    lista.Add(nuevo);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
+        public void eliminarLogico(int Id, bool estado = false)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("UPDATE Usuarios SET Estado = @estado where Id = @id");
+                datos.setParametro("@id", Id);
+                datos.setParametro("@stado", estado);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public string buscarArtista(int id)
         {
             List<Artista> ListaArtista;
             ArtistasNegocio art = new ArtistasNegocio();
