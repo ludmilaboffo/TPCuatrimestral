@@ -92,11 +92,16 @@ namespace TPCUATRI
                 nuevo.Fecha = new Fecha();
                 nuevo.Fecha.idFecha = int.Parse(ddlFecha.SelectedValue);
 
+                
                 if (Request.QueryString["id"] != null)
                 {
                     nuevo.idTurno = int.Parse(txtId.Text);
-                    negocio.modificarConSP(nuevo);
+                    if (nuevo.ocupado) {
+                        Session.Add("error", "No puede modificar turnos que ya están ocupados por artistas.");
+                        Response.Redirect("Error.aspx", false);
+                    }
 
+                    negocio.modificarConSP(nuevo);
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
 
@@ -142,18 +147,12 @@ namespace TPCUATRI
         }
 
 
-        protected void btnActivar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnInhabilitarTurno_Click(object sender, EventArgs e)
         {
             try
             {
                 TurnosNegocio turno = new TurnosNegocio();
                 Turno seleccionado = (Turno)Session["TurnoSeleccionado"];
-
                 turno.eliminarLogico(int.Parse(txtId.Text), !seleccionado.disponibilidad);
                 /// busco, negando la disponibilidad, que tenga la opuesta ///
                 Response.Redirect("ListadoTurnos.aspx", false);

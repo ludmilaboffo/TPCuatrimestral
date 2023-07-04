@@ -273,3 +273,20 @@ delete from turnos where idTurnos between 67 and 71
 
 ALTER TABLE Turnos
 ADD Ocupado BIT NOT NULL DEFAULT 0
+
+
+
+---------------
+
+
+
+CREATE PROCEDURE SP_listarPorArtistas(
+ @id int
+ )
+ AS
+BEGIN
+	SELECT F.idFecha, F.descripcionDia, F.numeroDia, F.Estado, L.idLugar, T.idTurnos FROM FECHAS F
+	INNER JOIN Turnos T on T.idFecha = F.idFecha
+	INNER JOIN Lugares L on L.idLugar = T.idLugar
+	WHERE F.Estado = 1 AND T.idTurnos = @id
+END

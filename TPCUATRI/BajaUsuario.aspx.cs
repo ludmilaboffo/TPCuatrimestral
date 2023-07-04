@@ -13,13 +13,14 @@ namespace TPCUATRI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                if (!((Dominio.Usuario)Session["user"]).isAdmin())
+            if (Session["user"] == null)
                 {
-                    Session.Add("error", "Solo los administradores acceden a esta sección");
+                    Session.Add("error", "Debes loguearte para entrar");
                     Response.Redirect("Error.aspx", false);
                 }
+            if (!IsPostBack)
+            {
+                
                 ArtistasNegocio negocio = new ArtistasNegocio();
                 dgvArtistas.DataSource = negocio.ListarConSp();
                 dgvArtistas.DataBind();

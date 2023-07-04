@@ -2,6 +2,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+  
+ <asp:ScriptManager runat="server" ID="scriptManager"></asp:ScriptManager>
+    <%
+
+        Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
+        if (usuario != null)
+        {
+
+            if (usuario.isAdmin())
+            { %>    
     <h1>LISTADO DE ARTISTAS</h1>
     <asp:GridView ID="dgvArtistas" runat="server" CssClass="table" OnSelectedIndexChanged="dgvArtistas_SelectedIndexChanged" datakeynames="Id" AutoGenerateColumns="false" >
         <Columns>  
@@ -15,4 +25,7 @@
             <asp:CommandField showselectbutton="true"  SelectText="Suspender" HeaderText="Accion" />
         </Columns>
     </asp:GridView>
+        <%}
+
+        }%>
 </asp:Content>

@@ -209,6 +209,44 @@ namespace Negocio
             datos.ejecutarAccion();
             datos.cerrarConexion();
         }
+
+        public List<Turno> listarPorArtistas(int idArtista)
+        {
+            List<Turno> lista = new List<Turno>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setProcedimieto("SP_listarPorArtistas"); /// STORE PROCEDURE CON INNER JOIN A AMBAS TABLAS
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Turno nuevo = new Turno();
+                    nuevo.Fecha = new Fecha();
+                    nuevo.Lugar = new Lugar();
+
+                    nuevo.Fecha.numeroFecha = (int)datos.Lector["numeroDia"];
+                    nuevo.Fecha.descripcionFecha = (string)datos.Lector["descripcionDia"];
+                    nuevo.Lugar.Nombre = (string)datos.Lector["Nombre"];
+                    nuevo.Lugar.Direccion = (string)datos.Lector["Direccion"];
+                    nuevo.ocupado = (bool)datos.Lector["Ocupado"];
+                    lista.Add(nuevo);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
     }
+
 
 }
