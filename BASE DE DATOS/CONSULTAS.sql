@@ -122,18 +122,22 @@ VALUES (4, 5, 1, 1, 0),
 
 	   ------------- STORED PARA LISTAR LOS TURNOS DE CADA ARTISTA ------------------
 	   GO
-CREATE PROCEDURE SP_listarPorArtistas(
+ ALTER PROCEDURE SP_listarPorArtistas(
  @idArtista int
  )
  AS
 BEGIN
-	SELECT F.numeroDia, F.descripcionDia, L.Nombre, L.Direccion, T.Ocupado from Turnos T
+	SELECT F.numeroDia, F.descripcionDia, L.Nombre, L.Direccion, T.Estado, T.idTurnos from Turnos T
 	INNER JOIN FECHAS  F on F.idFecha = T.idFecha
-	INNER JOIN Lugares L on L.idLugar = L.idLugar
+	INNER JOIN Lugares L on L.idLugar = T.idLugar
 	WHERE T.idUsuario = @idArtista
 END
 
-Exec SP_listarPorArtistas 2
+
+
+
+
+Exec SP_listarPorArtistas 1
 GO
     ------------------ STORED PARA MODIFICAR UN LUGAR -------------------------
 	CREATE PROCEDURE StoredModificarLugar
@@ -235,11 +239,11 @@ CREATE PROCEDURE SP_listarPorArtistas(
 BEGIN
 	SELECT F.numeroDia, F.descripcionDia, L.Nombre, L.Direccion, T.Ocupado from Turnos T
 	INNER JOIN FECHAS  F on F.idFecha = T.idFecha
-	INNER JOIN Lugares L on L.idLugar = L.idLugar
+	INNER JOIN Lugares L on L.idLugar = T.idLugar
 	WHERE T.idUsuario = @idArtista
 END
 
-Exec SP_listarPorArtistas 2
+Exec SP_listarPorArtistas 1
 
 ------------- STORED PARA LISTAR LOS USUARIOS ------------
 GO
@@ -262,3 +266,6 @@ as
 			INSERT INTO Turnos (idFecha, idLugar, idUsuario, Estado, Ocupado) VALUES (@idFecha, @idLugar, @idUsuario, @Estado, @Ocupado)
 	   END
 GO
+
+
+select * from Turnos where idUsuario = 1

@@ -26,17 +26,23 @@ namespace TPCUATRI
                 Response.Redirect("Error.aspx", false);
             }
 
-            
             TurnosNegocio negocio = new TurnosNegocio();
             listaAgenda = negocio.listarPorArtistas(usuario.idUsuario);
-            var turnosDGV = (listaAgenda).Select(t => new {              
+            var agendaDGV = listaAgenda.Select(t => new {
+                id = t.idTurno,
                 FechaNum = t.Fecha.numeroFecha,
                 FechaDia = t.Fecha.descripcionFecha + "    " + (t.Fecha.numeroFecha).ToString(),
-                NombreLugar = t.Lugar.Nombre+ " " + t.Lugar.Direccion,
-                Ocupado = t.ocupado
+                NombreLugar = t.Lugar.Nombre + " " + t.Lugar.Direccion,
+                Vigente = t.disponibilidad
             });
-            dgvAgenda.DataSource = dgvAgenda;
+            dgvAgenda.DataSource = agendaDGV;
             dgvAgenda.DataBind();
+
+        }
+
+        protected void dgvAgenda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

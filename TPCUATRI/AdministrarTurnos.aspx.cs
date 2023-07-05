@@ -16,7 +16,7 @@ namespace TPCUATRI
         List<Lugar> ListaLugar;
         List<Fecha> ListaFecha;
         public bool confirmarEliminacion { get; set; }
-
+         
         protected void Page_Load(object sender, EventArgs e)
         {
             confirmarEliminacion = false;
@@ -85,10 +85,11 @@ namespace TPCUATRI
                 Turno nuevo = new Turno();
                 TurnosNegocio negocio = new TurnosNegocio();
                 LugaresNegocio lugarNegocio = new LugaresNegocio();
+                Usuario usuario = HttpContext.Current.Session["user"] as Usuario;
 
                 nuevo.Lugar = new Lugar();
                 nuevo.Lugar.idLugar = int.Parse(ddlLugar.SelectedValue);
-                nuevo.idUsuario = 1;
+                nuevo.idUsuario = usuario.idUsuario;
                 nuevo.Fecha = new Fecha();
                 nuevo.Fecha.idFecha = int.Parse(ddlFecha.SelectedValue);
 
@@ -105,7 +106,7 @@ namespace TPCUATRI
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
 
-                if (validarFecha(nuevo))
+                if (validarFecha(nuevo) && usuario.isAdmin())
                 {
                     negocio.alta(nuevo);
                     Response.Redirect("ListadoTurnos.aspx", false);

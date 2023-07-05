@@ -233,6 +233,7 @@ namespace Negocio
             try
             {
                 datos.setProcedimieto("SP_listarPorArtistas"); /// STORE PROCEDURE CON INNER JOIN A AMBAS TABLAS
+                datos.setParametro("@idArtista", idArtista);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -241,11 +242,12 @@ namespace Negocio
                     nuevo.Fecha = new Fecha();
                     nuevo.Lugar = new Lugar();
 
+                    nuevo.idTurno = (int)datos.Lector["idTurnos"];
                     nuevo.Fecha.numeroFecha = (int)datos.Lector["numeroDia"];
+                    nuevo.disponibilidad = (bool)datos.Lector["Estado"];
                     nuevo.Fecha.descripcionFecha = (string)datos.Lector["descripcionDia"];
                     nuevo.Lugar.Nombre = (string)datos.Lector["Nombre"];
                     nuevo.Lugar.Direccion = (string)datos.Lector["Direccion"];
-                    nuevo.ocupado = (bool)datos.Lector["Ocupado"];
                     lista.Add(nuevo);
                 }
 
