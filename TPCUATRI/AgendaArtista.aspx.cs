@@ -35,8 +35,8 @@ namespace TPCUATRI
                 NombreLugar = t.Lugar.Nombre+ " " + t.Lugar.Direccion,
                 Ocupado = t.ocupado
             });
-            gvTurnos.DataSource = dgvAgenda;
-            gvTurnos.DataBind();
+            dgvAgenda.DataSource = dgvAgenda;
+            dgvAgenda.DataBind();
         }
     }
 }
