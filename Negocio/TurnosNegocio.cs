@@ -229,8 +229,18 @@ namespace Negocio
         public void bajaLugar(int lugar)
         {
             AccesoDatos datos = new AccesoDatos();
-            datos.setProcedimieto("SP_BajaFecha");
+            datos.setProcedimieto("SP_LugarOcupado");
             datos.setParametro("@idLugar", lugar);
+            datos.ejecutarAccion();
+            datos.cerrarConexion();
+        }
+
+
+        public void inhabilitarTurno(int idTurno)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            datos.setProcedimieto("SP_TurnoOcupado");
+            datos.setParametro("@idTurno", idTurno);
             datos.ejecutarAccion();
             datos.cerrarConexion();
         }

@@ -101,7 +101,7 @@ namespace TPCUATRI
                         Session.Add("error", "No puede modificar turnos que ya están ocupados por artistas.");
                         Response.Redirect("Error.aspx", false);
                     }
-
+                    negocio.inhabilitarTurno(nuevo.idTurno);
                     negocio.modificarConSP(nuevo);
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
@@ -137,6 +137,7 @@ namespace TPCUATRI
                 if (chConfirmarEliminar.Checked)
                 {
                     TurnosNegocio turno = new TurnosNegocio();
+                    turno.inhabilitarTurno(int.Parse(txtId.Text));
                     turno.eliminar(int.Parse(txtId.Text));
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
@@ -154,6 +155,7 @@ namespace TPCUATRI
             {
                 TurnosNegocio turno = new TurnosNegocio();
                 Turno seleccionado = (Turno)Session["TurnoSeleccionado"];
+                turno.inhabilitarTurno(seleccionado.idTurno);
                 turno.eliminarLogico(int.Parse(txtId.Text), !seleccionado.disponibilidad);
                 /// busco, negando la disponibilidad, que tenga la opuesta ///
                 Response.Redirect("ListadoTurnos.aspx", false);
@@ -183,5 +185,21 @@ namespace TPCUATRI
             return true;
         }
 
+        public bool turnoOcupado(int idTurno)
+        {
+            List<Turno> Listaturno;
+            TurnosNegocio negocio = new TurnosNegocio();
+            Listaturno = negocio.listarSP();
+
+            foreach (Turno turno in Listaturno)
+            {
+                if (turno.idTurno == idTurno)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
