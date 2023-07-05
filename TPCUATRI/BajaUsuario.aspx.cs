@@ -35,6 +35,8 @@ namespace TPCUATRI
             if (estado == true)
             {
                 negocio.eliminarLogico((int)dgvArtistas.SelectedDataKey.Value, false);
+                TurnosNegocio BajaTurno = new TurnosNegocio();
+                BajaTurno.BajaTurnoUsuarioEliminado((int)dgvArtistas.SelectedDataKey.Value, true);
             }
             else
             {

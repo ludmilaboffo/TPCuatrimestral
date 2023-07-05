@@ -183,7 +183,22 @@ namespace Negocio
             }
         }
 
+        public void BajaTurnoUsuarioEliminado(int Id, bool ocupado = false)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("UPDATE Turnos SET Ocupado = @Ocupado where idUsuario = @id");
+                datos.setParametro("@id", Id);
+                datos.setParametro("@Ocupado", ocupado);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+        }
         public void eliminarLogico(int Id, bool disponible = false)
         {
             try

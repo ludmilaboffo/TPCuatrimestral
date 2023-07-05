@@ -36,7 +36,7 @@ namespace Negocio
                     Artista nuevo = new Artista();
 
                     nuevo.idArtista = (int)lector["Id"];
-                    nuevo.contrasenaArtista = (string)lector["Dni"];
+                    nuevo.contrasenaArtista = (string)lector["Contrasena"];
                     nuevo.dniArtista = (string)lector["Dni"];
                     nuevo.mailArtista = (string)lector["Mail"];
                     nuevo.telefonoArtista = (string)lector["Telefono"];
