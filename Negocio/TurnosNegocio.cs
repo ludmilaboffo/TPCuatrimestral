@@ -225,6 +225,16 @@ namespace Negocio
             datos.cerrarConexion();
         }
 
+
+        public void bajaLugar(int lugar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            datos.setProcedimieto("SP_BajaFecha");
+            datos.setParametro("@idLugar", lugar);
+            datos.ejecutarAccion();
+            datos.cerrarConexion();
+        }
+
         public List<Turno> listarPorArtistas(int idArtista)
         {
             List<Turno> lista = new List<Turno>();

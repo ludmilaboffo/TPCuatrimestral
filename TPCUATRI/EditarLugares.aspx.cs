@@ -70,7 +70,14 @@ namespace TPCUATRI
                 if (Request.QueryString["idLugar"] != null)
                 {
                     nuevo.idLugar = int.Parse(txtID.Text);
+                    
                     negocio.ModificarConSP(nuevo);
+                    if (lugarOcupado(nuevo.idLugar))
+                    {
+                        TurnosNegocio turno = new TurnosNegocio();
+                        turno.bajaLugar(nuevo.idLugar); /// Esto llama a un SP que hace un UPDATE
+                        /// de "Ocupado" a 0 en todos los turnos que ocupen ese lugar.
+                    }
                     Response.Redirect("ListadoLugares.aspx", false);
                 }
                 else
@@ -131,6 +138,21 @@ namespace TPCUATRI
             Response.Redirect("ListadoLugares.aspx");
 
 
+        }
+        public bool lugarOcupado(int idLugar)
+        {
+            List<Turno> Listaturno;
+            TurnosNegocio negocio = new TurnosNegocio();
+            Listaturno = negocio.listarSP();
+
+            foreach (Turno turno in Listaturno)
+            {
+                if (turno.Lugar.idLugar == idLugar)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
