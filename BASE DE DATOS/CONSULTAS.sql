@@ -269,3 +269,17 @@ GO
 
 
 select * from Turnos where idUsuario = 1
+
+------------------------------------------------
+GO	
+CREATE PROCEDURE SP_TurnoOcupado(
+	@idLugar int
+)
+AS
+BEGIN
+	UPDATE Turnos 
+	SET Ocupado = 1
+	Inner Join Lugares L on L.idLugar = T.idLugar
+	WHERE L.idLugar = @idLugar AND T.Ocupado = 1
+
+END
