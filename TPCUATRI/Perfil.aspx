@@ -23,8 +23,12 @@
                 <asp:TextBox ID="txtApellido" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <label class="form-label">Fecha de nacimiento</label>
-                <asp:TextBox ID="txtNacimiento" CssClass="form-control" runat="server"></asp:TextBox>
+                <label class="form-label">Direccion</label>
+                <asp:TextBox ID="txtDireccion" CssClass="form-control" runat="server"></asp:TextBox>
+            </div>
+              <div class="mb-3">
+                <label class="form-label">Telefono</label>
+                <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="col-md-4 justify-content-center">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -132,6 +133,23 @@ namespace Negocio
             return " ";
         }
 
+        public void actualizar(Artista user)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("update users set ImagenPerfil = @imagen wheren id = @id");//agregar la propiedad img perfil a usuarios en la base
+                datos.setParametro("@imagen", user.ImgPerfil);
+                datos.setParametro("@id", user.idArtista);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 
 }
