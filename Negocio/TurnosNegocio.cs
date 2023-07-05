@@ -69,7 +69,7 @@ namespace Negocio
 
             try
             {
-                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
+                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = StreetART; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "SELECT T.idTurnos, T.Ocupado, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.numeroDia, F.descripcionDia FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar ";
                 if (id != "")
@@ -135,7 +135,7 @@ namespace Negocio
                     nuevo.Fecha.idFecha = (int)datos.Lector["idFecha"];
                     nuevo.Fecha.descripcionFecha = (string)datos.Lector["descripcionDia"];
                     nuevo.Fecha.numeroFecha = (int)datos.Lector["numeroDia"];
-                    nuevo.Fecha.Estado=(bool)datos.Lector["Estado"];
+                    nuevo.Fecha.Estado = (bool)datos.Lector["Estado"];
                     nuevo.idUsuario = (int)datos.Lector["idUsuario"];
                     nuevo.disponibilidad = (bool)datos.Lector["Estado"];
                     nuevo.ocupado = (bool)datos.Lector["Ocupado"];
@@ -233,6 +233,7 @@ namespace Negocio
             try
             {
                 datos.setProcedimieto("SP_listarPorArtistas"); /// STORE PROCEDURE CON INNER JOIN A AMBAS TABLAS
+                datos.setParametro("@idArtista", idArtista);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -241,11 +242,12 @@ namespace Negocio
                     nuevo.Fecha = new Fecha();
                     nuevo.Lugar = new Lugar();
 
+                    nuevo.idTurno = (int)datos.Lector["idTurnos"];
                     nuevo.Fecha.numeroFecha = (int)datos.Lector["numeroDia"];
+                    nuevo.disponibilidad = (bool)datos.Lector["Estado"];
                     nuevo.Fecha.descripcionFecha = (string)datos.Lector["descripcionDia"];
                     nuevo.Lugar.Nombre = (string)datos.Lector["Nombre"];
                     nuevo.Lugar.Direccion = (string)datos.Lector["Direccion"];
-                    nuevo.ocupado = (bool)datos.Lector["Ocupado"];
                     lista.Add(nuevo);
                 }
 

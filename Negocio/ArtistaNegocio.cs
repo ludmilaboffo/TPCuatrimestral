@@ -23,7 +23,7 @@ namespace Negocio
 
             try
             {
-                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
+                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = StreetART; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "SELECT  Id, Dni, Contrasena, Mail, Telefono, Direccion, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios ";
                 if (id != "")

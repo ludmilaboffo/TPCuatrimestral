@@ -20,6 +20,7 @@
 
         .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
             background-color: #000000;
+        }
     </style>
 
 

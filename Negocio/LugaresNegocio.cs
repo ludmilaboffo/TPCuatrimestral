@@ -22,7 +22,7 @@ namespace Negocio
             SqlCommand comand = new SqlCommand();
             try
             {
-                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
+                conexion = new SqlConnection("server =.\\SQLEXPRESS; database = StreetART; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "SELECT idLugar, Direccion, Descripcion, Nombre, Estado, UrlImagen FROM Lugares ";
                 if (id != "")
@@ -83,7 +83,7 @@ namespace Negocio
                 datos.setParametro("@Direccion", lugar.Direccion);
                 datos.setParametro("@Descripcion", lugar.Descripcion);
                 datos.setParametro("@Nombre", lugar.Nombre);
-                datos.setParametro("@Estado", lugar.Disponibilidad);
+                datos.setParametro("@Estado", true);
                 datos.setParametro("@UrlImagen", lugar.UrlImagen);
 
                 datos.ejecutarAccion();

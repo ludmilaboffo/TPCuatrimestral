@@ -20,7 +20,7 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server =.\\SQLEXPRESS; database = FreeShowMusic; integrated security = true");
+            conexion = new SqlConnection("server =.\\SQLEXPRESS; database = StreetART; integrated security = true");
             comando = new SqlCommand();
         }
         public void setConsulta(string consulta)
