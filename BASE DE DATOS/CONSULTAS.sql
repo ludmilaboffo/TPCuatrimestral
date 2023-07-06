@@ -19,9 +19,12 @@ CREATE TABLE Usuarios (
     TipoUsuario INT NOT NULL,         -- ADMIN (1) O USUARIO (2)
     Estado BIT NOT NULL
 )
-GO
- WHERE 
 
+alter TABLE Usuarios add UrlImgPerfil varchar(250) NULL
+SELECT * from Usuarios
+GO
+
+SELECT * from Usuarios
 CREATE TABLE Lugares (
     idLugar INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
     Direccion VARCHAR (50) NOT NULL,
@@ -33,7 +36,14 @@ CREATE TABLE Lugares (
 GO
 
 
+CREATE TABLE FECHAS(
+	idFecha int  not null primary key identity (1,1),
+	numeroDia int not null,
+	descripcionDia varchar(30) NOT NULL,
+	Estado bit NOT NULL
+)
 
+GO
 Create TABLE Turnos (
     idTurnos INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     idFecha int NOT NULL FOREIGN KEY REFERENCES FECHAS(idFecha),
@@ -42,16 +52,6 @@ Create TABLE Turnos (
     Estado BIT NOT NULL,
 	Ocupado BIT NOT NULL
 )
-GO
-
-CREATE TABLE FECHAS(
-	idFecha int  not null primary key identity (1,1),
-	numeroDia int not null,
-	descripcionDia varchar(30) NOT NULL,
-	Estado bit NOT NULL
-)
-
-
 
 
 ------------------------- CARGA DE DATOS -----------------------------
@@ -68,9 +68,9 @@ VALUES('28.315.082','artista123','soyartista@gmail.com','11-9455680','Mi casa 12
 INSERT INTO 
 	Lugares(Direccion, Descripcion, Nombre, Estado, UrlImagen)
 
- VALUES ('Av. 9 de Julio s/n', 'Obelisco del centro porteño', 'OBELISCO', 1,'https://dkeauwle5qhyx.cloudfront.net/wp-content/uploads/2021/05/obelisco_ba.jpg'),
+ VALUES ('Av. 9 de Julio s/n', 'Obelisco del centro porteï¿½o', 'OBELISCO', 1,'https://dkeauwle5qhyx.cloudfront.net/wp-content/uploads/2021/05/obelisco_ba.jpg'),
 (' Av. Sarmiento s/n, CABA','Ubicado en medio de los bosques de Palermo','PLANETARIO',1,'https://m.buenosaires123.com.ar/images/700/planetario-buenos-aires.jpg'),
-('Cerrito 628, CABA','Teatro de Opera, ubicado en plaza de Mayo','TEATRO COLÓN',1,'https://eldiariodeviaje.com/wp-content/uploads/2020/12/2017-05-23-22-14-10-01-1080x675.jpeg'),
+('Cerrito 628, CABA','Teatro de Opera, ubicado en plaza de Mayo','TEATRO COLï¿½N',1,'https://eldiariodeviaje.com/wp-content/uploads/2020/12/2017-05-23-22-14-10-01-1080x675.jpeg'),
 ('Estacion Belgrano ramal Mitre','Cultura y gastronomico oriental','BARRIO CHINO',1,'https://www.descubriendobuenosaires.com/wp-content/uploads/2021/07/BarrioChino3-1024.jpg'),
 ('Dique 3 de Puerto Madero','Excelente foco turistico y gastronomico', 'PUENTE DE LA MUJER',1,'https://cdn-media.italiani.it/site-buenosaires/2019/03/Puente-de-la-Mujer-Luces-de-noche-e1552009688826-1000x600.jpeg')
 
@@ -272,28 +272,15 @@ select * from Turnos where idUsuario = 1
 
 ------------------------------------------------
 GO	
-CREATE PROCEDURE SP_LugarOcupado(
-    @idLugar int
-)
-AS
-BEGIN
-    UPDATE Turnos 
-    SET Ocupado = 0
-    FROM Turnos T
-    INNER JOIN Lugares L ON L.idLugar = T.idLugar
-    WHERE L.idLugar = @idLugar AND T.Ocupado = 1;
-END
-
-GO
 CREATE PROCEDURE SP_TurnoOcupado(
-	@idTurno int
+	@idLugar int
 )
 AS
 BEGIN
 	UPDATE Turnos 
-	SET Ocupado = 0
-	FROM TURNOS
-	WHERE idTurnos = @idTurno AND Ocupado = 1
+	SET Ocupado = 1
+	Inner Join Lugares L on L.idLugar = T.idLugar
+	WHERE L.idLugar = @idLugar AND T.Ocupado = 1
 
 END
 
