@@ -30,7 +30,8 @@ namespace TPCUATRI
         protected void dgvArtistas_SelectedIndexChanged(object sender, EventArgs e)
         {
             ArtistasNegocio negocio = new ArtistasNegocio();
-            GridViewRow selectedRow = dgvArtistas.SelectedRow;
+           
+            GridViewRow selectedRow = dgvArtistas.SelectedRow; 
             bool estado = Convert.ToBoolean(selectedRow.Cells[6].Text);
             if (estado == true)
             {
@@ -38,10 +39,11 @@ namespace TPCUATRI
                 TurnosNegocio BajaTurno = new TurnosNegocio();
                 BajaTurno.BajaTurnoUsuarioEliminado((int)dgvArtistas.SelectedDataKey.Value, true);
             }
-            else
+            else if (estado == false) 
             {
                 negocio.eliminarLogico((int)dgvArtistas.SelectedDataKey.Value, true);
             }
+            
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
+using TPCUATRI;
 
 namespace TP_Programacion3
 {
@@ -14,6 +15,24 @@ namespace TP_Programacion3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
+            if (Session["user"] == null)
+            {
+                Session.Add("error", "Debes loguearte para entrar");
+                Response.Redirect("Error.aspx", false);
+            };
+
+            try
+            {
+              /*  string id =
+                ArtistasNegocio artista = new ArtistasNegocio(); 
+                Artista seleccionado = artista.listar(id))[0];*/ //como tengo el id en session?
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
 
         }
 

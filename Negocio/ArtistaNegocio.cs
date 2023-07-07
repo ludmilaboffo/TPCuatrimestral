@@ -81,7 +81,7 @@ namespace Negocio
                     nuevo.apellidoArtista = (string)datos.Lector["Apellido"];
                     nuevo.mailArtista = (string)datos.Lector["Mail"];
                     nuevo.telefonoArtista = (string)datos.Lector["Telefono"];
-                    nuevo.contrasenaArtista = (string)datos.Lector["Contraseña"];
+                  //  nuevo.contrasenaArtista = (string)datos.Lector["Contraseña"];
                     nuevo.estadoArtista = (bool)datos.Lector["Estado"];
                     nuevo.direccionArtista = (string)datos.Lector["Direccion"];
                     lista.Add(nuevo);
@@ -107,7 +107,7 @@ namespace Negocio
                 AccesoDatos datos = new AccesoDatos();
                 datos.setConsulta("UPDATE Usuarios SET Estado = @estado where Id = @id");
                 datos.setParametro("@id", Id);
-                datos.setParametro("@stado", estado);
+                datos.setParametro("@estado", estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -138,8 +138,13 @@ namespace Negocio
             try
             {
                 AccesoDatos datos = new AccesoDatos();
-                datos.setConsulta("update users set ImagenPerfil = @imagen wheren id = @id");//agregar la propiedad img perfil a usuarios en la base
+                datos.setConsulta("update users set UrlImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, Direccion = @direccion, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
                 datos.setParametro("@imagen", user.imgPerfil);
+                datos.setParametro("@nombre", user.nombreArtista);
+                datos.setParametro("@apellido", user.apellidoArtista);
+                datos.setParametro("@direccion", user.direccionArtista);
+                datos.setParametro("telefono", user.telefonoArtista);
+                datos.setParametro("@dni", user.dniArtista);
                 datos.setParametro("@id", user.idArtista);
                 datos.ejecutarAccion();
 
