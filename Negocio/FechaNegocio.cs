@@ -43,15 +43,14 @@ namespace Negocio
 
         }
 
-        public List<Fecha> listarFiltrado(string id = "", int ocupado = 0)
+        public List<Fecha> listarFiltrado(string id)
         {
             List<Fecha> lista = new List<Fecha>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setProcedimieto("StoredFechaFiltrada");
+                datos.setProcedimieto("StoredFechaFiltradaPorTurno");
                 datos.setParametro("@id", id);
-                datos.setParametro("@ocupado", ocupado);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

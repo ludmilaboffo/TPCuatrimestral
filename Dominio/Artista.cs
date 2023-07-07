@@ -18,5 +18,7 @@ namespace Dominio
         public string apellidoArtista { get; set; }
         public bool estadoArtista { get; set; }
         public bool esArtista { get; set; }
+
+        public string imgPerfil { get; set; }
     }
 }

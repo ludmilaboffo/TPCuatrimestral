@@ -35,8 +35,12 @@
             <Columns>
                 <asp:BoundField HeaderText="Dia" DataField="FechaDia"></asp:BoundField>
                 <asp:BoundField HeaderText="Lugar" DataField="NombreLugar"></asp:BoundField>
-               <asp:CheckBoxField HeaderText="Alta" DataField="Disponibilidad" />
-                 <asp:BoundField HeaderText="Disponibilidad" DataField="ocupado"></asp:BoundField>
+               <asp:CheckBoxField HeaderText="Alta del turno" DataField="Disponibilidad" />
+                 <asp:TemplateField HeaderText="Está ocupado">
+                    <ItemTemplate>
+                        <asp:Label ID="lblOcupado" runat="server" Text='<%# (bool)Eval("ocupado") ? "Si" : "No" %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:CommandField HeaderText="Administrar" ShowSelectButton="true" SelectText="Ver detalles"></asp:CommandField>
             </Columns>
         </asp:GridView>

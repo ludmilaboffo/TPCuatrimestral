@@ -32,7 +32,9 @@ namespace TPCUATRI
             try
             {
                 idLugar = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";
-                listaFechas = fecha.listarFiltrado(idLugar.ToString(), 0);
+                listaFechas = fecha.listarFiltrado(idLugar.ToString());
+                listaFechas.RemoveAll(f => f.Estado == false);
+
                 if (!IsPostBack)
                 {
                     if (listaFechas.Count > 0 && listaFechas!= null)

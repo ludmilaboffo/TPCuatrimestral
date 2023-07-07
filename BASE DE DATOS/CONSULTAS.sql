@@ -59,7 +59,8 @@ Create TABLE Turnos (
 INSERT INTO 
 	Usuarios(Dni, Contrasena, Mail, Telefono, Direccion, Nombre, Apellido, TipoUsuario, Estado)
 
-VALUES('28.315.082','artista123','soyartista@gmail.com','11-9455680','Mi casa 123', 'LOLA', 'RODRIGUEZ', 2, 1),
+VALUES('2222222', 'artista2', 'art@gmail', '22222', 'micasa', 'Laura', 'Perez', 2, 1)
+('28.315.082','artista123','soyartista@gmail.com','11-9455680','Mi casa 123', 'LOLA', 'RODRIGUEZ', 2, 1),
 ('40.715.182','admin123','soyadmin@gmail.com','11-40408080','Calle Falsa 123', 'JUAN', 'PEREZ', 1, 1)
 
 
@@ -185,16 +186,15 @@ BEGIN
 END 
 GO
    ------------------ STORED PARA LISTAR TODOS LOS LUGARES -------------------------
-   CREATE PROCEDURE StoredFechaFiltrada(
- @id int,
- @Ocupado bit
+   ALTER PROCEDURE StoredFechaFiltrada(
+ @id int
  )
  AS
 BEGIN
 	SELECT F.idFecha, F.descripcionDia, F.numeroDia, F.Estado, L.idLugar, T.Ocupado FROM FECHAS F
 	INNER JOIN Turnos T on T.idFecha = F.idFecha
 	INNER JOIN Lugares L on L.idLugar = T.idLugar
-	WHERE T.Ocupado = @Ocupado AND T.idLugar = @id
+	WHERE F.Estado = 1 AND T.idLugar = @id
 END
 GO
 
@@ -217,7 +217,7 @@ GO
 
  --------------- STORED PARA MOSTRAR LAS FECHAS DISPONIBLES RELACIONADAS A UN LUGAR X ID TURNO ---------------
 
-CREATE PROCEDURE StoredFechaFiltradaPorTurno(
+CREATE ALTER PROCEDURE StoredFechaFiltradaPorTurno(
  @id int
  )
  AS
@@ -262,8 +262,14 @@ CREATE PROCEDURE StoredAltaTurno(
 	@Ocupado bit
 )
 as
-	   BEGIN
+	   BEGIN			
 			INSERT INTO Turnos (idFecha, idLugar, idUsuario, Estado, Ocupado) VALUES (@idFecha, @idLugar, @idUsuario, @Estado, @Ocupado)
+			UPDATE FECHAS
+			SET Estado = 0
+			FROM FECHAS F
+			Inner Join Turnos T on T.idFecha = F.idFecha
+			Inner Join Lugares L on L.idLugar = T.idLugar
+			WHERE T.idFecha = @idFecha
 	   END
 GO
 
@@ -279,6 +285,7 @@ AS
 BEGIN
 	UPDATE Turnos 
 	SET Ocupado = 1
+	from turnos
 	Inner Join Lugares L on L.idLugar = T.idLugar
 	WHERE L.idLugar = @idLugar AND T.Ocupado = 1
 

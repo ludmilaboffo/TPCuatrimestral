@@ -139,7 +139,7 @@ namespace Negocio
             {
                 AccesoDatos datos = new AccesoDatos();
                 datos.setConsulta("update users set ImagenPerfil = @imagen wheren id = @id");//agregar la propiedad img perfil a usuarios en la base
-                datos.setParametro("@imagen", user.ImgPerfil);
+                datos.setParametro("@imagen", user.imgPerfil);
                 datos.setParametro("@id", user.idArtista);
                 datos.ejecutarAccion();
 
