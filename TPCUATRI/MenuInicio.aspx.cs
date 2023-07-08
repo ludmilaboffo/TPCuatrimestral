@@ -48,7 +48,7 @@ namespace TPCUATRI
 
         protected void btnPerfil_Click(object sender, EventArgs e)
         {
-            
+            Response.Redirect("Perfil.aspx", false);
         }
 
         protected void btnNuevoTurnoART_Click(object sender, EventArgs e)

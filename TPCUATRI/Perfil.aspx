@@ -43,7 +43,7 @@
         <div class="col-md-4 justify-content-center">
             <div class="text-end">
                 <asp:Button ID="btnGuardar" Text="Guardar" runat="server" CssClass="btn btn-primary" />
-                <a href="#">Atrás</a>
+                <asp:Button ID="btnatras" runat ="server" Text="Atras" CssClass="btn btn-secondary" OnClick="btnatras_Click"/>
             </div>
         </div>
     </div>
