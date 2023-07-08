@@ -135,9 +135,10 @@ namespace Negocio
 
         public void actualizar(Artista user)
         {
+            AccesoDatos datos = new AccesoDatos();
             try
             {
-                AccesoDatos datos = new AccesoDatos();
+               
                 datos.setConsulta("update users set UrlImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, Direccion = @direccion, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
                 datos.setParametro("@imagen", user.imgPerfil);
                 datos.setParametro("@nombre", user.nombreArtista);
@@ -153,6 +154,10 @@ namespace Negocio
             {
 
                 throw ex;
+            }
+            finally
+            {
+               datos.cerrarConexion();
             }
         }
     }

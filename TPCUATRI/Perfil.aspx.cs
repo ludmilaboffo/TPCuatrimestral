@@ -48,37 +48,39 @@ namespace TP_Programacion3
 
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!IsPostBack)
-                {
-                    ArtistasNegocio negocio = new ArtistasNegocio();
-                    Artista user = (Artista)Session["Artista"];
-                    string ruta = Server.MapPath("./ImgPerfil/");
-                    txtImagen.PostedFile.SaveAs(ruta + "Perfil-" + user.idArtista + ".jpg");
-
-                    user.imgPerfil = "Perfil-" + user.idArtista + ".jpg"; //agregar campo de imagen a usuarios
-                    user.nombreArtista = txtNombre.Text;
-                    user.apellidoArtista = txtApellido.Text;
-                    user.direccionArtista = txtDireccion.Text;
-                    user.telefonoArtista = txtTelefono.Text;
-
-                    negocio.actualizar(user);
-                    Response.Redirect("Menuinicio.aspx");
-                }
-            }
-            catch (Exception ex)
-            {
-                Session.Add("error", ex);
-                Response.Redirect("Error.aspx", false);
-            }
-        }
-
         protected void btnatras_Click(object sender, EventArgs e)
         {
             Response.Redirect("MenuInicio.aspx");
         }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        
+            {
+                try
+                {
+                    if (!IsPostBack)
+                    {
+                        ArtistasNegocio negocio = new ArtistasNegocio();
+                        Artista user = (Artista)Session["Artista"];
+                        string ruta = Server.MapPath("./ImgPerfil/");
+                        txtImagen.PostedFile.SaveAs(ruta + "Perfil-" + user.idArtista + ".jpg");
+
+                        user.imgPerfil = "Perfil-" + user.idArtista + ".jpg"; //agregar campo de imagen a usuarios
+                        user.nombreArtista = txtNombre.Text;
+                        user.apellidoArtista = txtApellido.Text;
+                        user.direccionArtista = txtDireccion.Text;
+                        user.telefonoArtista = txtTelefono.Text;
+
+                        negocio.actualizar(user);
+                        Response.Redirect("Menuinicio.aspx");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", ex);
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
+
+        }
     }
-}

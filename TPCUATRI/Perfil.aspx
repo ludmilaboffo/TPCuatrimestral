@@ -3,6 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <%
+
+         Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
+         if (!usuario.isAdmin())
+         { %>
     <div class="row justify-content-center">
         <div class="col-md-4 mb-5">
             <h1 class="display-4">Mi perfil</h1>
@@ -42,10 +47,16 @@
     <div class="row">
         <div class="col-md-4 justify-content-center">
             <div class="text-end">
-                <asp:Button ID="btnGuardar" Text="Guardar" runat="server" CssClass="btn btn-primary" />
+                <asp:Button ID="btnGuardar" Text="Guardar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
                 <asp:Button ID="btnatras" runat ="server" Text="Atras" CssClass="btn btn-secondary" OnClick="btnatras_Click"/>
             </div>
         </div>
     </div>
+    <% }
+        else
+        {
+        %>
+    <asp:Label runat="server" Text="LA ADMINISTRACION DEL PERFIL NO ESTA DISPONIBLE PARA EL ADMINISTRADOR :("></asp:Label>
+    <%} %>
 
 </asp:Content>
