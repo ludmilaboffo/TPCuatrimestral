@@ -18,6 +18,15 @@ namespace TP_Programacion3
 
         protected void btnReg_Click(object sender, EventArgs e)
         {
+            Artista user = new Artista();
+            ArtistasNegocio artistasNegocio = new ArtistasNegocio();
+
+            user.mailArtista = txtMailRegistro.Text;
+            user.contrasenaArtista = txtPassRegistro.Text;
+            user.idArtista = artistasNegocio.insertarNuevo(user);
+            Session.Add("user", user);
+
+            Response.Redirect("MenuInicio.aspx");
         }
     }
 }

@@ -80,12 +80,12 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="Perfil.aspx">Perfil</a>
-                               
+                                <a class="nav-link" href="Perfil.aspx">Perfil</a>     
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="MenuInicio.aspx">Menu principal</a>
                             </li>
+                            <asp:Button ID="Salir" runat="server" Text="Cerrar Sesion" OnClick="Salir_Click" />
                         </ul>
                     </div>
                 </div>

@@ -17,14 +17,15 @@ CREATE TABLE Usuarios (
     Nombre VARCHAR(30) NOT NULL,
     Apellido VARCHAR (30) NOT NULL,
     TipoUsuario INT NOT NULL,         -- ADMIN (1) O USUARIO (2)
-    Estado BIT NOT NULL
+    Estado BIT NOT NULL,
+	UrlImgPerfil VARCHAR(250) null,
 )
 
-alter TABLE Usuarios add UrlImgPerfil varchar(250) NULL
-SELECT * from Usuarios
+
 GO
 
 SELECT * from Usuarios
+
 CREATE TABLE Lugares (
     idLugar INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
     Direccion VARCHAR (50) NOT NULL,
@@ -34,6 +35,8 @@ CREATE TABLE Lugares (
 	UrlImagen VARCHAR(250)
 )
 GO
+alter table Usuarios
+add UrlImgPerfil VARCHAR(250)
 
 
 CREATE TABLE FECHAS(
@@ -43,6 +46,8 @@ CREATE TABLE FECHAS(
 	Estado bit NOT NULL
 )
 
+
+SELECT * from Usuarios
 GO
 Create TABLE Turnos (
     idTurnos INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -59,8 +64,7 @@ Create TABLE Turnos (
 INSERT INTO 
 	Usuarios(Dni, Contrasena, Mail, Telefono, Direccion, Nombre, Apellido, TipoUsuario, Estado)
 
-VALUES('2222222', 'artista2', 'art@gmail', '22222', 'micasa', 'Laura', 'Perez', 2, 1)
-('28.315.082','artista123','soyartista@gmail.com','11-9455680','Mi casa 123', 'LOLA', 'RODRIGUEZ', 2, 1),
+VALUES('28.315.082','artista123','soyartista@gmail.com','11-9455680','Mi casa 123', 'LOLA', 'RODRIGUEZ', 2, 1),
 ('40.715.182','admin123','soyadmin@gmail.com','11-40408080','Calle Falsa 123', 'JUAN', 'PEREZ', 1, 1)
 
 
@@ -86,8 +90,8 @@ VALUES (1, 'Lunes', 1),
 (7, 'Domingo', 1),
 (8, 'Lunes', 1)
 
-----------------------------------------------------------------
 
+----------------------------------------------------------------
 
 
  --- SI NO HAY 
@@ -101,12 +105,12 @@ VALUES (4, 5, 1, 1, 0),
 
              ---------------- P R O C E D I M I E N T O S ---------------------
 
-			 
+		SELECT * from turnos	 
 
 	   ------ STORE PROCEDURE DE ALTA ------
 	   
 	   GO
-	  ALTER PROCEDURE ST_AltaTurno (
+	create PROCEDURE ST_AltaTurno (
 		   @idFecha int, 
 		   @idLugar int,
 		   @idUsuario int,
@@ -123,7 +127,7 @@ VALUES (4, 5, 1, 1, 0),
 
 	   ------------- STORED PARA LISTAR LOS TURNOS DE CADA ARTISTA ------------------
 	   GO
- ALTER PROCEDURE SP_listarPorArtistas(
+ create PROCEDURE SP_listarPorArtistas(
  @idArtista int
  )
  AS
@@ -162,7 +166,7 @@ END
 GO
     ------------------ STORED PARA LISTAR TODOS LOS TURNOS -------------------------
 
-ALTER PROCEDURE StoredListarTurnos
+create PROCEDURE StoredListarTurnos
 AS
 BEGIN
 SELECT T.idTurnos, T.idFecha, T.idLugar, T.idUsuario, T.Estado, L.Nombre, F.Estado, F.numeroDia, F.descripcionDia, T.Ocupado FROM Turnos T INNER JOIN Fechas F ON F.idFecha = T.idFecha INNER JOIN Lugares L ON L.idLugar = T.idLugar
@@ -171,14 +175,14 @@ GO
 exec StoredListarTurnos
 
 GO
-  CREATE PROCEDURE [dbo].[StoredListarTurnos]
+  --CREATE PROCEDURE [dbo].[StoredListarTurnos]
 
 
 
 
     ------------------ STORED PARA LISTAR TODOS LOS LUGARES -------------------------
 
-
+GO
 	create PROCEDURE StoredListarLugares
 AS
 BEGIN
@@ -186,20 +190,22 @@ BEGIN
 END 
 GO
    ------------------ STORED PARA LISTAR TODOS LOS LUGARES -------------------------
-   ALTER PROCEDURE StoredFechaFiltrada(
- @id int
+   CREATE PROCEDURE StoredFechaFiltrada(
+ @id int,
+ @Ocupado bit
  )
  AS
 BEGIN
 	SELECT F.idFecha, F.descripcionDia, F.numeroDia, F.Estado, L.idLugar, T.Ocupado FROM FECHAS F
 	INNER JOIN Turnos T on T.idFecha = F.idFecha
 	INNER JOIN Lugares L on L.idLugar = T.idLugar
-	WHERE F.Estado = 1 AND T.idLugar = @id
+	WHERE T.Ocupado = @Ocupado AND T.idLugar = @id
 END
 GO
 
 exec StoredFechaFiltrada 2, 0
    ------------------ STORED PARA DAR DE BAJA UNA FECHA -------------------------
+  GO
    CREATE PROCEDURE StoredProcedureBajaFecha(
    @BAJA int)
 AS
@@ -217,7 +223,7 @@ GO
 
  --------------- STORED PARA MOSTRAR LAS FECHAS DISPONIBLES RELACIONADAS A UN LUGAR X ID TURNO ---------------
 
-CREATE ALTER PROCEDURE StoredFechaFiltradaPorTurno(
+CREATE PROCEDURE StoredFechaFiltradaPorTurno(
  @id int
  )
  AS
@@ -231,7 +237,7 @@ END
 GO
 exec StoredFechaFiltradaPorTurno 2
 ------------- STORED PARA LISTAR LOS TURNOS DE CADA ARTISTA ------------
-
+GO
 CREATE PROCEDURE SP_listarPorArtistas(
  @idArtista int
  )
@@ -243,17 +249,27 @@ BEGIN
 	WHERE T.idUsuario = @idArtista
 END
 
+
+
+
 Exec SP_listarPorArtistas 1
 
 ------------- STORED PARA LISTAR LOS USUARIOS ------------
 GO
-CREATE PROCEDURE StoredListarUsuarios
+create PROCEDURE StoredListarUsuarios
 AS
 BEGIN
 SELECT Id, Dni, Contrasena, Mail, Telefono, Direccion, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios
 END
 
+ go
+alter PROCEDURE StoredListarUsuarios
+AS
+BEGIN
+SELECT * FROM Usuarios
+END
 ----------------------- STORED PARA ALTA TURNO DESDE ARTISTA -------------------------
+go
 CREATE PROCEDURE StoredAltaTurno(
 	@idFecha int,
 	@idLugar int,
@@ -262,18 +278,12 @@ CREATE PROCEDURE StoredAltaTurno(
 	@Ocupado bit
 )
 as
-	   BEGIN			
+	   BEGIN
 			INSERT INTO Turnos (idFecha, idLugar, idUsuario, Estado, Ocupado) VALUES (@idFecha, @idLugar, @idUsuario, @Estado, @Ocupado)
-			UPDATE FECHAS
-			SET Estado = 0
-			FROM FECHAS F
-			Inner Join Turnos T on T.idFecha = F.idFecha
-			Inner Join Lugares L on L.idLugar = T.idLugar
-			WHERE T.idFecha = @idFecha
 	   END
 GO
 
-
+SELECT * from Usuarios
 select * from Turnos where idUsuario = 1
 
 ------------------------------------------------
@@ -285,9 +295,17 @@ AS
 BEGIN
 	UPDATE Turnos 
 	SET Ocupado = 1
-	from turnos
-	Inner Join Lugares L on L.idLugar = T.idLugar
+	INNER Join Lugares L on L.idLugar = T.idLugar 
 	WHERE L.idLugar = @idLugar AND T.Ocupado = 1
 
 END
 
+GO
+create PROCEDURE InsertarNuevo(
+@email varchar (50) , 
+@pass VARCHAR (50)
+)
+AS
+BEGIN
+insert into Usuarios (Mail, Contrasena, TipoUsuario) values (@email, @pass, 2)
+END

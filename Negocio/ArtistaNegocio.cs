@@ -160,6 +160,24 @@ namespace Negocio
                datos.cerrarConexion();
             }
         }
+
+        public int insertarNuevo(Artista nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setProcedimieto("InsertarNuevo"); // AL INSERTAR, SE ROMPE POR NO TENER CARGADO LOS NOT NULL DE USUARIO, HACER UPDATE Y PERMITIR DATOS EN NULL EN BASE DE DATOS DE USUARIO
+                datos.setParametro("@email", nuevo.mailArtista);
+                datos.setParametro("@pass", nuevo.contrasenaArtista);
+                return datos.EjecutarAccionScalar();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally { datos.cerrarConexion();}
+        }
     }
 
 }

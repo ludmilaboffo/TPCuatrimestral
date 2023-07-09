@@ -73,6 +73,7 @@
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="ArtistaNegocio.cs" />
     <Compile Include="FechaNegocio.cs" />
+    <Compile Include="seguridad.cs" />
     <Compile Include="TurnosNegocio.cs" />
     <Compile Include="LugaresNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

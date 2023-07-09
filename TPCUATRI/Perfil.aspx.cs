@@ -19,7 +19,7 @@ namespace TP_Programacion3
             try
             {
                 if (!IsPostBack) {
-                    Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
+                    Usuario usuario = Session["user"] != null ? (Usuario)Session["user"] : null;
                     if (Session["user"] == null)
                     {
                         Session.Add("error", "Debes loguearte para entrar");
