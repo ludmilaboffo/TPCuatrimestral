@@ -13,7 +13,7 @@ namespace TP_Programacion3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          /*  if(!(Page is TPCUATRI.Login) || !(Page is Registro))
+           /* if(!(Page is TPCUATRI.Login) || !(Page is Registro))
             if (!seguridad.sesionActiva(Session["user"]))
                 Response.Redirect("Login.aspx", false);*/
         }
@@ -23,7 +23,7 @@ namespace TP_Programacion3
         protected void Salir_Click(object sender, EventArgs e)
         {
             Session.Clear();
-            Response.Redirect("Login,aspx");
+            Response.Redirect("Login.aspx");
         }
     }
 }

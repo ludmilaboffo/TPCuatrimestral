@@ -35,8 +35,7 @@ namespace TP_Programacion3
                     txtDireccion.Text = seleccionado.apellidoArtista;
                     txtDireccion.Text = seleccionado.direccionArtista;
                     txtTelefono.Text = seleccionado.telefonoArtista;
-                    // txtImagen.
-
+                    imgFotoPerfil.DescriptionUrl = seleccionado.imgPerfil;
                     //seleccionado.imgPerfil = "Perfil-" + seleccionado.idArtista + ".jpg".ToString();
                 }
             }

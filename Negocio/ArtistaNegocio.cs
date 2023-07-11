@@ -35,15 +35,21 @@ namespace Negocio
                 while (lector.Read())
                 {
                     Artista nuevo = new Artista();
-
+                   
+                   
                     nuevo.idArtista = (int)lector["Id"];
-                    nuevo.contrasenaArtista = (string)lector["Contrasena"];
-                    nuevo.dniArtista = (string)lector["Dni"];
+                    nuevo.nombreArtista= (string)lector["Nombre"];
                     nuevo.mailArtista = (string)lector["Mail"];
-                    nuevo.telefonoArtista = (string)lector["Telefono"];
-                    nuevo.direccionArtista = (string)lector["Direccion"];
-                    nuevo.nombreArtista = (string)lector["Nombre"];
                     nuevo.apellidoArtista = (string)lector["Apellido"];
+                    nuevo.contrasenaArtista = (string)lector["Contrasena"];
+                    if (!(lector["Dni"] is DBNull))
+                        nuevo.dniArtista = (string)lector["Dni"];
+                    if (!(lector["Telefono"] is DBNull))
+                    nuevo.telefonoArtista = (string)lector["Telefono"];
+                    if (!(lector["Direccion"] is DBNull))
+                   nuevo.direccionArtista = (string)lector["Direccion"];
+                   // if (!(lector["RedesSociales"] is DBNull))
+                  //  nuevo.nombreArtista = (string)lector["RedesSociales"];
                     nuevo.esArtista = true;
                     nuevo.estadoArtista = (bool)lector["Estado"];
                     lista.Add(nuevo);
@@ -138,15 +144,15 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-               
-                datos.setConsulta("update users set UrlImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, Direccion = @direccion, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
-                datos.setParametro("@imagen", user.imgPerfil);
-                datos.setParametro("@nombre", user.nombreArtista);
-                datos.setParametro("@apellido", user.apellidoArtista);
-                datos.setParametro("@direccion", user.direccionArtista);
-                datos.setParametro("telefono", user.telefonoArtista);
-                datos.setParametro("@dni", user.dniArtista);
-                datos.setParametro("@id", user.idArtista);
+    
+                datos.setConsulta("update usuarios set UrlImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, Direccion = @direccion, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
+                datos.setParametro("@imagen", (object)user.imgPerfil ?? DBNull.Value);
+                datos.setParametro("@nombre", (object)user.nombreArtista ?? DBNull.Value);
+                datos.setParametro("@apellido", (object)user.apellidoArtista ?? DBNull.Value);
+                datos.setParametro("@direccion", (object)user.direccionArtista ?? DBNull.Value);
+                datos.setParametro("telefono", (object)user.telefonoArtista ?? DBNull.Value);
+                datos.setParametro("@dni", (object)user.dniArtista ?? DBNull.Value);
+                datos.setParametro("@id", (object)user.idArtista ?? DBNull.Value);
                 datos.ejecutarAccion();
 
             }
@@ -161,7 +167,7 @@ namespace Negocio
             }
         }
 
-        public int insertarNuevo(Artista nuevo)
+        public int insertarNuevo(Artista nuevo, string nombre, string apellido)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -169,6 +175,9 @@ namespace Negocio
                 datos.setProcedimieto("InsertarNuevo"); // AL INSERTAR, SE ROMPE POR NO TENER CARGADO LOS NOT NULL DE USUARIO, HACER UPDATE Y PERMITIR DATOS EN NULL EN BASE DE DATOS DE USUARIO
                 datos.setParametro("@email", nuevo.mailArtista);
                 datos.setParametro("@pass", nuevo.contrasenaArtista);
+                datos.setParametro("@nombre", nombre);
+                datos.setParametro("@apellido", apellido);
+                datos.EjecutarAccionScalar();
                 return datos.EjecutarAccionScalar();
             }
             catch (Exception ex)
@@ -176,8 +185,8 @@ namespace Negocio
 
                 throw ex;
             }
-            finally { datos.cerrarConexion();}
+            finally { datos.cerrarConexion(); }
         }
     }
-
 }
+

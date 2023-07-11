@@ -23,7 +23,9 @@ namespace TP_Programacion3
 
             user.mailArtista = txtMailRegistro.Text;
             user.contrasenaArtista = txtPassRegistro.Text;
-            user.idArtista = artistasNegocio.insertarNuevo(user);
+            string apellido = apellidoRegistro.Text;
+            string nombre = nombreRegistro.Text;
+            user.idArtista = artistasNegocio.insertarNuevo(user, nombre, apellido);
             Session.Add("user", user);
 
             Response.Redirect("MenuInicio.aspx");
