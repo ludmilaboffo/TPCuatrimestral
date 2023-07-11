@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TPCUATRI;
 
-namespace TP_Programacion3
+
+namespace TPCUATRI
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {

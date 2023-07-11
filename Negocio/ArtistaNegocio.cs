@@ -42,14 +42,11 @@ namespace Negocio
                     nuevo.mailArtista = (string)lector["Mail"];
                     nuevo.apellidoArtista = (string)lector["Apellido"];
                     nuevo.contrasenaArtista = (string)lector["Contrasena"];
-                    if (!(lector["Dni"] is DBNull))
-                        nuevo.dniArtista = (string)lector["Dni"];
-                    if (!(lector["Telefono"] is DBNull))
-                    nuevo.telefonoArtista = (string)lector["Telefono"];
-                    if (!(lector["Direccion"] is DBNull))
-                   nuevo.direccionArtista = (string)lector["Direccion"];
-                   // if (!(lector["RedesSociales"] is DBNull))
-                  //  nuevo.nombreArtista = (string)lector["RedesSociales"];
+                    nuevo.dniArtista = lector["Dni"] != DBNull.Value ? (string)lector["Dni"] : null;
+                    nuevo.telefonoArtista = lector["Telefono"] != DBNull.Value ? (string)lector["Telefono"] : null;
+                    nuevo.direccionArtista = lector["Direccion"] != DBNull.Value ? (string)lector["Direccion"] : null;
+                    // if (!(lector["RedesSociales"] is DBNull))
+                    //  nuevo.nombreArtista = (string)lector["RedesSociales"];
                     nuevo.esArtista = true;
                     nuevo.estadoArtista = (bool)lector["Estado"];
                     lista.Add(nuevo);
@@ -61,6 +58,7 @@ namespace Negocio
             {
                 throw ex;
             }
+
             finally
             {
                 conexion.Close();
@@ -177,8 +175,8 @@ namespace Negocio
                 datos.setParametro("@pass", nuevo.contrasenaArtista);
                 datos.setParametro("@nombre", nombre);
                 datos.setParametro("@apellido", apellido);
-                datos.EjecutarAccionScalar();
                 return datos.EjecutarAccionScalar();
+
             }
             catch (Exception ex)
             {

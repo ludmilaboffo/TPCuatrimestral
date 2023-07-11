@@ -23,7 +23,7 @@ namespace TPCUATRI
             UsuarioNegocio negocio = new UsuarioNegocio();
             try
             {
-                user = new Usuario(txtMailLogin.Text, txtPassLogin.Text, false);
+                user = new Usuario(txtMailLogin.Text, txtPassLogin.Text, u);
                 if (negocio.Loguearse(user))
                 {
                     Session.Add("user", user);
@@ -38,6 +38,7 @@ namespace TPCUATRI
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
 

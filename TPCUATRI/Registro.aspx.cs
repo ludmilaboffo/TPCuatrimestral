@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-namespace TP_Programacion3
+namespace TPCUATRI
 {
     public partial class Registro : System.Web.UI.Page
     {
@@ -18,17 +18,26 @@ namespace TP_Programacion3
 
         protected void btnReg_Click(object sender, EventArgs e)
         {
-            Artista user = new Artista();
-            ArtistasNegocio artistasNegocio = new ArtistasNegocio();
 
-            user.mailArtista = txtMailRegistro.Text;
-            user.contrasenaArtista = txtPassRegistro.Text;
-            string apellido = apellidoRegistro.Text;
-            string nombre = nombreRegistro.Text;
-            user.idArtista = artistasNegocio.insertarNuevo(user, nombre, apellido);
-            Session.Add("user", user);
+            try
+            {
 
-            Response.Redirect("MenuInicio.aspx");
+                Artista user = new Artista();
+                ArtistasNegocio artistasNegocio = new ArtistasNegocio();
+
+                user.mailArtista = txtMailRegistro.Text;
+                user.contrasenaArtista = txtPassRegistro.Text;
+                string apellido = apellidoRegistro.Text;
+                string nombre = nombreRegistro.Text;
+                user.idArtista = artistasNegocio.insertarNuevo(user, nombre, apellido);
+
+                Response.Redirect("Default.aspx", false);
+            }
+            catch(Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }

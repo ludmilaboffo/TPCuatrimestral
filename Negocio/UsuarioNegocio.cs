@@ -23,6 +23,8 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     user.idUsuario = (int)datos.Lector["Id"];
+                    user.email = (string)datos.Lector["Mail"];
+                    user.password = (string)datos.Lector["Contrasena"];
                     user.userTipo = (int)(datos.Lector["TipoUsuario"]) == 1 ? TipoUsuario.ADMIN : TipoUsuario.ARTISTA;
                     return true;
                 }

@@ -8,9 +8,8 @@ using System.Web.Caching;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-using TPCUATRI;
 
-namespace TP_Programacion3
+namespace TPCUATRI
 {
     public partial class Perfil : System.Web.UI.Page
     {

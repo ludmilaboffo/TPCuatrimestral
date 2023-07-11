@@ -23,8 +23,6 @@ namespace Dominio
 
                 public Usuario(string uemail, string pass, bool admin)
                 {
-                    email = uemail;
-                    password = pass;
                     userTipo = admin ? TipoUsuario.ADMIN : TipoUsuario.ARTISTA; // True o false segun sea admin o artista
                 }
 

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 
-namespace TP_Programacion3
+namespace TPCUATRI
 {
     public partial class TurnosClass : System.Web.UI.Page
     {
