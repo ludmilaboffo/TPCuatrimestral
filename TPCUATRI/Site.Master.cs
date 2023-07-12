@@ -13,7 +13,7 @@ namespace TPCUATRI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(Page is Login) || !(Page is Registro))
+            if (!(Page is Login) && !(Page is Registro))
             {
                 // Si no es login me navega a login
                 if (!seguridad.sesionActiva(Session["Artista"]))

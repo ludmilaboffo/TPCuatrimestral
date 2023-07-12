@@ -85,11 +85,13 @@ namespace TPCUATRI
                 Turno nuevo = new Turno();
                 TurnosNegocio negocio = new TurnosNegocio();
                 LugaresNegocio lugarNegocio = new LugaresNegocio();
-                Usuario usuario = HttpContext.Current.Session["user"] as Usuario;
+                Artista usuario = HttpContext.Current.Session["Artista"] as Artista;
+
+                /// A esta ventana solo se ingresa si el usuario es admin. 
 
                 nuevo.Lugar = new Lugar();
                 nuevo.Lugar.idLugar = int.Parse(ddlLugar.SelectedValue);
-                nuevo.idUsuario = usuario.idUsuario;
+                nuevo.idUsuario = usuario.idArtista;
                 nuevo.Fecha = new Fecha();
                 nuevo.Fecha.idFecha = int.Parse(ddlFecha.SelectedValue);
 
@@ -106,7 +108,7 @@ namespace TPCUATRI
                     Response.Redirect("ListadoTurnos.aspx", false);
                 }
 
-                if (validarFecha(nuevo) && usuario.isAdmin())
+                if (validarFecha(nuevo) && !usuario.esArtista)
                 {
                     negocio.alta(nuevo);
                     Response.Redirect("ListadoTurnos.aspx", false);

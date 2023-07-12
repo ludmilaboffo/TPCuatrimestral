@@ -84,6 +84,5 @@
         </div>
     </div>
     <%}
-
-        }%>
+%>
 </asp:Content>
