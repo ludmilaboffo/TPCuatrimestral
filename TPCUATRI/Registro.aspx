@@ -17,18 +17,6 @@
                     <asp:TextBox ID="txtPassRegistro" TextMode="Password" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
             </div>
-            <div class="mb-3 m-lg-4">
-                <div class="form-group">
-                    <label for="lblNombreRegistro">Nombre</label>
-                    <asp:TextBox ID="nombreRegistro" CssClass="form-control" runat="server"></asp:TextBox>
-                </div>
-            </div>
-            <div class="mb-3 m-lg-4">
-                <div class="form-group">
-                    <label for="lblApellidoRegistro">Apellido</label>
-                    <asp:TextBox ID="apellidoRegistro" CssClass="form-control" runat="server"></asp:TextBox>
-                </div>
-            </div>
             <div class="mb-3 m-lg-3">
                 <asp:Button ID="btnReg" CssClass="btn btn-primary" runat="server" Text="Aceptar" OnClick="btnReg_Click" />
                 <h5 cssclass="h5">¿Ya tenes una cuenta?</h5>

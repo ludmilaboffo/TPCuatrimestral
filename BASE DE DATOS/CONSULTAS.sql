@@ -9,20 +9,20 @@ GO
 
 CREATE TABLE Usuarios (
     Id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Dni VARCHAR(10) NOT NULL UNIQUE,
+    Dni VARCHAR(10) NULL,
     Contrasena VARCHAR(10) NOT NULL,
-    Mail VARCHAR (30) UNIQUE NOT NULL,
+    Mail VARCHAR (30) NOT NULL,
     Telefono VARCHAR(20),
-    Direccion VARCHAR (50) NOT NULL,
-    Nombre VARCHAR(30) NOT NULL,
-    Apellido VARCHAR (30) NOT NULL,
+    TipoEspectaculo VARCHAR (50) NULL,
+	RedesSociales VARCHAR (50) NULL,
+    Nombre VARCHAR(30) NULL,
+    Apellido VARCHAR (30)  NULL,
     TipoUsuario INT NOT NULL,         -- ADMIN (1) O USUARIO (2)
     Estado BIT NOT NULL
 )
 
-alter TABLE Usuarios add UrlImgPerfil varchar(250) NULL
-SELECT * from Usuarios
-GO
+
+
 
 SELECT * from Usuarios
 CREATE TABLE Lugares (
@@ -56,13 +56,10 @@ Create TABLE Turnos (
 
 ------------------------- CARGA DE DATOS -----------------------------
 
-INSERT INTO 
-	Usuarios(Dni, Contrasena, Mail, Telefono, Direccion, Nombre, Apellido, TipoUsuario, Estado)
-
-VALUES('2222222', 'artista2', 'art@gmail', '22222', 'micasa', 'Laura', 'Perez', 2, 1)
-('28.315.082','artista123','soyartista@gmail.com','11-9455680','Mi casa 123', 'LOLA', 'RODRIGUEZ', 2, 1),
-('40.715.182','admin123','soyadmin@gmail.com','11-40408080','Calle Falsa 123', 'JUAN', 'PEREZ', 1, 1)
-
+INSERT INTO Usuarios(Dni, Contrasena, Mail, Telefono, TipoEspectaculo, RedesSociales, Nombre, Apellido, TipoUsuario, Estado)
+VALUES ('2222222', 'artista2', 'art@gmail', '22222', 'micasa', 'https://www.instagram.com/emilia_clarke','Laura', 'Perez', 2, 1),
+('28.315.082','artista123','soyartista@gmail.com','11-9455680','Mi casa 123', 'https://www.instagram.com/emilia_clarke','LOLA', 'RODRIGUEZ', 2, 1),
+('40.715.182','admin123','soyadmin@gmail.com','11-40408080','Calle Falsa 123','https://www.instagram.com/emilia_clarke', 'JUAN', 'PEREZ', 1, 1);
 
 ----------------------------------------
 
@@ -247,10 +244,10 @@ Exec SP_listarPorArtistas 1
 
 ------------- STORED PARA LISTAR LOS USUARIOS ------------
 GO
-CREATE PROCEDURE StoredListarUsuarios
+ALTER PROCEDURE StoredListarUsuarios
 AS
 BEGIN
-SELECT Id, Dni, Contrasena, Mail, Telefono, Direccion, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios
+SELECT Id, Dni, Contrasena, Mail, Telefono, TipoEspectaculo, RedesSociales, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios
 END
 
 ----------------------- STORED PARA ALTA TURNO DESDE ARTISTA -------------------------
@@ -296,17 +293,15 @@ END
 MODIFICACIONES
 
 
-CREATE PROCEDURE InsertarNuevo(
+alter PROCEDURE InsertarNuevo(
 @email varchar (50) , 
-@pass VARCHAR (50),
-@nombre VARCHAR(30),
-@apellido VARCHAR(30)
+@pass VARCHAR (50)
 )
 AS
 BEGIN
-insert into Usuarios  (Mail, Contrasena, TipoUsuario, Nombre, Apellido, Estado)
+insert into Usuarios  (Mail, Contrasena, TipoUsuario, Estado)
  OUTPUT inserted.Id 
- values (@email, @pass, 2, @nombre, @apellido, 1)
+ values (@email, @pass, 2, 1)
 END
 
 

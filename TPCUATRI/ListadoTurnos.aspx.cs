@@ -14,13 +14,12 @@ namespace TPCUATRI
         List<Turno> ListaTurnos;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] == null)
+            if (seguridad.esAdministrador(Session["Artista"]))
             {
-
-                Session.Add("error", "Debes loguearte para entrar");
-                Response.Redirect("Error.aspx", false);
+                Session.Add("error", "Solo los administradores pueden acceder a esta sección");
+                Response.Redirect("Error.aspx");
             }
-                TurnosNegocio negocio = new TurnosNegocio();
+            TurnosNegocio negocio = new TurnosNegocio();
                 ListaTurnos = negocio.listarSP();
                 var turnosDGV =(ListaTurnos).Select(t => new {
                     id = t.idTurno,

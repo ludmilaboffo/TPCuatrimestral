@@ -19,14 +19,17 @@ namespace TPCUATRI
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
 
-            Usuario user;
-            UsuarioNegocio negocio = new UsuarioNegocio();
+            Artista artista = new Artista();
+            ArtistasNegocio negocio = new ArtistasNegocio();
+   
             try
             {
-                user = new Usuario(txtMailLogin.Text, txtPassLogin.Text, u);
-                if (negocio.Loguearse(user))
+
+                artista.mailArtista = txtMailLogin.Text;
+                artista.contrasenaArtista = txtPassLogin.Text;
+                if (negocio.Loguearse(artista))
                 {
-                    Session.Add("user", user);
+                    Session.Add("Artista", artista);
                     Response.Redirect("MenuInicio.aspx", false);
                 }
                 else

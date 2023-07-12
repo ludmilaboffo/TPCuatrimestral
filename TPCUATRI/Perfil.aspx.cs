@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 
+
 namespace TPCUATRI
 {
     public partial class Perfil : System.Web.UI.Page
@@ -18,23 +19,16 @@ namespace TPCUATRI
             try
             {
                 if (!IsPostBack) {
-                    Usuario usuario = Session["user"] != null ? (Usuario)Session["user"] : null;
-                    if (Session["user"] == null)
-                    {
-                        Session.Add("error", "Debes loguearte para entrar");
-                        Response.Redirect("Error.aspx", false);
-                    };
+                 
+                   // int id = artista.idArtista;
+                    ArtistasNegocio negocio = new ArtistasNegocio();
+                    //Artista seleccionado = negocio.listar(id.ToString())[0];
 
-                    int id = usuario.idUsuario;
-
-                    ArtistasNegocio artista = new ArtistasNegocio();
-                    Artista seleccionado = artista.listar(id.ToString())[0];
-
-                    txtNombre.Text = seleccionado.nombreArtista;
-                    txtDireccion.Text = seleccionado.apellidoArtista;
-                    txtDireccion.Text = seleccionado.direccionArtista;
-                    txtTelefono.Text = seleccionado.telefonoArtista;
-                    imgFotoPerfil.DescriptionUrl = seleccionado.imgPerfil;
+                    //txtNombre.Text = seleccionado.nombreArtista;
+                    //txtDireccion.Text = seleccionado.apellidoArtista;
+                    //txtDireccion.Text = seleccionado.direccionArtista;
+                    //txtTelefono.Text = seleccionado.telefonoArtista;
+                    //imgFotoPerfil.DescriptionUrl = seleccionado.imgPerfil;
                     //seleccionado.imgPerfil = "Perfil-" + seleccionado.idArtista + ".jpg".ToString();
                 }
             }
@@ -66,7 +60,8 @@ namespace TPCUATRI
                         user.imgPerfil = "Perfil-" + user.idArtista + ".jpg"; //agregar campo de imagen a usuarios
                         user.nombreArtista = txtNombre.Text;
                         user.apellidoArtista = txtApellido.Text;
-                        user.direccionArtista = txtDireccion.Text;
+                        user.tipoEspectaculo= txtTipoEspectaculo.Text;
+                        user.redesSociales = txtRedes.Text;
                         user.telefonoArtista = txtTelefono.Text;
 
                         negocio.actualizar(user);

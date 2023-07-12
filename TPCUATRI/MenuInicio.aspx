@@ -41,11 +41,9 @@
 
     <%
 
-        Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
-        if (usuario != null)
-        {
+        Dominio.Artista usuario = HttpContext.Current.Session["Artista"] as Dominio.Artista;
 
-            if (usuario.isAdmin())
+            if (!usuario.esArtista)
             { %>
     <div class="container">
         <div class="row justify-content-center menu-container">
@@ -76,7 +74,7 @@
         </div>
     </div>
     <%}
-        else if (usuario.isArtista())
+        else if (usuario.esArtista)
         {%>
     <div class="container">
         <div class="row justify-content-center menu-container">
@@ -108,7 +106,5 @@
             </div>
         </div>
     </div>
-    <%}
-
-      }%>
+    <%}%>
 </asp:Content>

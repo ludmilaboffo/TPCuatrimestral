@@ -6,10 +6,9 @@
 
 
     <%
-        Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
-        if (usuario != null)
-        {
-            if (usuario.isArtista())
+        Dominio.Artista usuario = HttpContext.Current.Session["Artista"] as Dominio.Artista;
+
+            if (usuario.esArtista)
             { %>
     <div id="turnosArtists" class="m-lg-5">
         <asp:GridView ID="dgvAgenda" runat="server" RowStyle-BackColor="White" RowStyle-ForeColor="Black" HeaderStyle-Font-Names="Bahnschrift SemiBold" HeaderStyle-Font-Size="Larger"
@@ -28,7 +27,5 @@
     <footer>
         En caso que su turno aparezca como "no vigente" consulte la disponiblidad del lugar. Es posible que el administrador haya realizado un cambio imprevisto.
     </footer>
-    <%}
-
-        }%>
+    <%}%>
 </asp:Content>

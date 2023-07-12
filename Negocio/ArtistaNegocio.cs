@@ -13,7 +13,38 @@ namespace Negocio
 
 
 
-        public List<Artista> listar(string id = "")
+        public bool Loguearse(Artista user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("SELECT Id, Mail, Contrasena, TipoUsuario from Usuarios WHERE Mail = @email AND Contrasena = @pass");
+                datos.setParametro("@email", user.mailArtista);
+                datos.setParametro("@pass", user.contrasenaArtista);
+
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    user.idArtista = (int)datos.Lector["Id"];
+                    user.mailArtista = (string)datos.Lector["Mail"];
+                    user.contrasenaArtista = (string)datos.Lector["Contrasena"];
+                    user.idArtista= (int)datos.Lector["Id"];
+                    user.esArtista = (int)datos.Lector["TipoUsuario"] == 2 ? true : false;
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+    public List<Artista> listar(string id = "")
         {
 
             List<Artista> lista = new List<Artista>();
@@ -25,7 +56,7 @@ namespace Negocio
             {
                 conexion = new SqlConnection("server =.\\SQLEXPRESS; database = StreetART; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT  Id, Dni, Contrasena, Mail, Telefono, Direccion, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios ";
+                comando.CommandText = "SELECT  Id, Dni, Contrasena, Mail, Telefono, TipoEspectaculo, RedesSociales, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios ";
                 if (id != "")
                     comando.CommandText += " WHERE Id= " + id;
                 comando.Connection = conexion;
@@ -44,7 +75,8 @@ namespace Negocio
                     nuevo.contrasenaArtista = (string)lector["Contrasena"];
                     nuevo.dniArtista = lector["Dni"] != DBNull.Value ? (string)lector["Dni"] : null;
                     nuevo.telefonoArtista = lector["Telefono"] != DBNull.Value ? (string)lector["Telefono"] : null;
-                    nuevo.direccionArtista = lector["Direccion"] != DBNull.Value ? (string)lector["Direccion"] : null;
+                    nuevo.tipoEspectaculo= lector["TipoEspectaculo"] != DBNull.Value ? (string)lector["TipoEspectaculo"] : null;
+                    nuevo.redesSociales = lector["RedesSociales"] != DBNull.Value ? (string)lector["RedesSociales"] : null;
                     // if (!(lector["RedesSociales"] is DBNull))
                     //  nuevo.nombreArtista = (string)lector["RedesSociales"];
                     nuevo.esArtista = true;
@@ -81,13 +113,16 @@ namespace Negocio
                     Artista nuevo = new Artista();
 
                     nuevo.idArtista = (int)datos.Lector["Id"];
-                    nuevo.nombreArtista = (string)datos.Lector["Nombre"];
-                    nuevo.apellidoArtista = (string)datos.Lector["Apellido"];
+                    nuevo.nombreArtista= (string)datos.Lector["Nombre"];
                     nuevo.mailArtista = (string)datos.Lector["Mail"];
-                    nuevo.telefonoArtista = (string)datos.Lector["Telefono"];
-                  //  nuevo.contrasenaArtista = (string)datos.Lector["Contraseña"];
+                    nuevo.apellidoArtista = (string)datos.Lector["Apellido"];
+                    nuevo.contrasenaArtista = (string)datos.Lector["Contrasena"];
+                    nuevo.dniArtista = datos.Lector["Dni"] != DBNull.Value ? (string)datos.Lector["Dni"] : null;
+                    nuevo.telefonoArtista = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : null;
+                    nuevo.tipoEspectaculo = datos.Lector["TipoEspectaculo"] != DBNull.Value ? (string)datos.Lector["TipoEspectaculo"] : null;
+                    nuevo.redesSociales = datos.Lector["RedesSociales"] != DBNull.Value ? (string)datos.Lector["RedesSociales"] : null;
+                    nuevo.esArtista = true;
                     nuevo.estadoArtista = (bool)datos.Lector["Estado"];
-                    nuevo.direccionArtista = (string)datos.Lector["Direccion"];
                     lista.Add(nuevo);
                 }
 
@@ -143,11 +178,12 @@ namespace Negocio
             try
             {
     
-                datos.setConsulta("update usuarios set UrlImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, Direccion = @direccion, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
+                datos.setConsulta("update usuarios set UrlImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, RedesSociales = @redes, TipoEspectaculo = @tipoShow, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
                 datos.setParametro("@imagen", (object)user.imgPerfil ?? DBNull.Value);
                 datos.setParametro("@nombre", (object)user.nombreArtista ?? DBNull.Value);
                 datos.setParametro("@apellido", (object)user.apellidoArtista ?? DBNull.Value);
-                datos.setParametro("@direccion", (object)user.direccionArtista ?? DBNull.Value);
+                datos.setParametro("@tiposhow", (object)user.tipoEspectaculo ?? DBNull.Value);
+                datos.setParametro("@redes", (object)user.redesSociales ?? DBNull.Value);
                 datos.setParametro("telefono", (object)user.telefonoArtista ?? DBNull.Value);
                 datos.setParametro("@dni", (object)user.dniArtista ?? DBNull.Value);
                 datos.setParametro("@id", (object)user.idArtista ?? DBNull.Value);
@@ -165,7 +201,7 @@ namespace Negocio
             }
         }
 
-        public int insertarNuevo(Artista nuevo, string nombre, string apellido)
+        public int insertarNuevo(Artista nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -173,8 +209,6 @@ namespace Negocio
                 datos.setProcedimieto("InsertarNuevo"); // AL INSERTAR, SE ROMPE POR NO TENER CARGADO LOS NOT NULL DE USUARIO, HACER UPDATE Y PERMITIR DATOS EN NULL EN BASE DE DATOS DE USUARIO
                 datos.setParametro("@email", nuevo.mailArtista);
                 datos.setParametro("@pass", nuevo.contrasenaArtista);
-                datos.setParametro("@nombre", nombre);
-                datos.setParametro("@apellido", apellido);
                 return datos.EjecutarAccionScalar();
 
             }
@@ -183,7 +217,9 @@ namespace Negocio
 
                 throw ex;
             }
-            finally { datos.cerrarConexion(); }
+            finally { 
+                datos.cerrarConexion(); 
+            }
         }
     }
 }

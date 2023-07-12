@@ -18,14 +18,13 @@ namespace TPCUATRI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
 
             txtID.Enabled = false;
-            if (Session["user"] == null)
+            if (seguridad.esAdministrador(Session["Artista"]))
             {
-                Session.Add("error", "Debes loguearte para entrar");
-                Response.Redirect("Error.aspx", false);
-            };
+                Session.Add("error", "Solo los administradores pueden acceder a esta sección");
+                Response.Redirect("Error.aspx");
+            }
             try
             {
                 string id = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";

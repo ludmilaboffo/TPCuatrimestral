@@ -14,20 +14,14 @@ namespace TPCUATRI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
-                if (Session["user"] == null)
-                {
-                    Session.Add("error", "Debes loguearte para entrar");
-                    Response.Redirect("Error.aspx", false);
-                }
-                else
-                {
+            Dominio.Artista usuario = (Dominio.Artista)HttpContext.Current.Session["Artista"];
+
+            if (usuario.esArtista)
+            {
                     ArtistasNegocio art = new ArtistasNegocio();
-                    string nombreUsuario = art.buscarArtista(usuario.idUsuario);
+                    string nombreUsuario = art.buscarArtista(usuario.idArtista);
                     lblHola.Text = "Bienvenido " + nombreUsuario;
-
-                }
-
+            }
         }
 
         protected void btnBajaUsuario_Click(object sender, EventArgs e)

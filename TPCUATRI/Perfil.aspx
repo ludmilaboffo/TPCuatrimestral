@@ -5,8 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <%
 
-         Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
-         if (!usuario.isAdmin())
+         Dominio.Artista usuario = HttpContext.Current.Session["user"] as Dominio.Artista;
+         if (usuario.esArtista)
          { %>
     <div class="row justify-content-center">
         <div class="col-md-4 mb-5">
@@ -15,28 +15,33 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" id="txtEmailPerfil">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server"></asp:TextBox>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Apellido</label>
-                <asp:TextBox ID="txtApellido" CssClass="form-control" runat="server"></asp:TextBox>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Direccion</label>
-                <asp:TextBox ID="txtDireccion" CssClass="form-control" runat="server"></asp:TextBox>
-            </div>
-              <div class="mb-3">
-                <label class="form-label">Telefono</label>
-                <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
-            </div>
-        </div>
-        <div class="col-md-4 justify-content-center">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" id="txtEmailPerfil">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Apellido</label>
+                    <asp:TextBox ID="txtApellido" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tipo de espectaculo (musical/teatro/otros)</label>
+                    <asp:TextBox ID="txtTipoEspectaculo" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Redes sociales</label>
+                    <asp:TextBox ID="txtRedes" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+                  <div class="mb-3">
+                    <label class="form-label">Telefono</label>
+                    <asp:TextBox ID="txtTelefono" CssClass="form-control" runat="server"></asp:TextBox>
+                </div>
+         </div>
+      </div>
+      <div class="col-md-4 justify-content-center">
             <div class="mb-3">
                 <label class="form-label">Imagen Perfil</label>
                 <input type="file" id="txtImagen" runat="server" class="form-control" />
@@ -56,7 +61,7 @@
         else
         {
         %>
-    <asp:Label runat="server" Text="LA ADMINISTRACION DEL PERFIL NO ESTA DISPONIBLE PARA EL ADMINISTRADOR :("></asp:Label>
+    <asp:Label runat="server" Text="Para ver los detalles de un artista, puede seleccionar el listado en el menú"></asp:Label>
     <%} %>
 
 </asp:Content>

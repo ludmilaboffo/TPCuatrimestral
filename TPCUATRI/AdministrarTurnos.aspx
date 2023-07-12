@@ -18,11 +18,9 @@
     <asp:ScriptManager runat="server" ID="scriptManager"></asp:ScriptManager>
     <%
 
-        Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
-        if (usuario != null)
-        {
+        Dominio.Artista usuario = HttpContext.Current.Session["Artista"] as Dominio.Artista;
 
-            if (usuario.isAdmin())
+            if (!usuario.esArtista)
             { %>
     <div class="row justify-content-center">
         <div class="col-md-4 text-center">
@@ -78,7 +76,7 @@
         </div>
     </div>
     <%}
-        else if (usuario.isArtista())
+        else if (usuario.esArtista)
         {%>
     <div class="row justify-content-center">
         <div class="col-md-4">

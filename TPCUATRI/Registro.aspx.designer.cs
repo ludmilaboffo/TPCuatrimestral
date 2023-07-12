@@ -33,24 +33,6 @@ namespace TPCUATRI
         protected global::System.Web.UI.WebControls.TextBox txtPassRegistro;
 
         /// <summary>
-        /// nombreRegistro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox nombreRegistro;
-
-        /// <summary>
-        /// apellidoRegistro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox apellidoRegistro;
-
-        /// <summary>
         /// btnReg control.
         /// </summary>
         /// <remarks>

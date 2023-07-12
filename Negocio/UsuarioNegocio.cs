@@ -15,16 +15,15 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("SELECT Id, Contrasena, TipoUsuario from Usuarios WHERE Mail = @email AND Contrasena = @pass");
+                datos.setConsulta("SELECT Id, Mail, Contrasena, TipoUsuario from Usuarios WHERE Mail = @email AND Contrasena = @pass");
                 datos.setParametro("@email", user.email);
                 datos.setParametro("@pass", user.password);
 
                 datos.ejecutarLectura();
-                while (datos.Lector.Read())
+                if (datos.Lector.Read())
                 {
                     user.idUsuario = (int)datos.Lector["Id"];
-                    user.email = (string)datos.Lector["Mail"];
-                    user.password = (string)datos.Lector["Contrasena"];
+
                     user.userTipo = (int)(datos.Lector["TipoUsuario"]) == 1 ? TipoUsuario.ADMIN : TipoUsuario.ARTISTA;
                     return true;
                 }

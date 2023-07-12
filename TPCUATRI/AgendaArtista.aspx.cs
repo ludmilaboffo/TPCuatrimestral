@@ -13,21 +13,16 @@ namespace TPCUATRI
         List<Turno> listaAgenda;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
-            if (usuario == null)
-            {
+            Dominio.Artista usuario = (Dominio.Artista)HttpContext.Current.Session["Artista"];
 
-                Session.Add("error", "Debes loguearte para entrar");
-                Response.Redirect("Error.aspx", false);
-            }
-            else if(usuario.isAdmin())
+            if(!usuario.esArtista)
             {
                 Session.Add("error", "Esta sección es para artistas solamente. Puede chequear la agenda en el listado de artistas");
                 Response.Redirect("Error.aspx", false);
             }
 
             TurnosNegocio negocio = new TurnosNegocio();
-            listaAgenda = negocio.listarPorArtistas(usuario.idUsuario);
+            listaAgenda = negocio.listarPorArtistas(usuario.idArtista);
             var agendaDGV = listaAgenda.Select(t => new {
                 id = t.idTurno,
                 FechaNum = t.Fecha.numeroFecha,

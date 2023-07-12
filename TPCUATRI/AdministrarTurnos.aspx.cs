@@ -16,16 +16,16 @@ namespace TPCUATRI
         List<Lugar> ListaLugar;
         List<Fecha> ListaFecha;
         public bool confirmarEliminacion { get; set; }
-         
+
         protected void Page_Load(object sender, EventArgs e)
         {
             confirmarEliminacion = false;
             txtId.Enabled = false;
 
-            if (Session["user"] == null)
+            if (seguridad.esAdministrador(Session["Artista"]))
             {
-                Session.Add("error", "Debes loguearte para entrar");
-                Response.Redirect("Error.aspx", false);
+                Session.Add("error", "Solo los administradores pueden acceder a esta sección");
+                Response.Redirect("Error.aspx");
             }
             try
             {

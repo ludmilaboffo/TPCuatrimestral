@@ -13,14 +13,14 @@ namespace TPCUATRI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] == null)
-                {
-                    Session.Add("error", "Debes loguearte para entrar");
-                    Response.Redirect("Error.aspx", false);
-                }
+            if (seguridad.esAdministrador(Session["Artista"]))
+            {
+                Session.Add("error", "Solo los administradores pueden acceder a esta sección");
+                Response.Redirect("Error.aspx");
+            }
             if (!IsPostBack)
             {
-                
+
                 ArtistasNegocio negocio = new ArtistasNegocio();
                 dgvArtistas.DataSource = negocio.ListarConSp();
                 dgvArtistas.DataBind();
@@ -30,8 +30,8 @@ namespace TPCUATRI
         protected void dgvArtistas_SelectedIndexChanged(object sender, EventArgs e)
         {
             ArtistasNegocio negocio = new ArtistasNegocio();
-           
-            GridViewRow selectedRow = dgvArtistas.SelectedRow; 
+
+            GridViewRow selectedRow = dgvArtistas.SelectedRow;
             bool estado = Convert.ToBoolean(selectedRow.Cells[6].Text);
             if (estado == true)
             {
@@ -39,11 +39,11 @@ namespace TPCUATRI
                 TurnosNegocio BajaTurno = new TurnosNegocio();
                 BajaTurno.BajaTurnoUsuarioEliminado((int)dgvArtistas.SelectedDataKey.Value, true);
             }
-            else if (estado == false) 
+            else if (estado == false)
             {
                 negocio.eliminarLogico((int)dgvArtistas.SelectedDataKey.Value, true);
             }
-            
+
         }
     }
 }

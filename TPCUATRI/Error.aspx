@@ -9,7 +9,7 @@
             <div class="mb-3 m-lg-4">
                 <h1 class="display-4">¡Ups! Parece que ha habido un error...</h1>
                 <asp:Label Text="text" runat="server" ID="lblMensaje"></asp:Label>
-                <% Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
+                <% Dominio.Artista usuario = HttpContext.Current.Session["Artista"] as Dominio.Artista;
                     if (usuario != null)
                     { %>
                 <div class="row row-cols-6">

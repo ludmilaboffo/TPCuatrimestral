@@ -5,9 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" ID="scriptManager2"></asp:ScriptManager>
     <%    
-        Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
-        if (usuario != null)
-        {
+        Dominio.Artista usuario = (Dominio.Artista)HttpContext.Current.Session["Artista"];
+            if (!usuario.esArtista) { 
     %>
 
     <div class="row justify-content-center">

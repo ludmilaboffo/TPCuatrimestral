@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
+
 namespace TPCUATRI
 {
     public partial class Lugares : System.Web.UI.Page
@@ -16,14 +17,7 @@ namespace TPCUATRI
         public Lugar Lugar { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] != null)
-            {
-                if (Session["user"] == null)
-                {
-                    Session.Add("error", "Debes loguearte para entrar");
-                    Response.Redirect("Error.aspx", false);
-                }
-                if (!IsPostBack)
+            if (!IsPostBack)
                 {
                     LugaresNegocio negocio = new LugaresNegocio();
                     ListaLugar = negocio.listarSP();
@@ -32,7 +26,6 @@ namespace TPCUATRI
                     repLugares.DataBind();
                 }
                 ListaLugar = (List<Lugar>)(Session["ListaLugar"]);
-            }
         }
 
         protected void btnModificarLugar_Click(object sender, EventArgs e)

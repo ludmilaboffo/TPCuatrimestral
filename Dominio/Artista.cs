@@ -13,7 +13,9 @@ namespace Dominio
         public string contrasenaArtista { get; set; }
         public string mailArtista { get; set; }
         public string telefonoArtista { get; set; }
-        public string direccionArtista { get; set; }
+        public string tipoEspectaculo { get; set; }
+
+        public string redesSociales { get; set; }
         public string nombreArtista { get; set; }
         public string apellidoArtista { get; set; }
         public bool estadoArtista { get; set; }

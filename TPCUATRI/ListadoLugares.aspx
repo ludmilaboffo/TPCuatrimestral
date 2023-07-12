@@ -58,10 +58,8 @@
         }
     </style>
     <%    
-        Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
+        Dominio.Artista usuario = (Dominio.Artista)HttpContext.Current.Session["Artista"];
 
-        if (usuario != null)
-        {
     %>
     <asp:Repeater runat="server" ID="repLugares">
         <ItemTemplate>
@@ -78,7 +76,7 @@
                         </em>
                      </div>
                    
-                    <% if (((Dominio.Usuario)Session["user"]).isArtista())
+                    <% if (((Dominio.Artista)Session["Artista"]).esArtista)
                         { %>
                         <div class="centered-button">
                                 <asp:Button ID="btnPedirTurno" CssClass="btn btn-primary m mb-4" Text="Pedir turno" runat="server" CommandName="PedirTurno" CommandArgument='<%# Eval("idLugar") %>' OnClick="btnPedirTurno_Click" />
@@ -87,19 +85,19 @@
             </div>
             <% 
                 }
-                else if (((Dominio.Usuario)Session["user"]).isAdmin())
+                else if (!(((Dominio.Artista)Session["Artista"]).esArtista))
                 {%>
             <asp:Button ID="btnModificarLugar" OnClick="btnModificarLugar_Click" CssClass="btn btn-warning" runat="server" Text="Modificar" CommandName="Modificar" CommandArgument='<%# Eval("idLugar") %>' />
             </div>
             <%}%>
         </ItemTemplate>
     </asp:Repeater>
-    <%if (((Dominio.Usuario)Session["user"]).isAdmin())
+    <%if (!(((Dominio.Artista)Session["Artista"]).esArtista))
         {%>
     <div class="centered-button">
         <asp:Button ID="btnAltaLugar" OnClick="btnAltaLugar_Click" CssClass="btn btn-primary" Text="Agregar nuevo" runat="server" />
     </div>
 
     <%}%>
-    <%} %>
+
 </asp:Content>

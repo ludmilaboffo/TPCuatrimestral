@@ -13,9 +13,14 @@ namespace TPCUATRI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           /* if(!(Page is TPCUATRI.Login) || !(Page is Registro))
-            if (!seguridad.sesionActiva(Session["user"]))
-                Response.Redirect("Login.aspx", false);*/
+            if (!(Page is Login) || !(Page is Registro))
+            {
+                // Si no es login me navega a login
+                if (!seguridad.sesionActiva(Session["Artista"]))
+                {
+                    Response.Redirect("Login.aspx");
+                }
+            }
         }
 
 

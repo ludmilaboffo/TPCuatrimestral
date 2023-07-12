@@ -22,14 +22,12 @@ namespace TPCUATRI
             try
             {
 
-                Artista user = new Artista();
+                Artista artista = new Artista();
                 ArtistasNegocio artistasNegocio = new ArtistasNegocio();
 
-                user.mailArtista = txtMailRegistro.Text;
-                user.contrasenaArtista = txtPassRegistro.Text;
-                string apellido = apellidoRegistro.Text;
-                string nombre = nombreRegistro.Text;
-                user.idArtista = artistasNegocio.insertarNuevo(user, nombre, apellido);
+                artista.mailArtista = txtMailRegistro.Text;
+                artista.contrasenaArtista = txtPassRegistro.Text;
+                artista.idArtista = artistasNegocio.insertarNuevo(artista);
 
                 Response.Redirect("Default.aspx", false);
             }

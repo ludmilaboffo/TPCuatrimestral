@@ -10,12 +10,18 @@ namespace Negocio
     {
         public static bool sesionActiva(object user)
         {
-            Usuario usuario = user != null ? (Usuario)user : null;
-            if (usuario != null && usuario.idUsuario != 0)
-            {
+            Artista usuario = user != null ? (Artista)user : null;
+            if (usuario != null && usuario.idArtista != 0)
+            
                 return true;
-            }
-            else { return false; }
+            else 
+                return false; 
+        }
+
+        public static bool esAdministrador(object user)
+        {
+            Artista artista = user != null ? (Artista)user : null;
+            return artista.esArtista; /// SI ES ARTISTA RETORNA TRUE, SI ES ADMIN FALSE
         }
     }
 }

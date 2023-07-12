@@ -23,12 +23,7 @@ namespace TPCUATRI
         protected void Page_Load(object sender, EventArgs e)
         {
             fechaLibre = true;
-            Dominio.Usuario usuario = (Dominio.Usuario)HttpContext.Current.Session["user"];
-            if (usuario == null)
-            {
-                Session.Add("error", "Debes loguearte para entrar");
-                Response.Redirect("Error.aspx", false);
-            }
+
             try
             {
                 idLugar = Request.QueryString["idLugar"] != null ? Request.QueryString["idLugar"].ToString() : "";
@@ -80,16 +75,16 @@ namespace TPCUATRI
 
         protected void btnConfirmarTurno_Click(object sender, EventArgs e)
         {
-            Usuario usuario = HttpContext.Current.Session["user"] as Usuario;
+            Dominio.Artista usuario = (Dominio.Artista)HttpContext.Current.Session["Artista"];
             ArtistasNegocio negocio = new ArtistasNegocio();
-            string id = negocio.buscarArtista(usuario.idUsuario);
+            string id = usuario.idArtista.ToString();
             Turno turno = new Turno();
             TurnosNegocio date = new TurnosNegocio();
             FechaNegocio dia = new FechaNegocio();
             LugaresNegocio place = new LugaresNegocio();
 
             /// al nuevo turno le guardo el id de la fecha, el id del turno y el id del lugar
-            turno.idUsuario = usuario.idUsuario;
+            turno.idUsuario = usuario.idArtista;
 
             turno.Lugar = new Lugar();
             turno.Fecha = new Fecha();

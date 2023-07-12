@@ -4,9 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" ID="scriptManager"></asp:ScriptManager>
-    <% Dominio.Usuario usuario = HttpContext.Current.Session["user"] as Dominio.Usuario;
-        if (usuario != null)
-        {
+    <% 
             if (fechaLibre)
             { %>
     <div class="row justify-content-center">
@@ -66,5 +64,4 @@
             </div>
         </div>
     </div>
-    <% }%>
 </asp:Content>
