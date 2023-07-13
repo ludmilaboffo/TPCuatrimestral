@@ -8,9 +8,9 @@
     <%
         Dominio.Artista usuario = HttpContext.Current.Session["Artista"] as Dominio.Artista;
 
-            if (usuario.esArtista)
-            { %>
-    <div id="turnosArtists" class="m-lg-5">
+        if (usuario.esArtista)
+        { %>
+    <div id="turnosArtists" class="m-lg-5 mt-5">
         <asp:GridView ID="dgvAgenda" runat="server" RowStyle-BackColor="White" RowStyle-ForeColor="Black" HeaderStyle-Font-Names="Bahnschrift SemiBold" HeaderStyle-Font-Size="Larger"
             Font-Names="Bahnschrift SemiBold" HeaderStyle-BackColor="#6699ff" CssClass="table table-group-divider" DataKeyNames="id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvAgenda_SelectedIndexChanged">
             <Columns>
@@ -21,11 +21,14 @@
                         <asp:Label ID="lblVigente" runat="server" Text='<%# (bool)Eval("Vigente") ? "Si" : "No" %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-            </Columns>        
+            </Columns>
         </asp:GridView>
     </div>
-    <footer>
-        En caso que su turno aparezca como "no vigente" consulte la disponiblidad del lugar. Es posible que el administrador haya realizado un cambio imprevisto.
+    <footer class="fixed-bottom bg-dark text-white text-center p-3">
+        <div class="container">
+            <p class="m-0">En caso que su turno aparezca como "no vigente" consulte la disponibilidad del lugar. Es posible que el administrador haya realizado un cambio imprevisto.</p>
+        </div>
     </footer>
+
     <%}%>
 </asp:Content>

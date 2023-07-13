@@ -31,8 +31,8 @@ namespace TPCUATRI
         {
             ArtistasNegocio negocio = new ArtistasNegocio();
 
-            GridViewRow selectedRow = dgvArtistas.SelectedRow;
-            bool estado = Convert.ToBoolean(selectedRow.Cells[6].Text);
+            GridViewRow selectedRow = dgvArtistas.SelectedRow; /// aca bug
+            bool estado = bool.Parse(selectedRow.Cells[8].Text);
             if (estado == true)
             {
                 negocio.eliminarLogico((int)dgvArtistas.SelectedDataKey.Value, false);

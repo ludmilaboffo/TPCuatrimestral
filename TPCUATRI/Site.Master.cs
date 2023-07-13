@@ -13,22 +13,14 @@ namespace TPCUATRI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(Page is Default) && !(Page is Registro) && !(Page is BusquedaInvitado) && !(Page is Login))
+            if (!(Page is Default) && !(Page is Registro) && !(Page is BusquedaInvitado) && !(Page is Login) && !(Page is Error))
             {
                 if (!seguridad.sesionActiva(Session["Artista"]))
                 {
+                    
                     Response.Redirect("Default.aspx");
-                    panelMenu.Visible = false;
 
                 }
-                else
-                {
-                    panelMenu.Visible = true;
-                }
-            }
-            else
-            {
-                panelMenu.Visible = false;
             }
         }
 

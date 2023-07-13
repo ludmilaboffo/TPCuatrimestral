@@ -18,7 +18,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("SELECT Id, Mail, Contrasena, TipoUsuario from Usuarios WHERE Mail = @email AND Contrasena = @pass");
+                datos.setConsulta("SELECT Id, Mail, Contrasena, Estado, TipoUsuario from Usuarios WHERE Mail = @email AND Contrasena = @pass");
                 datos.setParametro("@email", user.mailArtista);
                 datos.setParametro("@pass", user.contrasenaArtista);
 
@@ -30,6 +30,7 @@ namespace Negocio
                     user.contrasenaArtista = (string)datos.Lector["Contrasena"];
                     user.idArtista= (int)datos.Lector["Id"];
                     user.esArtista = (int)datos.Lector["TipoUsuario"] == 2 ? true : false;
+                    user.estadoArtista = (bool)datos.Lector["Estado"];
                     return true;
                 }
                 return false;

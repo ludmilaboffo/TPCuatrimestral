@@ -47,7 +47,7 @@
             { %>
     <div class="container">
         <div class="row justify-content-center menu-container">
-            <div class="col-md-6">
+            <div class="col-md-6  mt-5">
                 <h1 class="text-center menu-title">MENU PRINCIPAL</h1>
                 <div class="card menu-card">
                     <div class="card-header menu-card-header">USUARIOS</div>

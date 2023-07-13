@@ -13,13 +13,14 @@ namespace TPCUATRI
         List<Turno> listaAgenda;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Dominio.Artista usuario = (Dominio.Artista)HttpContext.Current.Session["Artista"];
 
-            if(!usuario.esArtista)
+            if (!seguridad.esAdministrador(Session["Artista"]))
             {
-                Session.Add("error", "Esta sección es para artistas solamente. Puede chequear la agenda en el listado de artistas");
-                Response.Redirect("Error.aspx", false);
+                Session.Add("error", "Solo los artistas pueden acceder a esta sección");
+                Response.Redirect("Error.aspx");
             }
+            
+            Artista usuario = (Artista)Session["Artista"];
 
             TurnosNegocio negocio = new TurnosNegocio();
             listaAgenda = negocio.listarPorArtistas(usuario.idArtista);
@@ -28,7 +29,7 @@ namespace TPCUATRI
                 FechaNum = t.Fecha.numeroFecha,
                 FechaDia = t.Fecha.descripcionFecha + "    " + (t.Fecha.numeroFecha).ToString(),
                 NombreLugar = t.Lugar.Nombre + " " + t.Lugar.Direccion,
-                Vigente = t.disponibilidad
+                Vigente = t.ocupado
             });
             dgvAgenda.DataSource = agendaDGV;
             dgvAgenda.DataBind();

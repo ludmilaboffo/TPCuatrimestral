@@ -11,7 +11,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <div class="mb-3 display-none">
+            <div class="mb-3 mt-5 display-none">
                 <label class="form-label">ID</label>
                 <asp:TextBox ID="txtID" CssClass="form-control" runat="server"></asp:TextBox>
 

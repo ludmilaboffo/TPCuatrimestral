@@ -29,8 +29,15 @@ namespace TPCUATRI
                 artista.contrasenaArtista = txtPassLogin.Text;
                 if (negocio.Loguearse(artista))
                 {
-                    Session.Add("Artista", artista);
-                    Response.Redirect("MenuInicio.aspx", false);
+                    if (artista.estadoArtista)
+                    {
+                        Session.Add("Artista", artista);
+                        Response.Redirect("MenuInicio.aspx", false);
+                    }
+                    else{
+                        Session.Add("error", "Usted ha sido dado de baja por el administrador. No puede ingresar al sistema.");
+                        Response.Redirect("Error.aspx", false);
+                    }
                 }
                 else
                 {

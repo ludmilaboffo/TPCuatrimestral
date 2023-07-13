@@ -1,7 +1,5 @@
 ﻿﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TPCUATRI.SiteMaster" %>
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
@@ -12,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="ruta/a/fullcalendar.min.css" />
-    <title>FREE SHOW MUSIC</title>
+
+    <title>Artistas de BA</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style>
@@ -55,10 +53,10 @@
             padding-inline-start: 10px;
         }
 
-            .fa-guitar:hover {
-                transform: rotate(20deg);
-                color: #000000;
-            }
+        .fa-guitar:hover {
+            transform: rotate(20deg);
+            color: #000000;
+        }
 
         .nav-link {
             font-family: 'High Tower Text', sans-serif;
@@ -72,22 +70,21 @@
             <nav class="navbar navbar-transparent navbar-estilo">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">Street Art Tour BA  <i class="fa-solid fa-guitar" style="color: #FFFFFF;"></i></a>
-
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="divMenu">
-                     <asp:Panel ID="panelMenu" runat="server" Visible="false">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link"  href="Perfil.aspx">Perfil</a>
+                                <a class="nav-link" href="Perfil.aspx">Perfil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="MenuInicio.aspx">Menu principal</a>
                             </li>
-                            <asp:Button ID="btnSalir" runat="server" CssClass="btn btn-outline-light btn-lg" Text="Cerrar Sesion" OnClick="Salir_Click" />
                         </ul>
-                         </asp:Panel>
+                        <%if(Session["Artista"]!=null){%>
+                        <asp:Button ID="btnSalir" runat="server" CssClass="btn btn-outline-light btn-lg" Text="Cerrar Sesion" OnClick="Salir_Click" />
+                        <%}%>
                     </div>
                 </div>
             </nav>
@@ -99,3 +96,4 @@
     </form>
 </body>
 </html>
+

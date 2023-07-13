@@ -27,6 +27,7 @@ namespace TPCUATRI
                 Session.Add("error", "Solo los administradores pueden acceder a esta sección");
                 Response.Redirect("Error.aspx");
             }
+
             try
             {
                 ListaLugar = lugar.listar();

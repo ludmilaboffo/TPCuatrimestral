@@ -40,7 +40,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("INSERT INTO Turnos (idFecha, idLugar, idUsuario, Estado) VALUES (@idFecha, @idLugar, @idUsuario, @Estado)");
+                datos.setConsulta("INSERT INTO Turnos (idFecha, idLugar, idUsuario, Estado, Ocupado) VALUES (@idFecha, @idLugar, @idUsuario, @Estado, @Ocupado)");
                 datos.setParametro("@idFecha", nuevo.Fecha.idFecha);
                 datos.setParametro("@idLugar", nuevo.Lugar.idLugar);
                 datos.setParametro("@idUsuario", nuevo.idUsuario);

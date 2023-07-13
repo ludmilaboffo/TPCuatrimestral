@@ -52,7 +52,7 @@ namespace TPCUATRI
 
         protected void btnAgendaArtista_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("AgendaArtista.aspx", false);
         }
     }
 }

@@ -21,7 +21,8 @@ namespace Negocio
         public static bool esAdministrador(object user)
         {
             Artista artista = user != null ? (Artista)user : null;
-            return artista.esArtista; /// SI ES ARTISTA RETORNA TRUE, SI ES ADMIN FALSE
+
+            return artista!=null ? artista.esArtista : false; /// SI ES ARTISTA RETORNA TRUE, SI ES ADMIN FALSE
         }
     }
 }

@@ -23,7 +23,7 @@
         }
     </style>
 
-    <div id="calendarioSemanal" class="m-lg-5">
+    <div id="calendarioSemanal" class="m-lg-5 mt-5">
         <asp:GridView ID="gvTurnos" runat="server" RowStyle-BackColor="White" RowStyle-ForeColor="Black" HeaderStyle-Font-Names="Bahnschrift SemiBold" HeaderStyle-Font-Size="Larger"
             Font-Names="Bahnschrift SemiBold" HeaderStyle-BackColor="#6699ff" CssClass="table table-group-divider" DataKeyNames="id" AutoGenerateColumns="false" OnSelectedIndexChanged="gvTurnos_SelectedIndexChanged">
             <Columns>
