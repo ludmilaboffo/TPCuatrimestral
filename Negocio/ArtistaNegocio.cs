@@ -69,9 +69,9 @@ namespace Negocio
                    
                    
                     nuevo.idArtista = (int)lector["Id"];
-                    nuevo.nombreArtista= (string)lector["Nombre"];
+                    nuevo.nombreArtista= lector["Nombre"] != DBNull.Value ? (string)lector["Nombre"] : null;
                     nuevo.mailArtista = (string)lector["Mail"];
-                    nuevo.apellidoArtista = (string)lector["Apellido"];
+                    nuevo.apellidoArtista = lector["Apellido"] != DBNull.Value ? (string)lector["Apellido"] : null;
                     nuevo.contrasenaArtista = (string)lector["Contrasena"];
                     nuevo.dniArtista = lector["Dni"] != DBNull.Value ? (string)lector["Dni"] : null;
                     nuevo.telefonoArtista = lector["Telefono"] != DBNull.Value ? (string)lector["Telefono"] : null;

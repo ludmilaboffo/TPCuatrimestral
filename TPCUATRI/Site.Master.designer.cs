@@ -33,13 +33,22 @@ namespace TPCUATRI
         protected global::System.Web.UI.HtmlControls.HtmlForm formMaster;
 
         /// <summary>
-        /// Salir control.
+        /// panelMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Salir;
+        protected global::System.Web.UI.WebControls.Panel panelMenu;
+
+        /// <summary>
+        /// btnSalir control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSalir;
 
         /// <summary>
         /// ContentPlaceHolder1 control.
