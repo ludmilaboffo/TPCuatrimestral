@@ -25,13 +25,15 @@ namespace TPCUATRI
 
         protected void txtFiltro_TextChanged(object sender, EventArgs e)
         {
+            if (txtFiltro.Text != "")
+            {
+                List<Artista> lista = (List<Artista>)(Session["listaArtistas"]);
 
-            List<Artista> lista = (List<Artista>)(Session["listaArtistas"]);
+                List<Artista> listaFiltrada = lista.FindAll(x => x.nombreArtista != null && x.nombreArtista.ToUpper().Contains(txtFiltro.Text.ToUpper()) || x.tipoEspectaculo != null && x.tipoEspectaculo.ToUpper().Contains(txtFiltro.Text.ToUpper()));
 
-            List<Artista> listaFiltrada = lista.FindAll(x => x.nombreArtista != null && x.nombreArtista.ToUpper().Contains(txtFiltro.Text.ToUpper()) || x.tipoEspectaculo  != null && x.tipoEspectaculo.ToUpper().Contains(txtFiltro.Text.ToUpper()));
-
-            dgvBusquedaArtistas.DataSource = listaFiltrada;
-            dgvBusquedaArtistas.DataBind();
+                dgvBusquedaArtistas.DataSource = listaFiltrada;
+                dgvBusquedaArtistas.DataBind();
+            }
         }
     protected void dgvBusquedaArtistas_SelectedIndexChanged(object sender, EventArgs e)
     {
