@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="TPCUATRI.Registro"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="TPCUATRI.Registro" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -9,12 +10,18 @@
                 <div class="form-group">
                     <label for="inputEmail3">Email</label>
                     <asp:TextBox ID="txtMailRegistro" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                        runat="server" ControlToValidate="txtMailRegistro"
+                        ErrorMessage="Por favor, ingrese su email"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="mb-3 m-lg-4">
                 <div class="form-group">
                     <label for="inputPassword3">Contraseña</label>
                     <asp:TextBox ID="txtPassRegistro" TextMode="Password" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2"
+                        runat="server" ControlToValidate="txtPassRegistro"
+                        ErrorMessage="Por favor, ingrese una contraseña"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="mb-3 m-lg-3">

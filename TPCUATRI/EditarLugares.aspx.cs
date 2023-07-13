@@ -20,7 +20,7 @@ namespace TPCUATRI
         {
 
             txtID.Enabled = false;
-            if (seguridad.esAdministrador(Session["Artista"]))
+            if (seguridad.esArtista(Session["Artista"]))
             {
                 Session.Add("error", "Solo los administradores pueden acceder a esta sección");
                 Response.Redirect("Error.aspx");
@@ -75,7 +75,7 @@ namespace TPCUATRI
                     {
                         TurnosNegocio turno = new TurnosNegocio();
                         turno.bajaLugar(nuevo.idLugar); /// Esto llama a un SP que hace un UPDATE
-                        /// de "Ocupado" a 0 en todos los turnos que ocupen ese lugar.
+                                                       /// de "Ocupado" a 0 en todos los turnos que ocupen ese lugar.
                     }
                     Response.Redirect("ListadoLugares.aspx", false);
                 }

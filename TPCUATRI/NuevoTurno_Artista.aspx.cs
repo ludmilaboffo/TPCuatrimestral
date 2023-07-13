@@ -82,6 +82,7 @@ namespace TPCUATRI
             TurnosNegocio date = new TurnosNegocio();
             FechaNegocio dia = new FechaNegocio();
             LugaresNegocio place = new LugaresNegocio();
+            ServicioEmail mail = new ServicioEmail();
 
             /// al nuevo turno le guardo el id de la fecha, el id del turno y el id del lugar
             turno.idUsuario = usuario.idArtista;
@@ -97,9 +98,12 @@ namespace TPCUATRI
                 divConfirmado.Visible = true;
                 divFecha.Visible = true;
                 divLugar.Visible = true;
-                lblConfirmado.Text = "Su turno ha sido confirmado. Puede verlo en la agenda";
+                lblConfirmado.Text = "Su turno ha sido confirmado. Puede verlo en la agenda";                
                 lblFecha.Text = dia.fechaReservada(turno.Fecha.idFecha);
                 lblLugar.Text = place.buscarLugar(turno.Lugar.idLugar);
+                string cuerpomail= "Su turno en " + place.buscarLugar(turno.Lugar.idLugar)+" en la fecha "+ dia.fechaReservada(turno.Fecha.idFecha)+" ha sido confirmado. ¡Gracias por ser parte del sistema!";
+                mail.correoAEnviar(usuario.mailArtista, "Turno confirmado", cuerpomail);
+                mail.enviarCorreo();
             }
             else
             {

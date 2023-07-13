@@ -14,7 +14,7 @@ namespace TPCUATRI
         List<Turno> ListaTurnos;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (seguridad.esAdministrador(Session["Artista"]))
+            if (seguridad.esArtista(Session["Artista"]))
             {
                 Session.Add("error", "Solo los administradores pueden acceder a esta sección");
                 Response.Redirect("Error.aspx");

@@ -24,11 +24,14 @@ namespace TPCUATRI
 
                 Artista artista = new Artista();
                 ArtistasNegocio artistasNegocio = new ArtistasNegocio();
+                ServicioEmail mail = new ServicioEmail();
 
                 artista.mailArtista = txtMailRegistro.Text;
                 artista.contrasenaArtista = txtPassRegistro.Text;
                 artista.idArtista = artistasNegocio.insertarNuevo(artista);
 
+                mail.correoAEnviar(txtMailRegistro.Text, "¡Te has registado de manera exitosa!", "Bienvenidx al sistema, de ahora en adelante vas a poder loguearte y acceder a los turnos.");
+                mail.enviarCorreo();
                 Response.Redirect("Default.aspx", false);
             }
             catch(Exception ex)

@@ -37,14 +37,20 @@
         .menu-button {
             width: 100%;
         }
+
+        .hover:hover {
+            color: lightblue;
+        }
+
     </style>
+
 
     <%
 
         Dominio.Artista usuario = HttpContext.Current.Session["Artista"] as Dominio.Artista;
 
-            if (!usuario.esArtista)
-            { %>
+        if (!usuario.esArtista)
+        { %>
     <div class="container">
         <div class="row justify-content-center menu-container">
             <div class="col-md-6  mt-5">
@@ -80,12 +86,14 @@
         <div class="row justify-content-center menu-container">
             <div class="col-md-6">
                 <h1 class="text-center menu-title">MENU PRINCIPAL</h1>
-                <div class="col-md-4 justify-content-center">
-                    <div class="mb-3">
-                        <asp:Label runat="server" ID="lblHola" CssClass="h5"></asp:Label>
+                <div class="col-md-8">
+                    <div class="mb-5  d-inline">
+                        <label  style=" font-family: 'Pacifico', cursive; font-size:30px; margin-right: 10px;">¡Hola de vuelta,</label>
+                        <asp:Label runat="server" ID="lblHola" style="font-size:40px; " CssClass="h5 hover"></asp:Label>
+                          <label  style=" font-family: 'Pacifico', cursive; font-size:30px; margin-right: 10px;">!</label>                     
                     </div>
                 </div>
-                <div class="card menu-card">
+                <div class="card menu-card mt-3">
                     <div class="card-header menu-card-header">MI PERFIL</div>
                     <div class="card-body menu-card-body">
                         <asp:Button ID="btnPerfil" CssClass="btn btn-primary menu-button" runat="server" Text="Ver perfil" OnClick="btnPerfil_Click" />

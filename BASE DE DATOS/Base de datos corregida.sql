@@ -291,7 +291,29 @@ END
 
 
 go
+--------------------------------------------
 
+
+GO
+   ------------------ STORED PARA LISTAR TODOS LOS LUGARES -------------------------
+ALTER PROCEDURE StoredEncontrarArtista(
+ @id int
+ )
+ AS
+BEGIN 
+	SELECT U.Id  from Turnos T
+	INNER JOIN Lugares L on L.idLugar = T.idLugar
+	INNER JOIN Usuarios U on u.Id = T.idUsuario
+	WHERE T.idTurnos = @id
+END
+GO
+
+
+select * from Turnos
+
+EXEC StoredEncontrarArtista 12
+
+------------------------------------------
 ALTER PROCEDURE ST_ModificarTurnos(
 		  @idTurnos int,
 		  @idFecha int, 

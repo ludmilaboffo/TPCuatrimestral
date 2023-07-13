@@ -165,13 +165,14 @@ namespace Negocio
             datos.setParametro("@Estado", true);
             datos.setParametro("@Ocupado", false);
             datos.ejecutarAccion();
+            datos.cerrarConexion();
         }
 
         public void eliminar(int Id)
         {
+            AccesoDatos datos = new AccesoDatos();
             try
             {
-                AccesoDatos datos = new AccesoDatos();
                 datos.setConsulta("delete from Turnos where idTurnos = @id");
                 datos.setParametro("@id", Id);
                 datos.ejecutarAccion();
@@ -181,13 +182,18 @@ namespace Negocio
 
                 throw ex;
             }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
         public void BajaTurnoUsuarioEliminado(int Id, bool ocupado = false)
         {
+
+            AccesoDatos datos = new AccesoDatos();
             try
             {
-                AccesoDatos datos = new AccesoDatos();
                 datos.setConsulta("UPDATE Turnos SET Ocupado = @Ocupado where idUsuario = @id");
                 datos.setParametro("@id", Id);
                 datos.setParametro("@Ocupado", ocupado);
@@ -195,15 +201,18 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
         public void eliminarLogico(int Id, bool disponible = false)
         {
+            AccesoDatos datos = new AccesoDatos();
             try
-            {
-                AccesoDatos datos = new AccesoDatos();
+            {               
                 datos.setConsulta("UPDATE Turnos SET Estado = @disponible where idTurnos = @id");
                 datos.setParametro("@id", Id);
                 datos.setParametro("@disponible", disponible);
@@ -213,6 +222,10 @@ namespace Negocio
             {
 
                 throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
 
@@ -283,7 +296,36 @@ namespace Negocio
             }
 
         }
+
+        public int turnoPorArtista(int idTurno)
+        {
+            List<Turno> lista = new List<Turno>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setProcedimieto("StoredEncontrarArtista"); /// STORE PROCEDURE CON INNER JOIN A AMBAS TABLAS
+                datos.setParametro("@id", idTurno);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Artista nuevo = new Artista();
+                    nuevo.idArtista = (int)datos.Lector["Id"];
+
+                    return nuevo.idArtista;
+                }
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
-
-
 }

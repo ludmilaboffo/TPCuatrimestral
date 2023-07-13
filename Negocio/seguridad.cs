@@ -18,7 +18,7 @@ namespace Negocio
                 return false; 
         }
 
-        public static bool esAdministrador(object user)
+        public static bool esArtista(object user)
         {
             Artista artista = user != null ? (Artista)user : null;
 
