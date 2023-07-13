@@ -22,6 +22,7 @@ namespace TPCUATRI
             {
 
                 ArtistasNegocio negocio = new ArtistasNegocio();
+
                 dgvArtistas.DataSource = negocio.ListarConSp();
                 dgvArtistas.DataBind();
             }
@@ -37,7 +38,7 @@ namespace TPCUATRI
             {
                 negocio.eliminarLogico((int)dgvArtistas.SelectedDataKey.Value, false);
                 TurnosNegocio BajaTurno = new TurnosNegocio();
-                BajaTurno.BajaTurnoUsuarioEliminado((int)dgvArtistas.SelectedDataKey.Value, true);
+                BajaTurno.BajaTurnoUsuarioEliminado((int)dgvArtistas.SelectedDataKey.Value, false);
             }
             else if (estado == false)
             {

@@ -18,18 +18,21 @@ namespace TPCUATRI
         {
             try
             {
-                if (!IsPostBack) {
-                 
-                   // int id = artista.idArtista;
-                    ArtistasNegocio negocio = new ArtistasNegocio();
-                    //Artista seleccionado = negocio.listar(id.ToString())[0];
+                if (!IsPostBack)
+                {
 
-                    //txtNombre.Text = seleccionado.nombreArtista;
-                    //txtDireccion.Text = seleccionado.apellidoArtista;
-                    //txtDireccion.Text = seleccionado.direccionArtista;
-                    //txtTelefono.Text = seleccionado.telefonoArtista;
-                    //imgFotoPerfil.DescriptionUrl = seleccionado.imgPerfil;
-                    //seleccionado.imgPerfil = "Perfil-" + seleccionado.idArtista + ".jpg".ToString();
+                    Dominio.Artista usuario = HttpContext.Current.Session["user"] as Dominio.Artista;
+                    int id = usuario.idArtista;
+                    ArtistasNegocio negocio = new ArtistasNegocio();
+                    Artista seleccionado = negocio.listar(id.ToString())[0];
+
+                    txtNombre.Text = seleccionado.nombreArtista;
+                    txtApellido.Text = seleccionado.apellidoArtista;
+                    txtRedes.Text = seleccionado.redesSociales;
+                    txtTipoEspectaculo.Text = seleccionado.tipoEspectaculo;
+                    txtTelefono.Text = seleccionado.telefonoArtista;
+                    imgFotoPerfil.DescriptionUrl = seleccionado.imgPerfil;
+                    seleccionado.imgPerfil = "Perfil-" + seleccionado.idArtista + ".jpg".ToString();
                 }
             }
             catch (Exception ex)
