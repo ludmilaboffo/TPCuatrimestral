@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="AgendaArtista.aspx" />
     <Content Include="BajaUsuario.aspx" />
+    <Content Include="BusquedaInvitado.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -184,6 +185,13 @@
     </Compile>
     <Compile Include="BajaUsuario.aspx.designer.cs">
       <DependentUpon>BajaUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusquedaInvitado.aspx.cs">
+      <DependentUpon>BusquedaInvitado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BusquedaInvitado.aspx.designer.cs">
+      <DependentUpon>BusquedaInvitado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

@@ -113,14 +113,14 @@ namespace Negocio
                     Artista nuevo = new Artista();
 
                     nuevo.idArtista = (int)datos.Lector["Id"];
-                    nuevo.nombreArtista= (string)datos.Lector["Nombre"];
+                    nuevo.nombreArtista= datos.Lector["Nombre"] != DBNull.Value ? datos.Lector["Nombre"].ToString() : null;
                     nuevo.mailArtista = (string)datos.Lector["Mail"];
-                    nuevo.apellidoArtista = (string)datos.Lector["Apellido"];
+                    nuevo.apellidoArtista = datos.Lector["Apellido"] != DBNull.Value ? datos.Lector["Apellido"].ToString() : null;
                     nuevo.contrasenaArtista = (string)datos.Lector["Contrasena"];
-                    nuevo.dniArtista = datos.Lector["Dni"] != DBNull.Value ? (string)datos.Lector["Dni"] : null;
-                    nuevo.telefonoArtista = datos.Lector["Telefono"] != DBNull.Value ? (string)datos.Lector["Telefono"] : null;
-                    nuevo.tipoEspectaculo = datos.Lector["TipoEspectaculo"] != DBNull.Value ? (string)datos.Lector["TipoEspectaculo"] : null;
-                    nuevo.redesSociales = datos.Lector["RedesSociales"] != DBNull.Value ? (string)datos.Lector["RedesSociales"] : null;
+                    nuevo.dniArtista = datos.Lector["Dni"] != DBNull.Value ? datos.Lector["Dni"].ToString() : null;
+                    nuevo.telefonoArtista = datos.Lector["Telefono"] != DBNull.Value ? datos.Lector["Telefono"].ToString() : null;
+                    nuevo.tipoEspectaculo = datos.Lector["TipoEspectaculo"] != DBNull.Value ? datos.Lector["TipoEspectaculo"].ToString() : null;
+                    nuevo.redesSociales = datos.Lector["RedesSociales"] != DBNull.Value ? datos.Lector["RedesSociales"].ToString() : null;
                     nuevo.esArtista = true;
                     nuevo.estadoArtista = (bool)datos.Lector["Estado"];
                     lista.Add(nuevo);
