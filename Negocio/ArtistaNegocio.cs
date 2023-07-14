@@ -61,7 +61,7 @@ namespace Negocio
             {
                 conexion = new SqlConnection("server =.\\SQLEXPRESS; database = StreetART; integrated security = true");
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT  Id, Dni, Contrasena, Mail, Telefono, TipoEspectaculo, RedesSociales, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios ";
+                comando.CommandText = "SELECT  Id, Dni, Contrasena, Mail, ImgPerfil, Telefono, TipoEspectaculo, RedesSociales, Nombre, Apellido, TipoUsuario, Estado FROM Usuarios ";
                 if (id != "")
                     comando.CommandText += " WHERE Id= " + id;
                 comando.Connection = conexion;
@@ -82,8 +82,7 @@ namespace Negocio
                     nuevo.telefonoArtista = lector["Telefono"] != DBNull.Value ? (string)lector["Telefono"] : null;
                     nuevo.tipoEspectaculo= lector["TipoEspectaculo"] != DBNull.Value ? (string)lector["TipoEspectaculo"] : null;
                     nuevo.redesSociales = lector["RedesSociales"] != DBNull.Value ? (string)lector["RedesSociales"] : null;
-                    // if (!(lector["RedesSociales"] is DBNull))
-                    //  nuevo.nombreArtista = (string)lector["RedesSociales"];
+                    nuevo.imgPerfil = lector["ImgPerfil"] != DBNull.Value ? (string)lector["ImgPerfil"] : null;
                     nuevo.esArtista = true;
                     nuevo.estadoArtista = (bool)lector["Estado"];
                     lista.Add(nuevo);

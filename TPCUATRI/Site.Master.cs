@@ -18,30 +18,29 @@ namespace TPCUATRI
             {
                 if (!seguridad.sesionActiva(Session["Artista"]))
                 {
-                    
+
                     Response.Redirect("Default.aspx");
 
                 }
 
             }
-            if (seguridad.sesionActiva(Session["Artista"]))
+
+            if (!seguridad.sesionActiva(Session["Artista"]) || (imgPerfil.ImageUrl = "~/Img/imgperfil/" + ((Artista)Session["Artista"]).imgPerfil) == null)
             {
 
-                if((AvatarPerfil.ImageUrl = "~/Img/imgperfil/" + ((Artista)Session["Artista"]).imgPerfil) is DBNull)
-                {
-                    AvatarPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-                }
+                imgPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
             }
             else
-                AvatarPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+            {
+                imgPerfil.ImageUrl = "~/Img/imgperfil/" + ((Artista)Session["Artista"]).imgPerfil;
+            }
+
         }
 
-
-
-        protected void Salir_Click(object sender, EventArgs e)
-        {
-            Session.Clear();
-            Response.Redirect("Login.aspx");
-        }
+            protected void Salir_Click(object sender, EventArgs e)
+            {
+                Session.Clear();
+                Response.Redirect("Login.aspx");
+            }
     }
 }

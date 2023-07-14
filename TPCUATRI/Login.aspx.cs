@@ -35,7 +35,8 @@ namespace TPCUATRI
                         Response.Redirect("MenuInicio.aspx", false);
                     }
                     else{
-                        Session.Add("error", "Usted ha sido dado de baja por el administrador. No puede ingresar al sistema.");
+                        Session.Add("error", "Usted ha sido dado de baja por el administrador o ha eliminado su cuenta. No puede ingresar al sistema.");
+                        Session.Clear();
                         Response.Redirect("Error.aspx", false);
                     }
                 }
