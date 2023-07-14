@@ -16,7 +16,6 @@
             margin-bottom: 20px;
             transition: transform 0.3s;
             box-shadow: 0px 1px 4px 0px rgba(255, 255, 255, 0.1);
-
         }
 
             .card-img-top:hover {
@@ -49,13 +48,19 @@
             font-size: 12px;
         }
 
-        h5{
+        h5 {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 50px;
         }
-        h5, p{
-           color: white;
+
+        h5, p {
+            color: white;
         }
+
+        .hover:hover {
+            color: cadetblue;
+        }
+
     </style>
     <%    
         Dominio.Artista usuario = (Dominio.Artista)HttpContext.Current.Session["Artista"];
@@ -66,21 +71,21 @@
             <div class="card mb-3 mt-5">
                 <img src="<%#Eval("UrlImagen")%>" class="card-img-top" alt="..." onerror="this.src='https://media.istockphoto.com/id/1193046540/es/vector/foto-pr%C3%B3ximamente-icono-de-imagen-ilustraci%C3%B3n-vectorial-aislado-sobre-fondo-blanco-no-hay.jpg?s=612x612&w=0&k=20&c=sblCjtqWoLEpWnqGZMr5yuiltE2bsiuH-WwsecNGSIA=';">
                 <div class="card-body">
-                    <h5 cssclass="card-title"><%#Eval("Nombre")%></h5>
+                    <h5 class=" hover"><%#Eval("Nombre")%></h5>
                     <p id="direccion" cssclass="card-text"><%#Eval("Direccion")%></p>
                     <p cssclass="card-text"><%#Eval("Descripcion")%></p>
                     <p cssclass="card-text"><%#Eval("Direccion")%></p>
                     <div class="mb-3">
-                        <em cssclass="card-text" style="color: red;">
+                        <em style="color: red;">
                             <%# (bool)Eval("Disponibilidad") ? "Disponible" : "No disponible" %>
                         </em>
-                     </div>
-                   
+                    </div>
+
                     <% if (((Dominio.Artista)Session["Artista"]).esArtista)
                         { %>
-                        <div class="centered-button">
-                                <asp:Button ID="btnPedirTurno" CssClass="btn btn-primary m mb-4" Text="Pedir turno" runat="server" CommandName="PedirTurno" CommandArgument='<%# Eval("idLugar") %>' OnClick="btnPedirTurno_Click" />
-                        </div>
+                    <div class="centered-button">
+                        <asp:Button ID="btnPedirTurno" CssClass="btn btn-primary m mb-4" Text="Pedir turno" runat="server" CommandName="PedirTurno" CommandArgument='<%# Eval("idLugar") %>' OnClick="btnPedirTurno_Click" Visible='<%# Eval("Disponibilidad") %>' />
+                    </div>
                 </div>
             </div>
             <% 
@@ -99,5 +104,4 @@
     </div>
 
     <%}%>
-
 </asp:Content>

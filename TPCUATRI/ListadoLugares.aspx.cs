@@ -15,6 +15,7 @@ namespace TPCUATRI
 
         public List<Lugar> ListaLugar { get; set; }
         public Lugar Lugar { get; set; }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

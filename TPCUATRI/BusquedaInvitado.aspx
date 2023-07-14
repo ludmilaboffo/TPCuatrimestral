@@ -39,8 +39,6 @@
             font-size: 80px;
             font-family: 'Bebas Neue', sans-serif;
         }
-
-
     </style>
 
 
@@ -52,7 +50,7 @@
                 <div class="col-md-4 text-center">
                     <h1 class="hover-h1">BUSQUEDA DE ARTISTAS</h1>
                     <div class="mb-3">
-                        <asp:Label ID="lblFiltro" style=" font-size: 15px; font-style:italic;" runat="server" Text="Ingrese el nombre del artista o el tipo de espectaculo que dio"></asp:Label>
+                        <asp:Label ID="lblFiltro" Style="font-size: 15px; font-style: italic;" runat="server" Text="Ingrese el nombre del artista o el tipo de espectaculo que dio"></asp:Label>
                     </div>
                     <div class="mb-3">
                         <asp:TextBox ID="txtFiltro" runat="server" AutoPostBack="true" CssClass="fa-search" OnTextChanged="txtFiltro_TextChanged"></asp:TextBox>
@@ -66,7 +64,16 @@
                         Font-Names="Bahnschrift SemiBold" CssClass="table table-hover" OnPageIndexChanging="dgvBusquedaArtistas_PageIndexChanging">
                         <Columns>
                             <asp:BoundField HeaderText="Artista" DataField="nombreArtista" />
-                            <asp:BoundField HeaderText="Más información de sus espectáculos..." DataField="redesSociales" />
+                            <asp:TemplateField>
+                                <HeaderTemplate>
+                                   <i class="fa-brands fa-instagram" style="color: #4aa9f2;"></i>
+                                   <i class="fa-brands fa-youtube" style="color: #4aa9f2;"></i>
+                                    <i class="fa-brands fa-square-facebook" style="color: #4aa9f2;"></i>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <a href='<%# Eval("redesSociales") %>'>Más del artista en sus redes...</a>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField HeaderText="Show" DataField="tipoEspectaculo" />
                         </Columns>
                     </asp:GridView>

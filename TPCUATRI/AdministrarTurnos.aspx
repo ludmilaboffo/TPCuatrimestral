@@ -53,11 +53,8 @@
                 <div class="col-md-6">
                     <asp:UpdatePanel ID="upEliminar" runat="server">
                         <ContentTemplate>
-                            <div class="mb-2">
-                                <em style="color: red;" >Eliminar definitivamente</em>
-                             </div>
                              <div class="mb-3">
-                                <asp:Button runat="server" Text="Eliminar " ID="btnEliminarTurno" CssClass="btn btn-danger" OnClick="btnEliminarTurno_Click" />
+                                <asp:Button runat="server" Text="Eliminar definitivamente" ID="btnEliminarTurno" CssClass="btn btn-danger" OnClick="btnEliminarTurno_Click" />
                             </div>
                             <div class="mb-3" >
                                 <a href="MenuInicio.aspx">Volver al menú de inicio</a>

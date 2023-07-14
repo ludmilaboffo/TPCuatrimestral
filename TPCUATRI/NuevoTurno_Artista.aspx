@@ -54,9 +54,10 @@
         { %>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="mb-3">
+            <div class="mb-3 mt-5">
                 <asp:Label runat="server" ID="lblNoHayTurno" CssClass="h5"></asp:Label>
-                <a href="MenuInicio.aspx">Atrás</a>
+                <br />
+                <a href="MenuInicio.aspx" style="font-size:20px">Atrás</a>
             </div>
         </div>
     </div>

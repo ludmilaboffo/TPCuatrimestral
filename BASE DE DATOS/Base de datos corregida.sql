@@ -229,7 +229,7 @@ GO
 exec StoredFechaFiltradaPorTurno 2
 ------------- STORED PARA LISTAR LOS TURNOS DE CADA ARTISTA ------------
 GO
-CREATE PROCEDURE SP_listarPorArtistas(
+ALTER PROCEDURE SP_listarPorArtistas(
  @idArtista int
  )
  AS
@@ -304,14 +304,16 @@ BEGIN
 	SELECT U.Id  from Turnos T
 	INNER JOIN Lugares L on L.idLugar = T.idLugar
 	INNER JOIN Usuarios U on u.Id = T.idUsuario
-	WHERE T.idTurnos = @id
+	WHERE T.idLugar = @id
 END
 GO
 
 
 select * from Turnos
 
-EXEC StoredEncontrarArtista 12
+EXEC StoredEncontrarArtista 16
+
+select * from Usuarios where Id = 2
 
 ------------------------------------------
 ALTER PROCEDURE ST_ModificarTurnos(

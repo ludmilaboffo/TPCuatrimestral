@@ -69,6 +69,11 @@ namespace TPCUATRI
                     }
 
                 }
+                else
+                {
+                    btnInhabilitarTurno.Visible = false;
+                    btnEliminarTurno.Visible = false;
+                }
             }
             catch (Exception ex)
             {
@@ -105,8 +110,16 @@ namespace TPCUATRI
                         Response.Redirect("Error.aspx", false);
                     }
                     negocio.inhabilitarTurno(nuevo.idTurno);
-                    negocio.modificarConSP(nuevo);
-                    Response.Redirect("ListadoTurnos.aspx", false);
+
+                    if(validarFecha(nuevo)){
+                        negocio.modificarConSP(nuevo);
+                        Response.Redirect("ListadoTurnos.aspx", false);
+                    }
+                    else
+                    {
+                        Session.Add("error", "No puede duplicar los turnos.");
+                        Response.Redirect("Error.aspx", false);
+                    }
                 }
 
                 if (validarFecha(nuevo) && !usuario.esArtista)
@@ -116,7 +129,7 @@ namespace TPCUATRI
                 }
                 else
                 {
-                    Session.Add("error", "Ya un turno en ese lugar en la misma fecha");
+                    Session.Add("error", "No puede duplicar los turnos.");
                     Response.Redirect("Error.aspx", false);
                 }
 

@@ -11,8 +11,10 @@
 
         .menu-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 70px;
+            margin-bottom: 0px;
+            font-family: 'Bebas Neue', sans-serif;
+            color: white;
         }
 
         .menu-card {
@@ -21,8 +23,8 @@
         }
 
         .menu-card-header {
-            background-color: #343a40;
-            color: #fff;
+            background: rgb(33,102,138);
+            background: linear-gradient(157deg, rgba(33,102,138,1) 0%, rgba(255,255,255,1) 100%);
         }
 
         .menu-card-body {
@@ -39,7 +41,16 @@
         }
 
         .hover:hover {
-            color: lightblue;
+           color:cornflowerblue;
+        }
+        .fontCard{
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+        }
+        h5{
+            font-family: 'Bebas Neue', sans-serif;
+            color:cornflowerblue;
+            font-size: 25px;
         }
 
     </style>
@@ -55,25 +66,25 @@
         <div class="row justify-content-center menu-container">
             <div class="col-md-6  mt-5">
                 <h1 class="text-center menu-title">MENU PRINCIPAL</h1>
-                <div class="card menu-card">
-                    <div class="card-header menu-card-header">USUARIOS</div>
+                <div class="card menu-card mt-3">
+                    <div class="card-header menu-card-header fontCard">USUARIOS</div>
                     <div class="card-body menu-card-body">
-                        <h5 class="card-title menu-card-title">Dar de baja a un usuario del sistema</h5>
-                        <asp:Button ID="btnBajaUsuario" CssClass="btn btn-primary menu-button" runat="server" Text="Ir" OnClick="btnBajaUsuario_Click" />
+                        <h5>Dar de baja a un usuario del sistema</h5>
+                        <asp:Button ID="btnBajaUsuario" CssClass="btn btn-outline-primary menu-button" runat="server" Text="Ir" OnClick="btnBajaUsuario_Click" />
                     </div>
                 </div>
                 <div class="card menu-card">
-                    <div class="card-header menu-card-header">ESPACIOS</div>
+                    <div class="card-header menu-card-header fontCard">ESPACIOS</div>
                     <div class="card-body menu-card-body">
-                        <h5 class="card-title menu-card-title">Administrar las locaciones disponibles</h5>
-                        <asp:Button ID="btnListadoLugares" CssClass="btn btn-primary menu-button" runat="server" Text="Ir" OnClick="btnListadoLugares_Click" />
+                        <h5>Administrar las locaciones disponibles</h5>
+                        <asp:Button ID="btnListadoLugares" CssClass="btn btn-outline-primary menu-button" runat="server" Text="Ir" OnClick="btnListadoLugares_Click" />
                     </div>
                 </div>
                 <div class="card menu-card">
-                    <div class="card-header menu-card-header">AGENDA</div>
+                    <div class="card-header menu-card-header fontCard">AGENDA</div>
                     <div class="card-body menu-card-body">
-                        <h5 class="card-title menu-card-title">Administrar los turnos</h5>
-                        <asp:Button ID="btnListarTurnos" CssClass="btn btn-primary menu-button" runat="server" OnClick="btnListarTurnos_Click" Text="Ir" />
+                        <h5>Administrar los turnos</h5>
+                        <asp:Button ID="btnListarTurnos" CssClass="btn btn-outline-primary menu-button" runat="server" OnClick="btnListarTurnos_Click" Text="Ir" />
                     </div>
                 </div>
             </div>
@@ -94,21 +105,21 @@
                     </div>
                 </div>
                 <div class="card menu-card mt-3">
-                    <div class="card-header menu-card-header">MI PERFIL</div>
+                    <div class="card-header menu-card-header hover fontCard">Perfil</div>
                     <div class="card-body menu-card-body">
-                        <asp:Button ID="btnPerfil" CssClass="btn btn-primary menu-button" runat="server" Text="Ver perfil" OnClick="btnPerfil_Click" />
+                        <asp:Button ID="btnPerfil" CssClass="btn btn-outline-primary menu-button" runat="server" Text="Ver perfil" OnClick="btnPerfil_Click" />
                     </div>
                 </div>
                 <div class="card menu-card">
-                    <div class="card-header menu-card-header">NUEVO TURNO</div>
+                    <div class="card-header menu-card-header hover fontCard">Nuevo turno</div>
                     <div class="card-body menu-card-body">
-                        <asp:Button ID="btnNuevoTurnoART" CssClass="btn btn-primary menu-button" runat="server" Text="Ir" OnClick="btnNuevoTurnoART_Click" />
+                        <asp:Button ID="btnNuevoTurnoART" CssClass="btn btn-outline-primary menu-button" runat="server" Text="Ir" OnClick="btnNuevoTurnoART_Click" />
                     </div>
                 </div>
                 <div class="card menu-card">
-                    <div class="card-header menu-card-header">MI AGENDA</div>
+                    <div class="card-header menu-card-header hover fontCard">Agenda de turnos</div>
                     <div class="card-body menu-card-body">
-                        <asp:Button ID="btnAgendaArtista" CssClass="btn btn-primary menu-button" runat="server" OnClick="btnAgendaArtista_Click" Text="Ir" />
+                        <asp:Button ID="btnAgendaArtista" CssClass="btn btn-outline-primary menu-button" runat="server" OnClick="btnAgendaArtista_Click" Text="Ir" />
                     </div>
                 </div>
             </div>

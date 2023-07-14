@@ -277,7 +277,7 @@ namespace Negocio
 
                     nuevo.idTurno = (int)datos.Lector["idTurnos"];
                     nuevo.Fecha.numeroFecha = (int)datos.Lector["numeroDia"];
-                    nuevo.disponibilidad = (bool)datos.Lector["Estado"];
+                    nuevo.ocupado = (bool)datos.Lector["Ocupado"];
                     nuevo.Fecha.descripcionFecha = (string)datos.Lector["descripcionDia"];
                     nuevo.Lugar.Nombre = (string)datos.Lector["Nombre"];
                     nuevo.Lugar.Direccion = (string)datos.Lector["Direccion"];
@@ -297,35 +297,5 @@ namespace Negocio
 
         }
 
-        public int turnoPorArtista(int idTurno)
-        {
-            List<Turno> lista = new List<Turno>();
-            AccesoDatos datos = new AccesoDatos();
-
-            try
-            {
-                datos.setProcedimieto("StoredEncontrarArtista"); /// STORE PROCEDURE CON INNER JOIN A AMBAS TABLAS
-                datos.setParametro("@id", idTurno);
-                datos.ejecutarLectura();
-
-                while (datos.Lector.Read())
-                {
-                    Artista nuevo = new Artista();
-                    nuevo.idArtista = (int)datos.Lector["Id"];
-
-                    return nuevo.idArtista;
-                }
-
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
     }
 }
