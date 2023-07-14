@@ -22,8 +22,8 @@ namespace TPCUATRI
             {
 
                 ArtistasNegocio negocio = new ArtistasNegocio();
-
-                dgvArtistas.DataSource = negocio.ListarConSp();
+                var artistas = negocio.ListarConSpUs().Where(a => a.esArtista); // Filtrar los usuarios de tipo admin
+                dgvArtistas.DataSource = artistas;
                 dgvArtistas.DataBind();
             }
         }
@@ -47,8 +47,8 @@ namespace TPCUATRI
                 negocio.eliminarLogico(selectedArtistId, true);
             }
 
-
-            dgvArtistas.DataSource = negocio.ListarConSp();
+            var artistas = negocio.ListarConSpUs().Where(a => a.esArtista); // Filtrar los usuarios de tipo admin
+            dgvArtistas.DataSource = artistas;
             dgvArtistas.DataBind();
         }
     }

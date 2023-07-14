@@ -143,6 +143,48 @@ namespace Negocio
 
         }
 
+
+        public List<Artista> ListarConSpUs()
+        {
+            List<Artista> lista = new List<Artista>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setProcedimieto("StoredListarUsuarios"); // HACER PROCEDURE
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Artista nuevo = new Artista();
+
+                    nuevo.idArtista = (int)datos.Lector["Id"];
+                    nuevo.nombreArtista = datos.Lector["Nombre"] != DBNull.Value ? datos.Lector["Nombre"].ToString() : null;
+                    nuevo.mailArtista = (string)datos.Lector["Mail"];
+                    nuevo.apellidoArtista = datos.Lector["Apellido"] != DBNull.Value ? datos.Lector["Apellido"].ToString() : null;
+                    nuevo.contrasenaArtista = (string)datos.Lector["Contrasena"];
+                    nuevo.dniArtista = datos.Lector["Dni"] != DBNull.Value ? datos.Lector["Dni"].ToString() : null;
+                    nuevo.telefonoArtista = datos.Lector["Telefono"] != DBNull.Value ? datos.Lector["Telefono"].ToString() : null;
+                    nuevo.tipoEspectaculo = datos.Lector["TipoEspectaculo"] != DBNull.Value ? datos.Lector["TipoEspectaculo"].ToString() : null;
+                    nuevo.redesSociales = datos.Lector["RedesSociales"] != DBNull.Value ? datos.Lector["RedesSociales"].ToString() : null;
+                    nuevo.esArtista = ((int)datos.Lector["TipoUsuario"] == 2) ? true : false;
+                    nuevo.estadoArtista = (bool)datos.Lector["Estado"];
+                    lista.Add(nuevo);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+
         public void eliminarLogico(int Id, bool estado = false)
         {
             try

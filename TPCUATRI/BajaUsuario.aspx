@@ -45,6 +45,8 @@
                 <asp:CommandField ShowSelectButton="true" SelectText="Cambiar Estado" HeaderText="Accion" ItemStyle-ForeColor="Red" />
             </Columns>
         </asp:GridView>
+
+        <a href="MenuInicio.aspx">Volver atrás</a>
     </div>
     <%
         }%>
