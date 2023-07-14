@@ -234,7 +234,7 @@ ALTER PROCEDURE SP_listarPorArtistas(
  )
  AS
 BEGIN
-	SELECT F.numeroDia, F.descripcionDia, L.Nombre, L.Direccion, T.Ocupado from Turnos T
+	SELECT T.idTurnos, F.numeroDia, F.descripcionDia, L.Nombre, L.Direccion, T.Ocupado from Turnos T
 	INNER JOIN FECHAS  F on F.idFecha = T.idFecha
 	INNER JOIN Lugares L on L.idLugar = T.idLugar
 	WHERE T.idUsuario = @idArtista
