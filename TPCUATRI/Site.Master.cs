@@ -1,4 +1,5 @@
 ﻿using Negocio;
+using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,18 @@ namespace TPCUATRI
                     Response.Redirect("Default.aspx");
 
                 }
+
             }
+            if (seguridad.sesionActiva(Session["Artista"]))
+            {
+
+                if((AvatarPerfil.ImageUrl = "~/Img/imgperfil/" + ((Artista)Session["Artista"]).imgPerfil) is DBNull)
+                {
+                    AvatarPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+                }
+            }
+            else
+                AvatarPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
         }
 
 

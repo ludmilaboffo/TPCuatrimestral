@@ -64,11 +64,12 @@ namespace TPCUATRI
         {
             try
             {
-                if (!IsPostBack)
+                if (IsPostBack)
                 {
+                  
                     ArtistasNegocio negocio = new ArtistasNegocio();
                     Artista user = (Artista)Session["Artista"];
-                    string ruta = Server.MapPath("./ImgPerfil/");
+                    string ruta = Server.MapPath("./Img/imgperfil/ ");
                     txtImagen.PostedFile.SaveAs(ruta + "Perfil-" + user.idArtista + ".jpg");
 
                     user.imgPerfil = "Perfil-" + user.idArtista + ".jpg"; //agregar campo de imagen a usuarios
@@ -80,6 +81,8 @@ namespace TPCUATRI
 
                     negocio.actualizar(user);
                     Response.Redirect("Menuinicio.aspx");
+                    Image img = (Image)Master.FindControl("AvatarPerfil");
+                    img.ImageUrl = "~/Img/imgperfil/" + user.imgPerfil;
                 }
             }
             catch (Exception ex)

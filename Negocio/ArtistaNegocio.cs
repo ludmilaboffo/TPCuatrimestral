@@ -18,19 +18,23 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("SELECT Id, Mail, Contrasena, Estado, TipoUsuario from Usuarios WHERE Mail = @email AND Contrasena = @pass");
+                datos.setConsulta("SELECT Id, Mail, Contrasena, Estado, TipoUsuario, ImgPerfil from Usuarios WHERE Mail = @email AND Contrasena = @pass");
                 datos.setParametro("@email", user.mailArtista);
                 datos.setParametro("@pass", user.contrasenaArtista);
 
                 datos.ejecutarLectura();
                 if (datos.Lector.Read())
                 {
+                    
+                   
                     user.idArtista = (int)datos.Lector["Id"];
                     user.mailArtista = (string)datos.Lector["Mail"];
                     user.contrasenaArtista = (string)datos.Lector["Contrasena"];
                     user.idArtista= (int)datos.Lector["Id"];
                     user.esArtista = (int)datos.Lector["TipoUsuario"] == 2 ? true : false;
                     user.estadoArtista = (bool)datos.Lector["Estado"];
+                    if (!(datos.Lector["ImgPerfil"]is DBNull))
+                        user.imgPerfil = (string)datos.Lector["ImgPerfil"];
                     return true;
                 }
                 return false;
@@ -179,7 +183,7 @@ namespace Negocio
             try
             {
     
-                datos.setConsulta("update usuarios set UrlImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, RedesSociales = @redes, TipoEspectaculo = @tipoShow, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
+                datos.setConsulta("update usuarios set ImgPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, RedesSociales = @redes, TipoEspectaculo = @tipoShow, Telefono = @telefono, Dni = @dni where id = @id");//agregar todas las propiedades del perfil
                 datos.setParametro("@imagen", (object)user.imgPerfil ?? DBNull.Value);
                 datos.setParametro("@nombre", (object)user.nombreArtista ?? DBNull.Value);
                 datos.setParametro("@apellido", (object)user.apellidoArtista ?? DBNull.Value);
