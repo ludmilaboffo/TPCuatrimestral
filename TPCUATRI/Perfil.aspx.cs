@@ -21,18 +21,29 @@ namespace TPCUATRI
                 if (!IsPostBack)
                 {
 
-                    Dominio.Artista usuario = HttpContext.Current.Session["user"] as Dominio.Artista;
-                    int id = usuario.idArtista;
-                    ArtistasNegocio negocio = new ArtistasNegocio();
-                    Artista seleccionado = negocio.listar(id.ToString())[0];
+                    if (seguridad.esArtista(Session["Artista"]))
+                    {
+                        ArtistasNegocio artista = new ArtistasNegocio();
+                        Artista usuario = (Artista)Session["Artista"];
+                        int id = usuario.idArtista;
 
-                    txtNombre.Text = seleccionado.nombreArtista;
-                    txtApellido.Text = seleccionado.apellidoArtista;
-                    txtRedes.Text = seleccionado.redesSociales;
-                    txtTipoEspectaculo.Text = seleccionado.tipoEspectaculo;
-                    txtTelefono.Text = seleccionado.telefonoArtista;
-                    imgFotoPerfil.DescriptionUrl = seleccionado.imgPerfil;
-                    seleccionado.imgPerfil = "Perfil-" + seleccionado.idArtista + ".jpg".ToString();
+
+                        Artista seleccionado = artista.listar(id.ToString())[0];
+
+                        txtNombre.Text = seleccionado.nombreArtista;
+                        txtApellido.Text = seleccionado.apellidoArtista;
+                        txtRedes.Text = seleccionado.redesSociales;
+                        txtTipoEspectaculo.Text = seleccionado.tipoEspectaculo;
+                        txtTelefono.Text = seleccionado.telefonoArtista;
+                        imgFotoPerfil.DescriptionUrl = seleccionado.imgPerfil;
+                        seleccionado.imgPerfil = "Perfil-" + seleccionado.idArtista + ".jpg".ToString();
+                    }
+                    else
+                    {
+                        Session.Add("error", "Si quiere ver un perfil, vaya a la seccion de baja de usuarios");
+                        Response.Redirect("Error.aspx");
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -49,34 +60,34 @@ namespace TPCUATRI
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
-        
+
+        {
+            try
             {
-                try
+                if (!IsPostBack)
                 {
-                    if (!IsPostBack)
-                    {
-                        ArtistasNegocio negocio = new ArtistasNegocio();
-                        Artista user = (Artista)Session["Artista"];
-                        string ruta = Server.MapPath("./ImgPerfil/");
-                        txtImagen.PostedFile.SaveAs(ruta + "Perfil-" + user.idArtista + ".jpg");
+                    ArtistasNegocio negocio = new ArtistasNegocio();
+                    Artista user = (Artista)Session["Artista"];
+                    string ruta = Server.MapPath("./ImgPerfil/");
+                    txtImagen.PostedFile.SaveAs(ruta + "Perfil-" + user.idArtista + ".jpg");
 
-                        user.imgPerfil = "Perfil-" + user.idArtista + ".jpg"; //agregar campo de imagen a usuarios
-                        user.nombreArtista = txtNombre.Text;
-                        user.apellidoArtista = txtApellido.Text;
-                        user.tipoEspectaculo= txtTipoEspectaculo.Text;
-                        user.redesSociales = txtRedes.Text;
-                        user.telefonoArtista = txtTelefono.Text;
+                    user.imgPerfil = "Perfil-" + user.idArtista + ".jpg"; //agregar campo de imagen a usuarios
+                    user.nombreArtista = txtNombre.Text;
+                    user.apellidoArtista = txtApellido.Text;
+                    user.tipoEspectaculo = txtTipoEspectaculo.Text;
+                    user.redesSociales = txtRedes.Text;
+                    user.telefonoArtista = txtTelefono.Text;
 
-                        negocio.actualizar(user);
-                        Response.Redirect("Menuinicio.aspx");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Session.Add("error", ex);
-                    Response.Redirect("Error.aspx", false);
+                    negocio.actualizar(user);
+                    Response.Redirect("Menuinicio.aspx");
                 }
             }
-
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                Response.Redirect("Error.aspx", false);
+            }
         }
+
     }
+}

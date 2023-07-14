@@ -21,7 +21,8 @@ CREATE TABLE Usuarios (
     Estado BIT NOT NULL
 )
 
-
+ALTER TABLE Usuarios
+ADD ImgPerfil VARCHAR(250) NULL;
 
 
 SELECT * from Usuarios
