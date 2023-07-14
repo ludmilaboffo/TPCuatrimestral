@@ -33,7 +33,7 @@ namespace TPCUATRI
             ArtistasNegocio negocio = new ArtistasNegocio();
 
             GridViewRow selectedRow = dgvArtistas.SelectedRow;
-            bool estado = bool.Parse(selectedRow.Cells[7].Text);
+            bool estado = bool.Parse(selectedRow.Cells[6].Text);
             int selectedArtistId = (int)dgvArtistas.SelectedDataKey.Value;
 
             if (estado == true)

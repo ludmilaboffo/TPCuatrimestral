@@ -25,7 +25,7 @@ namespace TPCUATRI
 
             }
 
-            if (!seguridad.sesionActiva(Session["Artista"]) || (imgPerfil.ImageUrl = "~/Img/imgperfil/" + ((Artista)Session["Artista"]).imgPerfil) == null)
+            if (!seguridad.sesionActiva(Session["Artista"]) || (imgPerfil.ImageUrl = "~/Img/imgperfil/" + ((Artista)Session["Artista"]).imgPerfil) == null || !seguridad.esArtista((Artista)Session["Artista"]))
             {
 
                 imgPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
