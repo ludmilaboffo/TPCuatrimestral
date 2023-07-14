@@ -32,19 +32,24 @@ namespace TPCUATRI
         {
             ArtistasNegocio negocio = new ArtistasNegocio();
 
-            GridViewRow selectedRow = dgvArtistas.SelectedRow; /// aca bug
-            bool estado = bool.Parse(selectedRow.Cells[8].Text);
+            GridViewRow selectedRow = dgvArtistas.SelectedRow;
+            bool estado = bool.Parse(selectedRow.Cells[7].Text);
+            int selectedArtistId = (int)dgvArtistas.SelectedDataKey.Value;
+
             if (estado == true)
             {
-                negocio.eliminarLogico((int)dgvArtistas.SelectedDataKey.Value, false);
+                negocio.eliminarLogico(selectedArtistId, false);
                 TurnosNegocio BajaTurno = new TurnosNegocio();
-                BajaTurno.BajaTurnoUsuarioEliminado((int)dgvArtistas.SelectedDataKey.Value, false);
+                BajaTurno.BajaTurnoUsuarioEliminado(selectedArtistId, false);
             }
             else if (estado == false)
             {
-                negocio.eliminarLogico((int)dgvArtistas.SelectedDataKey.Value, true);
+                negocio.eliminarLogico(selectedArtistId, true);
             }
 
+
+            dgvArtistas.DataSource = negocio.ListarConSp();
+            dgvArtistas.DataBind();
         }
     }
 }

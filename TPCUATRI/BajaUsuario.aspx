@@ -14,14 +14,14 @@
     <asp:GridView ID="dgvArtistas" runat="server" CssClass="table" OnSelectedIndexChanged="dgvArtistas_SelectedIndexChanged" DataKeyNames="IdArtista" AutoGenerateColumns="false">
         <Columns>
             <asp:BoundField HeaderText="ID" DataField="IdArtista" />
-            <asp:BoundField HeaderText="Nombre" DataField="nombreArtista" />
-            <asp:BoundField HeaderText="Apellido" DataField="apellidoArtista" />
-            <asp:BoundField HeaderText="Mail" DataField="mailArtista" />
-            <asp:BoundField HeaderText="Telefono" DataField="telefonoArtista" />
-            <asp:BoundField HeaderText="RedesSociales" DataField="redesSociales" />
-            <asp:BoundField HeaderText="RedesSociales" DataField="tipoEspectaculo" />
-            <asp:BoundField HeaderText="Estado" DataField="estadoArtista" />
-            <asp:CommandField ShowSelectButton="true" SelectText="Cambiar Estado" HeaderText="Accion" />
+            <asp:BoundField HeaderText="Nombre" DataField="nombreArtista" ItemStyle-ForeColor="white" />
+            <asp:BoundField HeaderText="Apellido" DataField="apellidoArtista" ItemStyle-ForeColor="white" />
+            <asp:BoundField HeaderText="Mail" DataField="mailArtista" ItemStyle-ForeColor="white"/>
+            <asp:BoundField HeaderText="Telefono" DataField="telefonoArtista" ItemStyle-ForeColor="white"/>
+            <asp:BoundField HeaderText="Redes Sociales" DataField="redesSociales" ItemStyle-ForeColor="white" />
+            <asp:BoundField HeaderText="Tipo Espectaculo" DataField="tipoEspectaculo" ItemStyle-ForeColor="white" />
+            <asp:BoundField HeaderText="Estado" DataField="estadoArtista" ItemStyle-ForeColor="green"/>
+            <asp:CommandField ShowSelectButton="true" SelectText="Cambiar Estado" HeaderText="Accion" ItemStyle-ForeColor="Red" />
         </Columns>
     </asp:GridView>
     <%
